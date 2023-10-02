@@ -1,33 +1,33 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ROUTES, THEME } from "../../../constants";
+import { ROUTES } from "../../../constants";
 import ButtonSubmit from "../../../components/ButtonSubmit";
 import Input from "../../../components/Input";
 import { userContext } from "../../../context/userContext";
 
-const Login = ({ navigation }) => {
+const Register = ({navigation}) => {
   const {user, setUser} = useContext(userContext)
-  const [identifier, setIdentifier] = useState("")
-  const [password, setPassword] = useState("")
-
-  function handleSubmit() {
-    setUser(true)
-  }
-
+  
   return (
     <SafeAreaView>
       <View>
-        <Image source="" />
+        <Image/>
         <Input text="Email"/>
         <Input text="Password"/>
-        <ButtonSubmit onPress={() => handleSubmit()} text={"Login"}/>
-        <Text style={styles.text}>You don't have an account yet ?</Text>
-        <Text style={styles.redirect} onPress={() => navigation.navigate(ROUTES.REGISTER,{screen:ROUTES.REGISTER})} >Sign up now !</Text>
+        <Input text="Confim Password"/>
+        <ButtonSubmit redirect={() => setUser(true)} text={"Sign Up"}/>
+        <Text style={styles.textBetween}>OR</Text>
+        <ButtonSubmit text={"Sign Up with Google"} image={"google"}/>
+        <Text style={styles.text}>Already have an account ?</Text>
+        <Text style={styles.redirect} onPress={() => navigation.navigate(ROUTES.LOGIN)} >Sign in now !</Text>
       </View>
     </SafeAreaView>
-  );
-};
+    
+  )
+}
+
+export default Register
 
 const styles = StyleSheet.create({
   input: {
@@ -38,8 +38,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 1,
   },
+  textBetween: {
+    margin:20,
+    fontWeight:"600",
+    textAlign: 'center',
+  },
   text: {
     marginTop:20,
+    fontWeight:"800",
     textAlign: 'center',
   },
   redirect: {
@@ -48,5 +54,3 @@ const styles = StyleSheet.create({
     color:"purple"
   }
 })
-
-export default Login;

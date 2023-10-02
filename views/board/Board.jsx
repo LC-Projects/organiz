@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { COLORS, THEME } from "../../constants";
+import Tasks from "./tasks/Tasks";
 
-const Board = () => {
+const Board = ({ title, data }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Todo</Text>
-          <Text style={styles.headerCounte}>4</Text>
+          <Text style={styles.headerTitle}>{title}</Text>
+          <Text style={styles.headerCounte}>{data.length}</Text>
         </View>
 
-        <View style={styles.tasks}>
-
-        </View>
+        <Tasks data={data} />
       </View>
     </ScrollView>
   );
@@ -22,13 +21,14 @@ const Board = () => {
 export default Board;
 
 const styles = StyleSheet.create({
-  container: {},
-  header: {
-    flexDirection: "row",
+  container: {
     margin: THEME.spacing.s,
     padding: THEME.spacing.s,
     backgroundColor: COLORS.white,
-    borderRadius: THEME.border.m
+    borderRadius: THEME.border.m,
+  },
+  header: {
+    flexDirection: "row",
   },
   headerTitle: {
     flex: 1,
@@ -37,12 +37,8 @@ const styles = StyleSheet.create({
   },
   headerCounte: {
     flex: 1,
-    textAlign: 'right',
+    textAlign: "right",
     fontSize: THEME.font.size.xl,
     fontWeight: THEME.font.weight.bold,
   },
-
-  tasks: {
-
-  }
 });
