@@ -1,4 +1,4 @@
 export default {
     LOGIN: 'login',
-    BOARD: 'site',
+    BOARD: 'Board',
 }
