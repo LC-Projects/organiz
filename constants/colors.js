@@ -6,7 +6,7 @@ export default {
     ultralight_gray: '#EEEEEE',
     white: '#FFFFFF',
     black: '#171919',
-    urgent_reg: '#FF7081',
+    urgent_red: '#FF7081',
     urgent_yellow: '#FBC580',
     urgent_blue: '#7CABFF',
 }
