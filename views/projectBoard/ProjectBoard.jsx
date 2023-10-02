@@ -28,7 +28,7 @@ const ProjectBoard = () => {
         title: "Create Homepage",
       },
     ],
-    inProgress: [
+    doing: [
       {
         id: 1,
         tag: "#AEE779",
@@ -54,11 +54,11 @@ const ProjectBoard = () => {
     ],
   });
 
-  const titles = ["Todo", "In Progress", "Done"];
+  const titles = ["To Do", "Doing", "Done"];
 
   const renderScene = SceneMap({
     todo: () => <Board title={titles[0]} data={data.todo} />,
-    inProgress: () => <Board title={titles[1]} data={data.inProgress} />,
+    doing: () => <Board title={titles[1]} data={data.doing} />,
     done: () => <Board title={titles[2]} data={data.done} />,
   });
 
@@ -67,7 +67,7 @@ const ProjectBoard = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "todo", title: titles[0] },
-    { key: "inProgress", title: titles[1] },
+    { key: "doing", title: titles[1] },
     { key: "done", title: titles[2] },
   ]);
 

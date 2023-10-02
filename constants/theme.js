@@ -6,8 +6,9 @@ const spacing =  {
 
 
 const border =  {
-    m: 8,
+    xs: 2,
     s: 4,
+    m: 8,
 }
 
 
