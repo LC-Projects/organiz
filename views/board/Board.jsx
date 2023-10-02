@@ -3,35 +3,12 @@ import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { COLORS, THEME } from "../../constants";
 import Tasks from "./tasks/Tasks";
 
-const Board = () => {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      tag: "#AEE779",
-      title: "Create Homepage",
-    },
-    {
-      id: 2,
-      tag: "#FF7081",
-      title: "Create Homepage",
-    },
-    {
-      id: 3,
-      tag: "#F7F6B4",
-      title: "Create Homepage",
-    },
-    {
-      id: 4,
-      tag: "#4EDCEB",
-      title: "Create Homepage",
-    },
-  ]);
-
+const Board = ({ title, data }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Todo</Text>
+          <Text style={styles.headerTitle}>{title}</Text>
           <Text style={styles.headerCounte}>{data.length}</Text>
         </View>
 

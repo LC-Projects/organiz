@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TextInput } from "react-native";
 import { COLORS, THEME } from "../../../constants";
 import Task from "./Task";
 
@@ -9,6 +9,11 @@ const Tasks = ({ data }) => {
       {data.map((task) => (
         <Task key={task.id} tag={task.tag} />
       ))}
+
+
+      <View>
+        <TextInput></TextInput>
+      </View>
     </View>
   );
 };
