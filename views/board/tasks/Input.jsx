@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, KeyboardAvoidingView, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { COLORS, THEME } from "../../../constants";
 
-const Input = ({ cancel, add, value, onChange }) => {
+const Input = ({ cancel, add, value, onChangeText }) => {
   return (
     <KeyboardAvoidingView>
       <View style={styles.addTask}>
@@ -10,7 +10,7 @@ const Input = ({ cancel, add, value, onChange }) => {
             placeholder="Task Title" 
             style={styles.input}
             value={value}
-            onChange={onChange}
+            onChangeText={onChangeText}
         />
       </View>
       <View style={styles.actions}>

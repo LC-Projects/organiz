@@ -35,7 +35,7 @@ const Tasks = ({ data }) => {
         <Task key={task.id} tag={task.tag} />
       ))}
 
-      {add ? <Input value={cardTitle} onChange={(e) => setCardTitle(e)} cancel={handleCancel} add={handleAdd} /> : <Button onPress={handleAddCard} />}
+      {add ? <Input value={cardTitle} onChangeText={(e) => setCardTitle(e)} cancel={handleCancel} add={handleAdd} /> : <Button onPress={handleAddCard} />}
     </View>
   );
 };
