@@ -11,7 +11,7 @@ const Homepage = ({navigation}) => {
     <SafeAreaView>
       <View>
         <Text>Home</Text>
-        <Button title="Board" onPress={() => navigation.navigate(ROUTES.BOARD)} />
+        <Button title="Board" onPress={() => navigation.navigate(ROUTES.PROJECTBOARD)} />
         <Button title="Disconnect" onPress={() => setUser(false)} />
       </View>
     </SafeAreaView>

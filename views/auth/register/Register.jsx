@@ -16,7 +16,7 @@ const Register = ({navigation}) => {
         <Input text="Email"/>
         <Input text="Password"/>
         <Input text="Confim Password"/>
-        <ButtonSubmit redirect={setUser(true)} text={"Sign Up"}/>
+        <ButtonSubmit redirect={() => setUser(true)} text={"Sign Up"}/>
         <Text style={styles.textBetween}>OR</Text>
         <ButtonSubmit text={"Sign Up with Google"} image={"google"}/>
         <Text style={styles.text}>Already have an account ?</Text>
