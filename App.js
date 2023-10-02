@@ -10,7 +10,7 @@ import Auth from "./routes/AuthRoutes";
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
 
   return (
     <NavigationContainer>{!user ? <Auth /> : <Access />}</NavigationContainer>
