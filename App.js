@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { StyleSheet } from "react-native";
-import { ROUTES } from "./constants";
-import Board from "./views/board/Board";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Access from "./routes/AccessRoutes";
 import Auth from "./routes/AuthRoutes";
+import { userContext } from "./context/userContext";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false)
+  const userContextValues = {user, setUser}
 
+  useEffect(() => {
+  }, [user])
+  
   return (
-    <NavigationContainer>{!user ? <Auth /> : <Access />}</NavigationContainer>
+    <userContext.Provider value={userContextValues}>
+      <NavigationContainer>{!user ? <Auth/> : <Access />}</NavigationContainer>
+    </userContext.Provider>
   );
 }
 
