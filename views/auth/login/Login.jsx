@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ROUTES, THEME } from "../../../constants";
-import ButtonSumbit from "../../../components/ButtonSubmit";
+import ButtonSubmit from "../../../components/ButtonSubmit";
 import Input from "../../../components/Input";
 import { userContext } from "../../../context/userContext";
 
@@ -17,7 +17,7 @@ const Login = ({ navigation }) => {
         <Image/>
         <Input text="Email"/>
         <Input text="Password"/>
-        <ButtonSumbit redirect={() => setUser(true)} text={"Login"}/>
+        <ButtonSubmit redirect={() => setUser(true)} text={"Login"}/>
         <Text style={styles.text}>You don't have an account yet ?</Text>
         <Text style={styles.redirect} onPress={() => navigation.navigate(ROUTES.REGISTER,{screen:ROUTES.REGISTER})} >Sign up now !</Text>
       </View>
