@@ -1,22 +1,41 @@
-import React, { useContext } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useContext, useState } from "react";
+import { View, Text, StyleSheet, Image, Alert, Keyboard } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ROUTES } from "../../../constants";
 import ButtonSubmit from "../../../components/ButtonSubmit";
 import Input from "../../../components/Input";
 import { userContext } from "../../../context/userContext";
+import { createUser } from "../../../api/firebase/authUtils";
 
 const Register = ({navigation}) => {
   const {user, setUser} = useContext(userContext)
-  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+
+  const handleSubmit = async () => {
+    Keyboard.dismiss()
+    if (password !== passwordConfirm) {
+        Alert.alert('Passwords are not the same')
+    } else {
+        try {
+            setUser(await createUser(email, password))
+        }
+        catch (err) {
+            setUser(false)
+            console.log(err);
+            Alert.alert("Can't create an user: Email or Password is incorrect");
+        }
+    }
+}
   return (
     <SafeAreaView>
       <View>
         <Image/>
-        <Input text="Email"/>
-        <Input text="Password"/>
-        <Input text="Confim Password"/>
-        <ButtonSubmit redirect={() => setUser(true)} text={"Sign Up"}/>
+        <Input text="Email" value={email} onChangeText={setEmail} />
+        <Input text="Password" value={password} onChangeText={setPassword} />
+        <Input text="Confim Password" value={passwordConfirm} onChangeText={setPasswordConfirm} />
+        <ButtonSubmit onPress={handleSubmit} text={"Sign Up"}/>
         <Text style={styles.textBetween}>OR</Text>
         <ButtonSubmit text={"Sign Up with Google"} image={"google"}/>
         <Text style={styles.text}>Already have an account ?</Text>
