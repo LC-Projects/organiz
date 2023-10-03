@@ -25,6 +25,8 @@ const Homepage = ({navigation}) => {
         </ScrollView>
         <Text style={styles.text}>Boards</Text>
         <Board importance="High" importanceColor={COLORS.urgent_red} text="Organiz Mobile App" percentage={68}/>
+        <Board importance="High" importanceColor={COLORS.urgent_red} text="Organiz Mobile App" percentage={68}/>
+        <Board importance="High" importanceColor={COLORS.urgent_red} text="Organiz Mobile App" percentage={68}/>
         <Button title="Board" onPress={() => navigation.navigate(ROUTES.PROJECTBOARD)} />
         <Button title="Disconnect" onPress={() => setUser(false)} />
       </ScrollView>
