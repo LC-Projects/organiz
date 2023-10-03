@@ -38,7 +38,7 @@ const DataBoard = ({importance, importanceColor, title, percentage}) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor:COLORS.white,
-        margin:20,
+        marginTop: THEME.spacing.m,
         padding:10,
         borderRadius:10,
     },

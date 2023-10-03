@@ -5,11 +5,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from "../../constants";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddBoard from "./AddBoard";
+import { userContext } from "../../context/userContext";
+import { addBoard } from "../../api/firebase/realTime/boards";
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
   const [showAddBoardForm, setShowAddBoardForm] = useState(false);
+  const [title, setTitle] = useState('')
+
+  const { user } = useContext(userContext)
 
   function handleAddBoard() {
     setShowAddBoardForm(true);
@@ -22,6 +27,10 @@ const Main = () => {
   }
 
   function handleAddBoardAdd() {
+    addBoard(user.uid, {
+        title,
+        important: "#45dd12",
+    })
     setShowAddBoardForm(false);
   }
 
@@ -102,7 +111,7 @@ const Main = () => {
           }}
         />
       </Tab.Navigator>
-      {showAddBoardForm && <AddBoard cancel={handleAddBoardCancel} add={handleAddBoardAdd} />}
+      {showAddBoardForm && <AddBoard title={title} setTitle={setTitle} cancel={handleAddBoardCancel} add={handleAddBoardAdd} />}
     </>
   );
 };

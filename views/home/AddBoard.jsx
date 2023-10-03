@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import { COLORS, THEME } from "../../constants";
 import ButtonsActions from "../../components/button/ButtonsActions";
 
-const AddBoard = ({ cancel, add }) => {
+const AddBoard = ({ cancel, add, title, setTitle }) => {
+    
+
   return (
         <View style={styles.container}>
-          <TextInput style={styles.title}>esdsdfqdsfqsdf</TextInput>
+          <TextInput style={styles.title} value={title} onChangeText={setTitle} ></TextInput>
           <ButtonsActions cancel={cancel} add={add} />
         </View>
   );
