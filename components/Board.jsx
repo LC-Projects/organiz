@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { COLORS, THEME } from '../constants'
 
-const DataBoard = ({importance, importanceColor, text, percentage}) => {
+const DataBoard = ({importance, importanceColor, title, percentage}) => {
   return (
     <View style={styles.container}>
         <View style={styles.topBoard}>
@@ -17,8 +17,10 @@ const DataBoard = ({importance, importanceColor, text, percentage}) => {
             <Text style={styles.informations}>. . .</Text>
         </View>
         <View style={styles.middleBoard}>
-            <Text style={styles.textBoard}>{text}</Text>
+            <Text style={styles.textBoard}>{title}</Text>
         </View>
+
+        {/* ProgressBar Props: Nb Todo / Nb Doing / Nb Done */}
         <View style={styles.bottomBoard}>
             <View style={styles.ProgessBarParent}>
                 <Text></Text>
@@ -28,6 +30,7 @@ const DataBoard = ({importance, importanceColor, text, percentage}) => {
             </View>
             <Text style={styles.percentage}>{percentage} %</Text>
         </View>
+        {/* END ProgressBar */}
     </View>
   )
 }

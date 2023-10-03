@@ -6,31 +6,63 @@ import { userContext } from "../../context/userContext";
 import DataBoard from "../../components/DataBoard";
 import Board from "../../components/Board";
 import LottieView from "lottie-react-native";
+import AddBoard from "./AddBoard";
 
 const Homepage = ({navigation}) => {
   const {user, setUser} = useContext(userContext)
+
+  const data = [
+    {
+      id: 1,
+      title: "Organiz Mobile App",
+      important: "",
+      color: "#45dd12"
+    },
+    {
+      id: 2,
+      title: "Jonathan",
+      important: "",
+      color: "#95ed12"
+    },
+    {
+      id: 2,
+      title: "Lucky",
+      important: "",
+      color: "#45dd12"
+    },
+  ]
   
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.background}>
-        <View style={{height: 250, width: "100%", textAlign: 'center', backgroundColor: COLORS.dark_purple}}>
-          <LottieView source={IMGS.json.homepage} autoPlay loop style={{resizeMode: 'cover'}} />
-        </View>
-        {/* <Image src="../../assets/json/homepage-welcome-animation.json"/> */}
-        <ScrollView horizontal={true} style={styles.array}>
-          <DataBoard value={4} text="Boards" valueColor={COLORS.dark_purple} separator={true} />
-          <DataBoard value={10} text="TO DO" valueColor={COLORS.green} />
-          <DataBoard value={4} text="DOING" valueColor={COLORS.blue} />
-          <DataBoard value={6} text="DONE" valueColor={COLORS.orange} />
+    <View>
+      <SafeAreaView>
+        <ScrollView style={styles.background}>
+          <View style={{height: 250, width: "100%", textAlign: 'center', backgroundColor: COLORS.dark_purple}}>
+            <LottieView source={IMGS.json.homepage} autoPlay loop style={{resizeMode: 'cover'}} />
+          </View>
+          {/* <Image src="../../assets/json/homepage-welcome-animation.json"/> */}
+          <ScrollView horizontal={true} style={styles.array}>
+            <DataBoard value={4} text="Boards" valueColor={COLORS.dark_purple} separator={true} />
+            <DataBoard value={10} text="TO DO" valueColor={COLORS.green} />
+            <DataBoard value={4} text="DOING" valueColor={COLORS.blue} />
+            <DataBoard value={6} text="DONE" valueColor={COLORS.orange} />
+          </ScrollView>
+          <Text style={styles.text}>Boards</Text>
+        {
+          data.map((element, key) => <Board
+            key={key}
+            importance="High"
+            importanceColor={element.color} title={element.title}
+            percentage={68}/> )
+        }
+      
+      
+      
+      
+          <Button title="Board" onPress={() => navigation.navigate(ROUTES.PROJECTBOARD)} />
+          <Button title="Disconnect" onPress={() => setUser(false)} />
         </ScrollView>
-        <Text style={styles.text}>Boards</Text>
-        <Board importance="High" importanceColor={COLORS.urgent_red} text="Organiz Mobile App" percentage={68}/>
-        <Board importance="High" importanceColor={COLORS.urgent_red} text="Organiz Mobile App" percentage={68}/>
-        <Board importance="High" importanceColor={COLORS.urgent_red} text="Organiz Mobile App" percentage={68}/>
-        <Button title="Board" onPress={() => navigation.navigate(ROUTES.PROJECTBOARD)} />
-        <Button title="Disconnect" onPress={() => setUser(false)} />
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </View>
   )
 }
 

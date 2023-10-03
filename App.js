@@ -5,20 +5,27 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Access from "./routes/AccessRoutes";
 import Auth from "./routes/AuthRoutes";
 import { userContext } from "./context/userContext";
+import { appContext } from "./context/appContext";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [user, setUser] = useState(true)
-  const userContextValues = {user, setUser}
+  const [user, setUser] = useState(true);
+  const [refresh, setRefresh] = useState(false)
 
-  useEffect(() => {
-  }, [user])
-  
+  const userContextValues = { user, setUser };
+  const appContextValues = { refresh, setRefresh };
+
+  useEffect(() => {}, [user]);
+
   return (
-    <userContext.Provider value={userContextValues}>
-      <NavigationContainer>{!user ? <Auth/> : <Access />}</NavigationContainer>
-    </userContext.Provider>
+    <appContext.Provider value={appContextValues}>
+      <userContext.Provider value={userContextValues}>
+        <NavigationContainer>
+          {!user ? <Auth /> : <Access />}
+        </NavigationContainer>
+      </userContext.Provider>
+    </appContext.Provider>
   );
 }
 

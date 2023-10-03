@@ -5,6 +5,7 @@ export default {
     light_gray: '#8892AD',
     ultralight_gray: '#EEEEEE',
     white: '#FFFFFF',
+    gray: '#EEEEEE',
     black: '#171919',
     urgent_red: '#FF7081',
     urgent_yellow: '#FBC580',
