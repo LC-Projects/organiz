@@ -15,7 +15,7 @@ const Register = ({navigation}) => {
 
   const handleSubmit = async () => {
     Keyboard.dismiss()
-    if (password !== passwordConfirm) {
+    if (password != passwordConfirm) {
         Alert.alert('Passwords are not the same')
     } else {
         try {
@@ -23,7 +23,6 @@ const Register = ({navigation}) => {
         }
         catch (err) {
             setUser(false)
-            console.log(err);
             Alert.alert("Can't create an user: Email or Password is incorrect");
         }
     }
@@ -33,8 +32,8 @@ const Register = ({navigation}) => {
       <View>
         <Image/>
         <Input text="Email" value={email} onChangeText={setEmail} />
-        <Input text="Password" value={password} onChangeText={setPassword} />
-        <Input text="Confim Password" value={passwordConfirm} onChangeText={setPasswordConfirm} />
+        <Input text="Password" value={password} secureTextEntry={true} onChangeText={setPassword} />
+        <Input text="Confim Password" value={passwordConfirm} secureTextEntry={true} onChangeText={setPasswordConfirm} />
         <ButtonSubmit onPress={handleSubmit} text={"Sign Up"}/>
         <Text style={styles.textBetween}>OR</Text>
         <ButtonSubmit text={"Sign Up with Google"} image={"google"}/>
