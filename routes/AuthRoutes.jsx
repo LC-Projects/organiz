@@ -10,8 +10,8 @@ const Stack = createStackNavigator();
 const Auth = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="login" component={Login} />
-      <Stack.Screen name="register" component={Register} />
+      <Stack.Screen name="login" component={Login} options={{headerShown: false}} />
+      <Stack.Screen name="register" component={Register} options={{headerShown: false}} />
     </Stack.Navigator>
   );
 };
