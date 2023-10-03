@@ -2,14 +2,12 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { COLORS, THEME } from "../constants";
 
-const ButtonSumbit = ({redirect, text, image = ""}) => {
+const ButtonSubmit = ({onPress, text, image = ""}) => {
   return (
-    <View>
-      <TouchableOpacity style={styles.container} OnPress={redirect} >
+      <TouchableOpacity style={styles.container} onPress={onPress} >
         <Image source={image}/>
         <Text style={styles.text}>{text}</Text>
       </TouchableOpacity>
-    </View>
   )
 }
 
@@ -27,4 +25,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default ButtonSumbit
+export default ButtonSubmit

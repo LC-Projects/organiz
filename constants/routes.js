@@ -1,6 +1,7 @@
 export default {
     LOGIN: 'login',
-    HOMEPAGE: 'homepage',
     REGISTER: 'register',
+    HOMEPAGE: 'homepage',
+    PROJECTBOARD: 'Project Board',
     BOARD: 'Board',
 }

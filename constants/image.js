@@ -8,7 +8,12 @@ const auth = {
   intro: require("../assets/imgs/auth/intro.png"),
 };
 
+const icon = {
+  plus: require("../assets/icons/icon-plus.png"),
+};
+
 export default {
   logo,
   auth,
+  icon
 };
