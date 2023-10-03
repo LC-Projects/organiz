@@ -9,7 +9,7 @@ import { userContext } from "./context/userContext";
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [user, setUser] = useState(false)
+  const [user, setUser] = useState(true)
   const userContextValues = {user, setUser}
 
   useEffect(() => {

@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { View, Text, Button, StyleSheet, Image, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, ROUTES, THEME } from "../../constants";
+import { COLORS, IMGS, ROUTES, THEME } from "../../constants";
 import { userContext } from "../../context/userContext";
 import DataBoard from "../../components/DataBoard";
 import Board from "../../components/Board";
+import LottieView from "lottie-react-native";
 
 const Homepage = ({navigation}) => {
   const {user, setUser} = useContext(userContext)
@@ -12,6 +13,9 @@ const Homepage = ({navigation}) => {
   return (
     <SafeAreaView>
       <ScrollView style={styles.background}>
+        <View style={{height: 250, width: "100%", textAlign: 'center', backgroundColor: COLORS.dark_purple}}>
+          <LottieView source={IMGS.json.homepage} autoPlay loop style={{resizeMode: 'cover'}} />
+        </View>
         {/* <Image src="../../assets/json/homepage-welcome-animation.json"/> */}
         <ScrollView horizontal={true} style={styles.array}>
           <DataBoard value={4} text="Boards" valueColor={COLORS.dark_purple} separator={true} />
@@ -30,13 +34,16 @@ const Homepage = ({navigation}) => {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor:COLORS.dark_purple
+    backgroundColor:COLORS.dark_gray,
   },
   array: {
     flexDirection:"row",
     backgroundColor:COLORS.white,
     borderRadius:10,
-    margin:20
+    marginTop: '-10%',
+    marginLeft: THEME.spacing.m,
+    marginRight: THEME.spacing.m,
+    marginBottom: THEME.spacing.m,
   },
   text: {
     textAlign:"center",

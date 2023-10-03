@@ -12,8 +12,13 @@ const icon = {
   plus: require("../assets/icons/icon-plus.png"),
 };
 
+const json = {
+  homepage: require("../assets/json/homepage-welcome-animation.json")
+}
+
 export default {
   logo,
   auth,
-  icon
+  icon,
+  json
 };

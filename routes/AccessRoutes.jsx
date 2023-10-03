@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 const Access = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name={ROUTES.HOMEPAGE} component={Homepage} />
+      <Stack.Screen name={ROUTES.HOMEPAGE} component={Homepage} options={{headerShown: false}} />
       {/* <Stack.Screen name={ROUTES.HOMEPAGE} component={ProjectBoard} /> */}
       {/* <Stack.Screen name={ROUTES.BOARD} component={Board} /> */}
       <Stack.Screen name={ROUTES.PROJECTBOARD} component={ProjectBoard} />
