@@ -28,11 +28,12 @@ const Login = ({ navigation }) => {
     <SafeAreaView>
       {errMessage && <Text>{errMessage}</Text>}
       <View>
-        {/* <Image source="" /> */}
+        <Image source="../../imgs/auth/intro.png" />
         <Input text="Email" value={email} onChangeText={(e) => setEmail(e)} />
         <Input
           text="Password"
           value={password}
+          secureTextEntry={true}
           onChangeText={(e) => setPassword(e)}
         />
         <ButtonSubmit onPress={() => handleSubmit()} text="Login" />

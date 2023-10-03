@@ -9,4 +9,7 @@ export default {
     urgent_red: '#FF7081',
     urgent_yellow: '#FBC580',
     urgent_blue: '#7CABFF',
+    green: 'green',
+    blue: 'blue',
+    orange: 'orange',
 }

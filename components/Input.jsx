@@ -2,10 +2,10 @@ import React from 'react'
 import { View, StyleSheet, TextInput, Image } from "react-native";
 import { COLORS, THEME } from "../constants";
 
-const Input = ({text, value, onChangeText}) => {
+const Input = ({text, value, onChangeText, secureTextEntry}) => {
   return (
     <View>
-        <TextInput style={styles} placeholder={text} value={value} onChangeText={onChangeText}/>
+        <TextInput style={styles} secureTextEntry={secureTextEntry} placeholder={text} value={value} onChangeText={onChangeText}/>
         <Image/>
     </View>
   )
