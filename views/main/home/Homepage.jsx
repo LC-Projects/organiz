@@ -4,22 +4,22 @@ import {
   Text,
   Button,
   StyleSheet,
-  Image,
   ScrollView,
   Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, IMGS, ROUTES, THEME } from "../../constants";
-import { userContext } from "../../context/userContext";
-import DataBoard from "../../components/DataBoard";
-import Board from "../../components/Board";
+import { COLORS, IMGS, THEME } from "../../../constants";
+import { userContext } from "../../../context/userContext";
+import DataBoard from "../../../components/DataBoard";
+import Board from "../../../components/Board";
 import LottieView from "lottie-react-native";
-import { getBoards } from "../../api/firebase/realTime/boards";
-import { appContext } from "../../context/appContext";
+import { getBoards } from "../../../api/firebase/realTime/boards";
+import { appContext } from "../../../context/appContext";
 
 const Homepage = ({ navigation }) => {
   const { user, setUser } = useContext(userContext);
   const { resfresh, setRefresh } = useContext(appContext);
+  const { backgroundColor } = useContext(appContext)
 
   const [data, setData] = useState(null);
 
@@ -37,15 +37,15 @@ const Homepage = ({ navigation }) => {
   }, []);
 
   return (
-    <View>
+    <View style={[styles.container, backgroundColor ? {backgroundColor: COLORS.dark} : {backgroundColor: COLORS.light}]}>
       <SafeAreaView>
-        <ScrollView style={styles.background}>
+        <ScrollView>
           <View
             style={{
               height: 250,
               width: "100%",
               textAlign: "center",
-              backgroundColor: COLORS.dark_purple,
+              backgroundColor: backgroundColor ? COLORS.dark : COLORS.light,
             }}
           >
             <LottieView
@@ -66,7 +66,7 @@ const Homepage = ({ navigation }) => {
             <DataBoard value={4} text="DOING" valueColor={COLORS.blue} />
             <DataBoard value={6} text="DONE" valueColor={COLORS.orange} />
           </ScrollView>
-          <Text style={styles.text}>Boards</Text>
+          <Text style={[styles.text, backgroundColor ? {color:COLORS.light} : {color:COLORS.dark}]}>Boards</Text>
 
           <View style={styles.boards}>
             {data &&
@@ -80,12 +80,6 @@ const Homepage = ({ navigation }) => {
                 />
               ))}
           </View>
-
-          <Button
-            title="Board"
-            onPress={() => navigation.navigate(ROUTES.PROJECTBOARD)}
-          />
-          <Button title="Disconnect" onPress={() => setUser(false)} />
         </ScrollView>
       </SafeAreaView>
     </View>
@@ -93,8 +87,8 @@ const Homepage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  background: {
-    backgroundColor: COLORS.dark_gray,
+  container: {
+    height:'100%'
   },
   array: {
     flexDirection: "row",

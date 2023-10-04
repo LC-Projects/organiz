@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
-import { COLORS, THEME } from "../../constants";
-import ButtonsActions from "../../components/button/ButtonsActions";
+import { View, StyleSheet, TextInput } from "react-native";
+import { COLORS, THEME } from "../../../constants";
+import ButtonsActions from "../../../components/button/ButtonsActions";
 
 const AddBoard = ({ cancel, add, title, setTitle }) => {
     
