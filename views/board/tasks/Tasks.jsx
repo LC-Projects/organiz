@@ -1,32 +1,35 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import Button from "./Button";
+import Button from "./add/Button";
 import Task from "./task/Task";
-import Input from "./task/Input";
+import Input from "./add/Input";
+import { userContext } from "../../../context/userContext";
+import { addTask } from "../../../api/firebase/realTime/tasks";
 
 const Tasks = ({ data }) => {
-  const [add, setAdd] = useState(false)
-  const [cardTitle, setCardTitle] = useState("")
+  const { user, setUser } = useContext(userContext);
+
+  const [add, setAdd] = useState(false);
+  const [title, setTitle] = useState("");
 
   function handleAddCard() {
-    setAdd(true)
+    setAdd(true);
   }
 
   function handleCancel() {
-    setAdd(false)
+    setAdd(false);
   }
 
   function handleAdd() {
-    // setAdd(false)
-    // Todo: Add to Firebase
-    // let newData =    {
-    //   id: Math.random(),
-    //   tag: "#FF7081",
-    //   title: cardTitle,
-    // }
+    addTask(user.uid, 0, "todo", 
+        {
+          tag: "#FF7081",
+          title,
+        },
+    );
 
-    // setCardTitle([...data, newData]);
-
+    setAdd(false);
+    setTitle("");
   }
 
   return (
@@ -35,7 +38,16 @@ const Tasks = ({ data }) => {
         <Task key={task.id} tag={task.tag} />
       ))}
 
-      {add ? <Input value={cardTitle} onChangeText={(e) => setCardTitle(e)} cancel={handleCancel} add={handleAdd} /> : <Button onPress={handleAddCard} />}
+      {add ? (
+        <Input
+          value={title}
+          onChangeText={(e) => setTitle(e)}
+          cancel={handleCancel}
+          add={handleAdd}
+        />
+      ) : (
+        <Button onPress={handleAddCard} />
+      )}
     </View>
   );
 };

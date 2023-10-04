@@ -12,8 +12,6 @@ export async function addBoard(userId, board) {
     boards.push(board);
     set(ref(FIREBASE_DBRT, `${userId}/boards`), boards);
     return boards;
-
-    // push(ref(FIREBASE_DBRT, `${userId}/boards`), board);
   } catch (err) {
     console.error(err);
     throw new Error(err);
