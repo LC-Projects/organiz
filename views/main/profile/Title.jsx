@@ -4,8 +4,10 @@ import { appContext } from "../../../context/appContext";
 import { COLORS, THEME } from "../../../constants";
 
 const Title = () => {
+  // Context
   const { backgroundColor, setBackgroundColor } = useContext(appContext);
 
+  // Render
   return (
     <Text
       style={[
@@ -20,6 +22,7 @@ const Title = () => {
 
 export default Title;
 
+// Style
 const styles = StyleSheet.create({
   title: {
     fontSize: THEME.font.size.l,

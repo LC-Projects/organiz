@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import { appContext } from "../../../../context/appContext";
 import { COLORS, THEME } from "../../../../constants";
+import Input from "../../../../components/Input.jsx"
 
-const Input = ({ label, placeholder, value, onChangeText }) => {
+const InputWithLabel = ({ label, placeholder, value, onChangeText }) => {
+  // Context
   const { backgroundColor, setBackgroundColor } = useContext(appContext);
 
+  // Render
   return (
     <>
       <Text
@@ -25,8 +28,9 @@ const Input = ({ label, placeholder, value, onChangeText }) => {
   );
 };
 
-export default Input;
+export default InputWithLabel;
 
+// Style
 const styles = StyleSheet.create({
   subtitle: {
     marginTop: 20,
