@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { COLORS, THEME } from "../../../constants";
+import { COLORS, THEME } from "../../../../constants";
 import Dots from "./Dots";
 
 const Task = ({ tag }) => {

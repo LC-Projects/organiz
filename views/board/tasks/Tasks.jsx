@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import Task from "./Task";
-import Input from "./Input";
 import Button from "./Button";
+import Task from "./task/Task";
+import Input from "./task/Input";
 
 const Tasks = ({ data }) => {
   const [add, setAdd] = useState(false)

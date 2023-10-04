@@ -4,7 +4,6 @@ import {
   Text,
   Button,
   StyleSheet,
-  Image,
   ScrollView,
   Alert,
 } from "react-native";
@@ -26,9 +25,9 @@ const Homepage = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await getBoards(user.uid);
-        if (res) {
-          setData(res);
+        const a = await getBoards(user.uid);
+        if (a) {
+          setData(a);
         }
       } catch (err) {
         Alert.alert("err");
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
   boards: {
     paddingLeft: THEME.spacing.m,
     paddingRight: THEME.spacing.m,
-  }
+  },
 });
 
 export default Homepage;
