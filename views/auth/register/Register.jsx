@@ -40,8 +40,8 @@ const Register = ({ navigation }) => {
         </View>
 
         <Input placeholder="Email" value={email} onChangeText={setEmail} />
-        <Input placeholder="Password" value={password} password={true} onChangeText={setPassword} />
-        <Input placeholder="Confirm Password" value={passwordConfirm} password={true} onChangeText={setPasswordConfirm} />
+        <Input placeholder="Password" value={password} secureTextEntry={true} onChangeText={setPassword} />
+        <Input placeholder="Confirm Password" value={passwordConfirm} secureTextEntry={true} onChangeText={setPasswordConfirm} />
 
         <ButtonSubmit onPress={handleSubmit} text={"Sign Up"} />
 

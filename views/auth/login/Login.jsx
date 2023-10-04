@@ -42,7 +42,7 @@ const Login = ({ navigation }) => {
         <Input
           placeholder="Password"
           value={password}
-          password={true}
+          secureTextEntry={true}
           onChangeText={(e) => setPassword(e)}
         />
 
