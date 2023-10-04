@@ -3,7 +3,7 @@ import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { COLORS, THEME } from "../../constants";
 import Tasks from "./tasks/Tasks";
 
-const Board = ({ title, data }) => {
+const Board = ({ title, data, keyName }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -12,7 +12,7 @@ const Board = ({ title, data }) => {
           <Text style={styles.headerCounte}>{data?.length}</Text>
         </View>
 
-        <Tasks data={data} />
+        <Tasks data={data} keyName={keyName} />
       </View>
     </ScrollView>
   );

@@ -16,7 +16,7 @@ export async function addTask(userId, boardId, column, task) {
     );
     boards = snapshot.val();
 
-    if (!boards[column]) boards[column] = [task];
+    if (!boards[column]) boards[column] = [];
     boards[column].push(task);
 
     set(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}`), boards);

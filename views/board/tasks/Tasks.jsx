@@ -7,7 +7,7 @@ import { userContext } from "../../../context/userContext";
 import { addTask } from "../../../api/firebase/realTime/tasks";
 import { appContext } from "../../../context/appContext";
 
-const Tasks = ({ data }) => {
+const Tasks = ({ data, keyName }) => {
   const { user, setUser } = useContext(userContext);
   const { refresh, setRefresh } = useContext(appContext);
 
@@ -23,7 +23,7 @@ const Tasks = ({ data }) => {
   }
 
   function handleAdd() {
-    addTask(user.uid, 0, "todo", 
+    addTask(user.uid, 0, keyName, 
         {
           tag: "#FF7081",
           title,
