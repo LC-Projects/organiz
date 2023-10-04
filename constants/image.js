@@ -13,7 +13,8 @@ const icon = {
 };
 
 const json = {
-  homepage: require("../assets/json/homepage-welcome-animation.json")
+  homepage: require("../assets/json/homepage-welcome-animation.json"),
+  login: require("../assets/json/login-animation.json"),
 }
 
 export default {

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, KeyboardAvoidingView, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { COLORS, THEME } from "../../../constants";
+import ButtonsActions from "../../../components/button/ButtonsActions";
 
 const Input = ({ cancel, add, value, onChangeText }) => {
   return (
@@ -13,14 +14,9 @@ const Input = ({ cancel, add, value, onChangeText }) => {
             onChangeText={onChangeText}
         />
       </View>
-      <View style={styles.actions}>
-        <TouchableOpacity onPress={cancel}>
-          <Text style={styles.cancel}>Cancel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={add}>
-          <Text style={styles.add}>Add</Text>
-        </TouchableOpacity>
-      </View>
+
+      <ButtonsActions cancel={cancel} add={add} />
+
     </KeyboardAvoidingView>
   );
 };
@@ -44,22 +40,5 @@ const styles = StyleSheet.create({
       paddingLeft: THEME.spacing.xs,
       paddingRight: THEME.spacing.xs,
       borderRadius: THEME.border.xs,
-    },
-  
-    actions: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      margin: THEME.spacing.xs,
-      color: COLORS.white,
-    },
-  
-    cancel: {
-      color: COLORS.black,
-      fontSize: THEME.font.size.m,
-    },
-    add: {
-      color: COLORS.black,
-      fontWeight: THEME.font.weight.bold,
-      fontSize: THEME.font.size.m,
     },
   });
