@@ -13,13 +13,16 @@ import SeparatorWithLabel from "../../../components/SeparatorWithLabel";
 
 
 const Login = ({ navigation }) => {
+  // Context
   const { user, setUser } = useContext(userContext);
   const { backgroundColor } = useContext(appContext)
 
+  // Initialization
   const [errMessage, setErrMessage] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Handler
   async function handleSubmit() {
     Keyboard.dismiss();
     try {
@@ -30,6 +33,7 @@ const Login = ({ navigation }) => {
     }
   }
 
+  // Render
   return (
     <SafeAreaView style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}>
       {errMessage && <Text>{errMessage}</Text>}
@@ -60,6 +64,9 @@ const Login = ({ navigation }) => {
   );
 };
 
+export default Login;
+
+// Style
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -77,5 +84,3 @@ const styles = StyleSheet.create({
     height: '30%',
   },
 });
-
-export default Login;

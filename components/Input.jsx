@@ -15,7 +15,7 @@ const Input = ({ placeholder, value, onChangeText, secureTextEntry = false }) =>
   // Render
   return (
     <View style={StyleSheet.container} >
-      <TextInput style={styles.input} secureTextEntry={!visibility} placeholder={placeholder} value={value} onChangeText={onChangeText} />
+      <TextInput style={styles.input} secureTextEntry={secureTextEntry && !visibility} placeholder={placeholder} value={value} onChangeText={onChangeText} />
 
       {secureTextEntry && <TouchableOpacity style={styles.icon} onPress={() => handleVisibility()} >
         {visibility ? <Icon name="visibility" size={25} color={COLORS.black} /> : <Icon name="visibility-off" size={25} color={COLORS.black} />}
