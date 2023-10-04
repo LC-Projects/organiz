@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { COLORS, THEME } from '../constants'
+import ProgressBar from './ProgressBar'
 
 const DataBoard = ({importance, importanceColor, title, percentage}) => {
   return (
@@ -22,12 +23,7 @@ const DataBoard = ({importance, importanceColor, title, percentage}) => {
 
         {/* ProgressBar Props: Nb Todo / Nb Doing / Nb Done */}
         <View style={styles.bottomBoard}>
-            <View style={styles.ProgessBarParent}>
-                <Text></Text>
-                <View style={[styles.ProgessBarChild, {width:percentage*3}]}>
-                    <Text></Text>
-                </View>
-            </View>
+            <ProgressBar percentage={68}/>
             <Text style={styles.percentage}>{percentage} %</Text>
         </View>
         {/* END ProgressBar */}
@@ -89,25 +85,6 @@ const styles = StyleSheet.create({
         textAlign:'right',
         fontWeight:'bold',
         flex:1
-    },
-    ProgessBarParent: {
-        backgroundColor:COLORS.medium_gray,
-        position:'relative',
-        borderRadius:5,
-        flex:3,
-        height:10,
-    },
-    ProgessBarChild : {
-        position:'absolute',
-        backgroundColor:COLORS.dark_purple,
-        borderRadius:5,
-        height:10,
-    },
-    percentage: {
-        flex:1,
-        fontSize:THEME.font.size.l,
-        textAlign:'right',
-        fontWeight: 'bold'
     },
     fontSize: {
         fontSize:THEME.font.size.m

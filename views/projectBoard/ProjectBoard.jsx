@@ -15,7 +15,7 @@ import { appContext } from "../../context/appContext";
 
 const ProjectBoard = ({ route, navigation }) => {
   const { user, setUser } = useContext(userContext);
-  const { refresh, setRefresh } = useContext(appContext);
+  const { backgroundColor, refresh, setRefresh } = useContext(appContext);
   const [boardId, setstate] = useState("");
   const [data, setData] = useState(null);
 
@@ -69,7 +69,7 @@ const ProjectBoard = ({ route, navigation }) => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
-      style={styles.container}
+      style={[styles.container, backgroundColor ? {backgroundColor:COLORS.dark} : {backgroundColor:COLORS.light}]}
     />
   );
 };

@@ -4,5 +4,6 @@ export default {
     HOMEPAGE: 'homepage',
     PROJECTBOARD: 'Project Board',
     BOARD: 'Board',
+    TASK: 'Task',
     TASKSETTINGS: 'Task Settings'
 }
