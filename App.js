@@ -12,9 +12,10 @@ const Stack = createStackNavigator();
 export default function App() {
   const [user, setUser] = useState(false);
   const [refresh, setRefresh] = useState(false)
+  const [backgroundColor, setBackgroundColor] = useState(false)
 
   const userContextValues = { user, setUser };
-  const appContextValues = { refresh, setRefresh };
+  const appContextValues = { refresh, setRefresh, backgroundColor, setBackgroundColor };
 
   useEffect(() => {}, [user]);
 

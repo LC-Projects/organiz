@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     margin:10,
     borderRadius:10,
     fontSize: THEME.font.size.l,
-    backgroundColor:COLORS.ultralight_gray,
-    color:COLORS.light_gray,
+    backgroundColor:COLORS.light_gray,
+    color:COLORS.black,
 })
 export default Input

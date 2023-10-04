@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Homepage from "./Homepage";
+import { View, StyleSheet } from "react-native";
+import Homepage from "./home/Homepage";
+import Profile from "./profile/Profile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from "../../constants";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import AddBoard from "./AddBoard";
+import AddBoard from "./home/AddBoard";
 import { userContext } from "../../context/userContext";
 import { addBoard } from "../../api/firebase/realTime/boards";
 
@@ -18,8 +19,6 @@ const Main = () => {
 
   function handleAddBoard() {
     setShowAddBoardForm(true);
-    // alert("OMG!");
-    // addBoard
   }
 
   function handleAddBoardCancel() {
@@ -101,7 +100,7 @@ const Main = () => {
         />
         <Tab.Screen
           name="Profile"
-          component={Homepage}
+          component={Profile}
           options={{
             headerShown: false,
             tabBarLabel: "Profile",
