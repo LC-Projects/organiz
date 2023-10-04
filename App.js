@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -6,12 +6,13 @@ import Access from "./routes/AccessRoutes";
 import Auth from "./routes/AuthRoutes";
 import { userContext } from "./context/userContext";
 import { appContext } from "./context/appContext";
+import { useEffect, useState } from "react";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  // const [user, setUser] = useState(false);
-  const [user, setUser] = useState({uid: "ktHXw6ROETaRHh5lJclP2o1Es5F2"});
+  const [user, setUser] = useState(false);
+  // const [user, setUser] = useState({uid: "ktHXw6ROETaRHh5lJclP2o1Es5F2"});
   const [refresh, setRefresh] = useState(false)
   const [backgroundColor, setBackgroundColor] = useState(false)
 

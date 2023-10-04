@@ -1,11 +1,13 @@
 import React from 'react'
 import { View, StyleSheet, TextInput, Image } from "react-native";
 import { COLORS, THEME } from "../constants";
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Input = ({text, value, onChangeText, secureTextEntry}) => {
+const Input = ({placeholder, value, onChangeText, password}) => {
   return (
     <View>
-        <TextInput style={styles} secureTextEntry={secureTextEntry} placeholder={text} value={value} onChangeText={onChangeText}/>
+        <TextInput style={styles} password={password} placeholder={placeholder} value={value} onChangeText={onChangeText}/>
+        {/* <Icon name="hide" size={25} color={COLORS.black} /> */}
         {/* <Image/> */}
     </View>
   )
