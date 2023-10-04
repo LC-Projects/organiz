@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { COLORS, THEME } from '../constants'
 
 const DataBoard = ({importance, importanceColor, title, percentage}) => {

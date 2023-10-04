@@ -3,13 +3,15 @@ import { COLORS, THEME } from "../../../constants";
 import ButtonsActions from "../../../components/button/ButtonsActions";
 
 const AddBoard = ({ cancel, add, title, setTitle }) => {
-    
-
   return (
-        <View style={styles.container}>
-          <TextInput style={styles.title} value={title} onChangeText={setTitle} ></TextInput>
-          <ButtonsActions cancel={cancel} add={add} />
-        </View>
+    <View style={styles.container}>
+      <TextInput
+        style={styles.title}
+        value={title}
+        onChangeText={setTitle}
+      ></TextInput>
+      <ButtonsActions cancel={cancel} add={add} />
+    </View>
   );
 };
 

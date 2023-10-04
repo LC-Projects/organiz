@@ -3,11 +3,11 @@ import { View, Text, StyleSheet } from "react-native";
 import { COLORS, THEME } from "../../../../constants";
 import Dots from "./Dots";
 
-const Task = ({ tag }) => {
+const Task = ({ title, tag }) => {
   return (
     <View style={styles.task}>
       <View style={[styles.tag, {backgroundColor: tag}]}></View>
-      <Text style={styles.title}>Create Homepage</Text>
+      <Text style={styles.title}>{title}</Text>
       <Dots />
     </View>
   );

@@ -3,8 +3,7 @@ import { FIREBASE_DBRT } from "../connect";
 
 export async function addBoard(userId, board) {
   try {
-    const dbRef = ref(FIREBASE_DBRT);
-    let snapshot = await get(child(dbRef, `${userId}/boards`));
+    let snapshot = await get(child(ref(FIREBASE_DBRT), `${userId}/boards`));
     boards = snapshot.val();
     if (boards == null || boards == "") {
       boards = [];
@@ -20,9 +19,9 @@ export async function addBoard(userId, board) {
 
 export async function getBoards(userId) {
   try {
-    const userAlbums = ref(FIREBASE_DBRT, `${userId}/boards`);
+    const userBoards = ref(FIREBASE_DBRT, `${userId}/boards`);
     return new Promise((res, rej) => {
-      onValue(userAlbums, (data) => {
+      onValue(userBoards, (data) => {
         res(data.val());
       });
     });

@@ -6,9 +6,10 @@ import {
   StyleSheet,
   ScrollView,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, IMGS, THEME } from "../../../constants";
+import { COLORS, IMGS, ROUTES, THEME } from "../../../constants";
 import { userContext } from "../../../context/userContext";
 import DataBoard from "../../../components/DataBoard";
 import Board from "../../../components/Board";
@@ -19,7 +20,7 @@ import { appContext } from "../../../context/appContext";
 const Homepage = ({ navigation }) => {
   const { user, setUser } = useContext(userContext);
   const { resfresh, setRefresh } = useContext(appContext);
-  const { backgroundColor } = useContext(appContext)
+  const { backgroundColor } = useContext(appContext);
 
   const [data, setData] = useState(null);
 
@@ -34,10 +35,17 @@ const Homepage = ({ navigation }) => {
         Alert.alert("err");
       }
     })();
-  }, []);
+  }, [resfresh]);
 
   return (
-    <View style={[styles.container, backgroundColor ? {backgroundColor: COLORS.dark} : {backgroundColor: COLORS.light}]}>
+    <View
+      style={[
+        styles.container,
+        backgroundColor
+          ? { backgroundColor: COLORS.dark }
+          : { backgroundColor: COLORS.light },
+      ]}
+    >
       <SafeAreaView>
         <ScrollView>
           <View
@@ -66,18 +74,29 @@ const Homepage = ({ navigation }) => {
             <DataBoard value={4} text="DOING" valueColor={COLORS.blue} />
             <DataBoard value={6} text="DONE" valueColor={COLORS.orange} />
           </ScrollView>
-          <Text style={[styles.text, backgroundColor ? {color:COLORS.light} : {color:COLORS.dark}]}>Boards</Text>
+          <Text
+            style={[
+              styles.text,
+              backgroundColor
+                ? { color: COLORS.light }
+                : { color: COLORS.dark },
+            ]}
+          >
+            Boards
+          </Text>
 
           <View style={styles.boards}>
             {data &&
               data?.map((element, key) => (
-                <Board
-                  key={key}
-                  importance="High"
-                  importanceColor={element?.important}
-                  title={element?.title}
-                  percentage={68}
-                />
+                <TouchableOpacity onPress={() => (navigation.navigate(ROUTES.PROJECTBOARD, {"boardId": key}))} >
+                  <Board
+                    key={key}
+                    importance="High"
+                    importanceColor={element?.important}
+                    title={element?.title}
+                    percentage={68}
+                  />
+                </TouchableOpacity>
               ))}
           </View>
         </ScrollView>
@@ -88,7 +107,7 @@ const Homepage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height:'100%'
+    height: "100%",
   },
   array: {
     flexDirection: "row",

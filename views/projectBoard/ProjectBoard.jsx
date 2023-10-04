@@ -1,74 +1,57 @@
-import React, { useState } from "react";
-import { StyleSheet, View, useWindowDimensions } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import Board from "../board/Board";
 import { COLORS, THEME } from "../../constants";
+import { getTasks } from "../../api/firebase/realTime/tasks";
+import { userContext } from "../../context/userContext";
+import { appContext } from "../../context/appContext";
 
-const ProjectBoard = () => {
-  const [data, setData] = useState({
-    todo: [
-      {
-        id: 1,
-        tag: "#AEE779",
-        title: "Create Homepage",
-      },
-      {
-        id: 2,
-        tag: "#FF7081",
-        title: "Create Homepage",
-      },
-      {
-        id: 3,
-        tag: "#F7F6B4",
-        title: "Create Homepage",
-      },
-      {
-        id: 4,
-        tag: "#4EDCEB",
-        title: "Create Homepage",
-      },
-    ],
-    doing: [
-      {
-        id: 1,
-        tag: "#AEE779",
-        title: "Create Homepage",
-      },
-      {
-        id: 2,
-        tag: "#FF7081",
-        title: "Create Homepage",
-      },
-    ],
-    done: [
-      {
-        id: 1,
-        tag: "#AEE779",
-        title: "Create Homepage",
-      },
-      {
-        id: 2,
-        tag: "#FF7081",
-        title: "Create Homepage",
-      },
-    ],
-  });
+const ProjectBoard = ({ route }) => {
+  const { user, setUser } = useContext(userContext);
+  const { refresh, setRefresh } = useContext(appContext);
+  const [boardId, setstate] = useState("");
+  const [data, setData] = useState(null);
 
-  const titles = ["To Do", "Doing", "Done"];
+  useEffect(() => {
+    setstate(route.params?.boardId);
+    (async () => {
+      try {
+        const a = await getTasks(user.uid, boardId);
+        if (a) {
+          setData(a);
+        }
+      } catch (err) {
+        Alert.alert("err");
+      }
+    })();
+  }, [boardId, refresh]);
+
+  const titles = [
+    { name: "To Do", key: "todo" },
+    { name: "Doing", key: "doing" },
+    { name: "Done", key: "done" },
+  ];
 
   const renderScene = SceneMap({
-    todo: () => <Board title={titles[0]} data={data.todo} />,
-    doing: () => <Board title={titles[1]} data={data.doing} />,
-    done: () => <Board title={titles[2]} data={data.done} />,
+    todo: () => <Board title={titles[0].name} data={data?.todo} keyName={titles[0].key} />,
+    doing: () => <Board title={titles[1].name} data={data?.doing} keyName={titles[1].key} />,
+    done: () => <Board title={titles[2].name} data={data?.done} keyName={titles[2].key} />,
   });
 
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "todo", title: titles[0] },
-    { key: "doing", title: titles[1] },
-    { key: "done", title: titles[2] },
+    { key: titles[0].key, title: titles[0].name },
+    { key: titles[1].key, title: titles[1].name },
+    { key: titles[2].key, title: titles[2].name },
   ]);
 
   const renderTabBar = (props) => (
@@ -98,9 +81,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.dark_gray,
   },
   tabBarIndicator: {
-    backgroundColor: COLORS.white
+    backgroundColor: COLORS.white,
   },
   tabBarContainer: {
-    backgroundColor: COLORS.dark_purple
+    backgroundColor: COLORS.dark_purple,
   },
 });
