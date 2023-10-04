@@ -13,7 +13,7 @@ import { getTasks } from "../../api/firebase/realTime/tasks";
 import { userContext } from "../../context/userContext";
 import { appContext } from "../../context/appContext";
 
-const ProjectBoard = ({ route }) => {
+const ProjectBoard = ({ route, navigation }) => {
   const { user, setUser } = useContext(userContext);
   const { refresh, setRefresh } = useContext(appContext);
   const [boardId, setstate] = useState("");
@@ -40,9 +40,9 @@ const ProjectBoard = ({ route }) => {
   ];
 
   const renderScene = SceneMap({
-    todo: () => <Board title={titles[0].name} data={data?.todo} keyName={titles[0].key} />,
-    doing: () => <Board title={titles[1].name} data={data?.doing} keyName={titles[1].key} />,
-    done: () => <Board title={titles[2].name} data={data?.done} keyName={titles[2].key} />,
+    todo: () => <Board navigation={navigation} title={titles[0].name} data={data?.todo} keyName={titles[0].key} />,
+    doing: () => <Board navigation={navigation} title={titles[1].name} data={data?.doing} keyName={titles[1].key} />,
+    done: () => <Board navigation={navigation} title={titles[2].name} data={data?.done} keyName={titles[2].key} />,
   });
 
   const layout = useWindowDimensions();

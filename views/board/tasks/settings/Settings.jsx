@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 import { COLORS, THEME } from "../../../../constants";
 import { appContext } from "../../../../context/appContext";
@@ -8,9 +8,10 @@ const Settings = ({ route }) => {
     const { backgroundColor } = useContext(appContext)
     const [status, setStatus] = useState(1)
     const [data, setData] = useState(null);
+    const [taskId, setTaskId] = useState()
 
     useEffect(() => {
-        setstate(route.params?.taskId);
+        setTaskId(route.params?.taskId);
         (async () => {
         try {
             const a = await getTasks(user.uid, taskId);
@@ -21,7 +22,7 @@ const Settings = ({ route }) => {
             Alert.alert("err");
         }
         })();
-    }, [boardId, refresh]);
+    }, []);
         function deleteTask(event){
         
     }
@@ -51,10 +52,10 @@ const Settings = ({ route }) => {
     }
     return (
         <View style={[styles.container, backgroundColor ? {backgroundColor:COLORS.dark} : {backgroundColor:COLORS.light}]}>
-            <View style={styles.containerProgressBar}>
+            {/* <View style={styles.containerProgressBar}>
                 <ProgressBar percentage={68} />
                 <Text style={styles.percent}>{percentage} %</Text>
-            </View>
+            </View> */}
             <View style={styles.containerTitle}>
                 <Text style={styles.title}>Create Homepage</Text>
                 <Text style={styles.horizontalBar}></Text>
