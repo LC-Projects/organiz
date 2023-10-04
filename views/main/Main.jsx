@@ -8,11 +8,14 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import AddBoard from "./home/AddBoard";
 import { userContext } from "../../context/userContext";
 import { addBoard } from "../../api/firebase/realTime/boards";
+import { appContext } from "../../context/appContext";
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
   const [showAddBoardForm, setShowAddBoardForm] = useState(false);
+  const { resfresh, setRefresh } = useContext(appContext);
+
   const [title, setTitle] = useState('')
 
   const { user } = useContext(userContext)
@@ -28,9 +31,11 @@ const Main = () => {
   function handleAddBoardAdd() {
     addBoard(user.uid, {
         title,
-        important: "#45dd12",
+        important: 1,
     })
+    setTitle('');
     setShowAddBoardForm(false);
+    setRefresh(!resfresh);
   }
 
   function EmptyComponent() {

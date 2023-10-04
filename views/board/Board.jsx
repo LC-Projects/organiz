@@ -9,7 +9,7 @@ const Board = ({ title, data }) => {
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>{title}</Text>
-          <Text style={styles.headerCounte}>{data.length}</Text>
+          <Text style={styles.headerCounte}>{data?.length}</Text>
         </View>
 
         <Tasks data={data} />

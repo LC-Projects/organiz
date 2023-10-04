@@ -5,9 +5,11 @@ import Task from "./task/Task";
 import Input from "./add/Input";
 import { userContext } from "../../../context/userContext";
 import { addTask } from "../../../api/firebase/realTime/tasks";
+import { appContext } from "../../../context/appContext";
 
 const Tasks = ({ data }) => {
   const { user, setUser } = useContext(userContext);
+  const { refresh, setRefresh } = useContext(appContext);
 
   const [add, setAdd] = useState(false);
   const [title, setTitle] = useState("");
@@ -30,12 +32,13 @@ const Tasks = ({ data }) => {
 
     setAdd(false);
     setTitle("");
+    setRefresh(!refresh)
   }
 
   return (
     <View style={styles.tasks}>
-      {data.map((task) => (
-        <Task key={task.id} tag={task.tag} />
+      {data?.map((task) => (
+        <Task key={task?.id} title={task?.title} tag={task?.tag} />
       ))}
 
       {add ? (
