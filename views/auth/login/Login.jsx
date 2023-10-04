@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Text, StyleSheet, Image, Keyboard, Alert } from "react-native";
+import { View, Text, StyleSheet, Keyboard, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, IMGS, ROUTES, THEME } from "../../../constants";
 import ButtonSubmit from "../../../components/ButtonSubmit";
@@ -7,10 +7,12 @@ import Input from "../../../components/Input";
 import { userContext } from "../../../context/userContext";
 import { connectUser } from "../../../api/firebase/authUtils";
 import LottieView from "lottie-react-native";
+import { appContext } from "../../../context/appContext";
 
 
 const Login = ({ navigation }) => {
   const { user, setUser } = useContext(userContext);
+  const { backgroundColor } = useContext(appContext)
 
   const [errMessage, setErrMessage] = useState("");
   const [email, setEmail] = useState("");
@@ -27,12 +29,12 @@ const Login = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, backgroundColor ? {backgroundColor:COLORS.dark} : {backgroundColor:COLORS.light}]}>
       {errMessage && <Text>{errMessage}</Text>}
       <View>
 
         <View style={styles.loginImg}>
-          <LottieView source={IMGS.json.login} autoPlay loop style={{ transform: [{scale: 1.2}] }} />
+          <LottieView source={IMGS.json.login} autoPlay loop style={{ transform: [{scale: 1.4}] }} />
         </View>
         <Input text="Email" value={email} onChangeText={(e) => setEmail(e)} />
         <Input
@@ -42,10 +44,14 @@ const Login = ({ navigation }) => {
           onChangeText={(e) => setPassword(e)}
         />
         <ButtonSubmit onPress={() => handleSubmit()} text="Login" />
-
+        <View style={styles.transitionButton}>
+          <Text style={[styles.textBetween, backgroundColor ? {backgroundColor:COLORS.dark, color:COLORS.light} : {backgroundColor:COLORS.light, color:COLORS.dark}]}>OR</Text>
+          <Text style={[styles.horizontalBar, backgroundColor ? {backgroundColor:COLORS.light} : {backgroundColor:COLORS.dark}]}></Text>
+        </View>
+        <ButtonSubmit text={"Login with Google"} image={"google"}/>
         {/* Sign Up Message */}
         <View style={styles.message}>
-          <Text style={styles.text}>You don't have an account yet ?</Text>
+          <Text style={[styles.text, backgroundColor ? {color:COLORS.light} : {color:COLORS.dark}]}>You don't have an account yet ?</Text>
           <Text
             style={styles.redirect}
             onPress={() =>
@@ -82,11 +88,30 @@ const styles = StyleSheet.create({
   redirect: {
     textAlign: "center",
     fontWeight: "800",
-    color: "purple",
+    color: COLORS.purple,
+  },
+  transitionButton: {
+    position:"relative",
+    alignItems:"baseline",
+    textAlign:"center"
+  },
+  textBetween: {
+    margin:'auto',
+    fontWeight:"600",
+    padding:10,
+    alignSelf:"center",
+    zIndex:1,
+  },
+  horizontalBar: {
+    height: 2,
+    borderRadius:5,
+    position:"absolute",
+    left:20,
+    right:20,
+    top:'50%',
   },
   loginImg: {
-    height: '50%',
-    paddingTop: 40,
+    height: '30%',
     // backgroundColor: COLORS.gray
   },
   message: {
