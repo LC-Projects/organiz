@@ -10,17 +10,20 @@ import { userContext } from "../../context/userContext";
 import { addBoard } from "../../api/firebase/realTime/boards";
 import { appContext } from "../../context/appContext";
 
-const Tab = createBottomTabNavigator();
-
 const Main = () => {
-  const [showAddBoardForm, setShowAddBoardForm] = useState(false);
+  // Context
   const { resfresh, setRefresh } = useContext(appContext);
+  const { user } = useContext(userContext);
 
-  const [title, setTitle] = useState('')
 
-  const { user } = useContext(userContext)
+  // Initialization
+  const Tab = createBottomTabNavigator();
+  const [showAddBoardForm, setShowAddBoardForm] = useState(false);
+  const [title, setTitle] = useState("");
 
-  function handleAddBoard() {
+
+  // Handler
+  function handleAddBoardShow() {
     setShowAddBoardForm(true);
   }
 
@@ -30,18 +33,22 @@ const Main = () => {
 
   function handleAddBoardAdd() {
     addBoard(user.uid, {
-        title,
-        important: 1,
-    })
-    setTitle('');
+      title,
+      important: 1,
+    });
+    setTitle("");
     setShowAddBoardForm(false);
     setRefresh(!resfresh);
   }
 
+
+  // Component
   function EmptyComponent() {
     return null;
   }
 
+
+  // Render
   return (
     <>
       <Tab.Navigator
@@ -62,35 +69,19 @@ const Main = () => {
           }}
         />
         <Tab.Screen
-          name="EmptyComponent" //Render Empty Component
+          name="EmptyComponent"
           component={EmptyComponent}
           options={{
             headerShown: false,
             tabBarLabel: "",
             tabBarIcon: ({ color }) => (
-              <View
-                style={{
-                  marginTop: "-10%",
-                  backgroundColor: COLORS.dark_gray,
-                  borderRadius: 50,
-                  padding: 4,
-                }}
-              >
-                <View
-                  style={{
-                    width: 50,
-                    height: 50,
-                    backgroundColor: COLORS.dark_gray,
-                    borderRadius: 50,
-                    borderWidth: 2,
-                    borderColor: COLORS.white,
-                  }}
-                >
+              <View style={styles.addContainer}>
+                <View style={styles.addSubContainer}>
                   <Icon
                     name="add"
                     size={44}
                     color={color}
-                    style={{ textAlign: "center", color: COLORS.white }}
+                    style={styles.addIcon}
                   />
                 </View>
               </View>
@@ -99,7 +90,7 @@ const Main = () => {
           listeners={() => ({
             tabPress: (event) => {
               event.preventDefault();
-              handleAddBoard(event);
+              handleAddBoardShow(event);
             },
           })}
         />
@@ -115,13 +106,23 @@ const Main = () => {
           }}
         />
       </Tab.Navigator>
-      {showAddBoardForm && <AddBoard title={title} setTitle={setTitle} cancel={handleAddBoardCancel} add={handleAddBoardAdd} />}
+
+      {showAddBoardForm && (
+        <AddBoard
+          title={title}
+          setTitle={setTitle}
+          cancel={handleAddBoardCancel}
+          add={handleAddBoardAdd}
+        />
+      )}
     </>
   );
 };
 
 export default Main;
 
+
+// Style
 const styles = StyleSheet.create({
   bottomBar: {
     backgroundColor: COLORS.dark_gray,
@@ -134,5 +135,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.75,
     elevation: 10,
     borderWidth: 0,
+  },
+  addContainer: {
+    marginTop: "-10%",
+    backgroundColor: COLORS.dark_gray,
+    borderRadius: 50,
+    padding: 4,
+  },
+  addSubContainer: {
+    width: 50,
+    height: 50,
+    backgroundColor: COLORS.dark_gray,
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: COLORS.white,
+  },
+  addIcon: {
+    textAlign: "center",
+    color: COLORS.white,
   },
 });
