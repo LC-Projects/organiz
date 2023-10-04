@@ -7,9 +7,8 @@ import Input from "./Input";
 
 const Form = () => {
   const { backgroundColor, setBackgroundColor } = useContext(appContext);
-  const { user, setUser } = useContext(userContext);
   const [newEmail, setNewEmail] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  // const [newPassword, setNewPassword] = useState("");
 
   const inputs = [
     {label: "Your Email", placeholder: "New Email", value: newEmail, onChangeText: setNewEmail}
@@ -17,49 +16,7 @@ const Form = () => {
 
   return (
     <View>
-        {inputs?.map((input, key) => <Input label={input.label} placeholder={input.placeholder} value={input.value} />)}
-      {/* <Text
-        style={[
-          styles.subtitle,
-          backgroundColor ? { color: COLORS.light } : { color: COLORS.dark },
-        ]}
-      >
-        Your Password
-      </Text>
-      <Input
-        text="New Password"
-        value={newPassword}
-        secureTextEntry={true}
-        onChangeText={(e) => setNewPassword(e)}
-      ></Input>
-      <Text
-        style={[
-          styles.subtitle,
-          backgroundColor ? { color: COLORS.light } : { color: COLORS.dark },
-        ]}
-      >
-        Background color
-      </Text> */}
-      <View style={styles.buttons}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setBackgroundColor(true)}
-        >
-          <Text style={[styles.textButton, styles.dark]}>Dark</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setBackgroundColor(false)}
-        >
-          <Text style={[styles.textButton, styles.light]}>Light</Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        style={styles.exitButton}
-        onPress={() => setUser(false)}
-      >
-        <Text style={[styles.textButton]}>Disconnect</Text>
-      </TouchableOpacity>
+        {inputs.map((input, key) => <Input key={key} label={input.label} placeholder={input.placeholder} value={input.value} onChangeText={input.onChangeText} />)}
     </View>
   );
 };

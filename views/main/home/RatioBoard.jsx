@@ -16,8 +16,9 @@ const RatioBoard = () => {
   //   Render
   return (
     <ScrollView horizontal={true} style={styles.container}>
-      {data?.map((e) => (
+      {data?.map((e, key) => (
         <DataBoard
+          key={key}
           value={e.value}
           text={e.title}
           valueColor={e.color}

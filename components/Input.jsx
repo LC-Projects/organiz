@@ -6,7 +6,7 @@ const Input = ({text, value, onChangeText, secureTextEntry}) => {
   return (
     <View>
         <TextInput style={styles} secureTextEntry={secureTextEntry} placeholder={text} value={value} onChangeText={onChangeText}/>
-        <Image/>
+        {/* <Image/> */}
     </View>
   )
 }

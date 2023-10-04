@@ -37,8 +37,8 @@ const Tasks = ({ data, keyName }) => {
 
   return (
     <View style={styles.tasks}>
-      {data?.map((task) => (
-        <Task key={task?.id} title={task?.title} tag={task?.tag} />
+      {data?.map((task, key) => (
+        <Task key={key} title={task?.title} tag={task?.tag} />
       ))}
 
       {add ? (

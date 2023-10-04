@@ -9,12 +9,12 @@ const BoardContainer = ({ data, navigation }) => {
       {data &&
         data?.map((element, key) => (
           <TouchableOpacity
+            key={key}
             onPress={() =>
               navigation.navigate(ROUTES.PROJECTBOARD, { boardId: key })
             }
           >
             <Board
-              key={key}
               importance="High"
               importanceColor={element?.important}
               title={element?.title}
