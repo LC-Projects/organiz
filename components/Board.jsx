@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { COLORS, THEME } from '../constants'
 
-const DataBoard = ({importance, importanceColor, title, percentage}) => {
+const Board = ({importance, importanceColor, title, percentage}) => {
   return (
     <View style={styles.container}>
         <View style={styles.topBoard}>
@@ -114,4 +114,4 @@ const styles = StyleSheet.create({
     }
   })
 
-export default DataBoard
+export default Board

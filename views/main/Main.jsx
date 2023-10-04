@@ -12,7 +12,7 @@ import { appContext } from "../../context/appContext";
 
 const Main = () => {
   // Context
-  const { resfresh, setRefresh } = useContext(appContext);
+  const { refresh, setRefresh } = useContext(appContext);
   const { user } = useContext(userContext);
 
 
@@ -36,9 +36,9 @@ const Main = () => {
       title,
       important: 1,
     });
+    setRefresh(!refresh);
     setTitle("");
     setShowAddBoardForm(false);
-    setRefresh(!resfresh);
   }
 
 
