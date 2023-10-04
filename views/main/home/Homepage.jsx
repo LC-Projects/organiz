@@ -89,7 +89,7 @@ const Homepage = ({ navigation }) => {
             {data &&
               data?.map((element, key) => (
                 <TouchableOpacity onPress={() => (navigation.navigate(ROUTES.PROJECTBOARD, {"boardId": key}))} >
-                  <Board
+                  <Board navigation={navigation}
                     key={key}
                     importance="High"
                     importanceColor={element?.important}

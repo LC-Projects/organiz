@@ -7,7 +7,7 @@ import { userContext } from "../../../context/userContext";
 import { addTask } from "../../../api/firebase/realTime/tasks";
 import { appContext } from "../../../context/appContext";
 
-const Tasks = ({ data, keyName }) => {
+const Tasks = ({ navigation, data, keyName }) => {
   const { user, setUser } = useContext(userContext);
   const { refresh, setRefresh } = useContext(appContext);
 
@@ -37,8 +37,8 @@ const Tasks = ({ data, keyName }) => {
 
   return (
     <View style={styles.tasks}>
-      {data?.map((task) => (
-        <Task key={task?.id} title={task?.title} tag={task?.tag} />
+      {data?.map((task,key) => (
+        <Task navigation={navigation} key={key} keyName={key} title={task?.title} tag={task?.tag} />
       ))}
 
       {add ? (

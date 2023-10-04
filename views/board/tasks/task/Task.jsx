@@ -1,15 +1,18 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { COLORS, THEME } from "../../../../constants";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { COLORS, ROUTES, THEME } from "../../../../constants";
 import Dots from "./Dots";
 
-const Task = ({ title, tag }) => {
+const Task = ({ navigation, title, tag, keyName }) => {
+
   return (
-    <View style={styles.task}>
-      <View style={[styles.tag, {backgroundColor: tag}]}></View>
-      <Text style={styles.title}>{title}</Text>
-      <Dots />
-    </View>
+    <TouchableOpacity onPress={() => navigation.navigate(ROUTES.TASKSETTINGS, { "taskId": keyName })}>
+      <View style={styles.task}>
+        <View style={[styles.tag, {backgroundColor: tag}]}></View>
+        <Text style={styles.title}>{title}</Text>
+        <Dots />
+      </View>
+    </TouchableOpacity>
   );
 };
 
