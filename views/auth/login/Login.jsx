@@ -52,7 +52,7 @@ const Login = ({ navigation }) => {
 
         <ButtonSubmit onPress={() => handleSubmit()} text="Login" />
         <SeparatorWithLabel label="Or" />
-        <ButtonSubmit text={"Login with Google"} image={"google"} />
+        <ButtonSubmit text={"Login with Google"} image={IMGS.logo.google} style={styles.google} textColor={COLORS.black} />
 
         <AuthBottomMessage
           message="You don't have an account yet?"
@@ -83,4 +83,9 @@ const styles = StyleSheet.create({
   loginImg: {
     height: '30%',
   },
+  google: {
+    backgroundColor: COLORS.light,
+    borderColor: COLORS.black,
+    borderWidth: 2,
+  }
 });
