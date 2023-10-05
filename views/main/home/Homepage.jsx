@@ -52,7 +52,7 @@ const Homepage = ({ navigation }) => {
       <SafeAreaView>
         <ScrollView>
           <Hero />
-          <RatioBoard />
+          <RatioBoard DataBoard={data} />
           <Title />
           <BoardContainer data={data} navigation={navigation} />
         </ScrollView>

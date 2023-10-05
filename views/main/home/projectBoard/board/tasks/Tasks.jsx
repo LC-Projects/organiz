@@ -10,7 +10,6 @@ import { appContext } from "../../../../../../context/appContext";
 const Tasks = ({ navigation, boardId, data, keyName }) => {
   const { user, setUser } = useContext(userContext);
   const { refresh, setRefresh } = useContext(appContext);
-
   const [add, setAdd] = useState(false);
   const [title, setTitle] = useState("");
 
@@ -23,7 +22,7 @@ const Tasks = ({ navigation, boardId, data, keyName }) => {
   }
 
   function handleAdd() {
-    addTask(user.uid, 0, keyName, 
+  addTask(user.uid, boardId, keyName, 
         {
           title,
           status:1,
