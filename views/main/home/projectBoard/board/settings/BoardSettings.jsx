@@ -71,13 +71,13 @@ const BoardSettings = ({ navigation, route }) => {
 
             <View style={styles.containerStatus}>
                 <Text style={styles.title}>Move :</Text>
-                <TouchableOpacity style={[styles.button, status == 1 ? {backgroundColor:COLORS.dark_purple} : {backgroundColor:COLORS.medium_purple}]} onPress={() => setStatus(1)}>
+                <TouchableOpacity style={[styles.button, status == 1 ? {backgroundColor:COLORS.blue} : {backgroundColor:COLORS.urgent_blue}]} onPress={() => setStatus(1)}>
                     <Text style={styles.titleButtonStatus}>Low</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, status == 2 ? {backgroundColor:COLORS.dark_purple} : {backgroundColor:COLORS.medium_purple}]} onPress={() => setStatus(2)}>
+                <TouchableOpacity style={[styles.button, status == 2 ? {backgroundColor:COLORS.orange} : {backgroundColor:COLORS.urgent_orange}]} onPress={() => setStatus(2)}>
                   <Text style={styles.titleButtonStatus}>Medium</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, status == 3 ? {backgroundColor:COLORS.dark_purple} : {backgroundColor:COLORS.medium_purple}]} onPress={() => setStatus(3)}>
+                <TouchableOpacity style={[styles.button, status == 3 ? {backgroundColor:COLORS.red} : {backgroundColor:COLORS.urgent_red}]} onPress={() => setStatus(3)}>
                     <Text style={styles.titleButtonStatus}>High</Text>
                 </TouchableOpacity>
             </View>

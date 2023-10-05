@@ -10,7 +10,7 @@ import Form from './form/Form';
 
 const Profile = () => {
   // Context
-  const { backgroundColor, setBackgroundColor } = useContext(appContext)
+  const { backgroundColor } = useContext(appContext)
 
   // Render
   return (
