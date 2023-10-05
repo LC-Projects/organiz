@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Alert, StyleSheet, useWindowDimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
-import Board from "../board/Board";
-import { COLORS, THEME } from "../../constants";
-import { getTasks } from "../../api/firebase/realTime/tasks";
-import { userContext } from "../../context/userContext";
-import { appContext } from "../../context/appContext";
+import { appContext } from "../../../../context/appContext";
+import { userContext } from "../../../../context/userContext";
+import { COLORS } from "../../../../constants";
+import { getTasks } from "../../../../api/firebase/realTime/tasks";
+import Board from "./board/Board";
 
-const ProjectBoard = ({ route }) => {
+const ProjectBoard = ({ navigation, route }) => {
   // Context
   const { user, setUser } = useContext(userContext);
-  const { refresh, setRefresh } = useContext(appContext);
+  const { refresh, setRefresh, backgroundColor } = useContext(appContext);
 
 
   // Inititalization
@@ -30,7 +30,7 @@ const ProjectBoard = ({ route }) => {
   ]);
   const renderScene = SceneMap({
     todo: () => (
-      <Board title={titles[0].name} data={data?.todo} keyName={titles[0].key} />
+      <Board navigation={navigation} title={titles[0].name} data={data?.todo} keyName={titles[0].key} />
     ),
     doing: () => (
       <Board

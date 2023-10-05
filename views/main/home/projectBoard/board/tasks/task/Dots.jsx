@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { COLORS } from "../../../../constants";
+import { COLORS } from "../../../../../../../constants";
 
 const Dots = () => {
   return (

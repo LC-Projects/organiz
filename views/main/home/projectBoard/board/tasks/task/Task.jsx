@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { COLORS, ROUTES, THEME } from "../../../../constants";
 import Dots from "./Dots";
+import { COLORS, ROUTES, THEME } from "../../../../../../../constants";
 
 const Task = ({ navigation, title, tag, keyName }) => {
 

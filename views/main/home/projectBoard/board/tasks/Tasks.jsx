@@ -3,9 +3,9 @@ import { View, StyleSheet } from "react-native";
 import Button from "./add/Button";
 import Task from "./task/Task";
 import Input from "./add/Input";
-import { userContext } from "../../../context/userContext";
-import { addTask } from "../../../api/firebase/realTime/tasks";
-import { appContext } from "../../../context/appContext";
+import { addTask } from "../../../../../../api/firebase/realTime/tasks";
+import { userContext } from "../../../../../../context/userContext";
+import { appContext } from "../../../../../../context/appContext";
 
 const Tasks = ({ navigation, data, keyName }) => {
   const { user, setUser } = useContext(userContext);

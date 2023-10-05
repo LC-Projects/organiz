@@ -1,11 +1,10 @@
 import React from "react";
 import { ROUTES } from "../constants";
 import { createStackNavigator } from "@react-navigation/stack";
-import Board from "../views/board/Board";
-import ProjectBoard from "../views/projectBoard/ProjectBoard";
 import Homepage from "../views/main/home/Homepage";
 import Main from "../views/main/Main";
-import Settings from "../views/board/tasks/settings/Settings";
+import ProjectBoard from "../views/main/home/projectBoard/ProjectBoard";
+import Settings from "../views/main/home/projectBoard/board/tasks/settings/Settings";
 
 const Stack = createStackNavigator();
 

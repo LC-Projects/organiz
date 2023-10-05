@@ -30,44 +30,4 @@ const styles = StyleSheet.create({
   container: {
     height: '100%'
   },
-  profileImg: {
-    height: '40%',
-  },
-  title: {
-    fontSize: THEME.font.size.l,
-    textAlign: "center",
-    fontWeight: "600",
-  },
-  subtitle: {
-    marginTop: 20,
-    fontSize: THEME.font.size.m,
-    marginLeft: 20,
-    fontWeight: "600",
-  },
-  buttons: {
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 30,
-    marginRight: 30,
-    flexDirection: "row",
-    gap: 80,
-  },
-  button: {
-    flex: 1,
-    backgroundColor: COLORS.dark_purple,
-    alignItems: "center",
-    padding: 10,
-    borderRadius: 5,
-  },
-  textButton: {
-    fontSize: THEME.font.size.l,
-    fontWeight: '800',
-  },
-
-  dark: {
-    color: COLORS.dark
-  },
-  light: {
-    color: COLORS.light
-  }
 })

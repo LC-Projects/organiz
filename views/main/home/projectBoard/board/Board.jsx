@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
-import { COLORS, THEME } from "../../constants";
 import Tasks from "./tasks/Tasks";
+import { COLORS, THEME } from "../../../../../constants";
 
 const Board = ({ navigation, title, data, keyName }) => {
   return (

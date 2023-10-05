@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from "react-native";
-import { COLORS, ROUTES, THEME } from "../../../../constants";
-import { appContext } from "../../../../context/appContext";
-import ProgressBar from "../../../../components/ProgressBar";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert } from "react-native";
+import { COLORS, THEME } from "../../../../../../../constants";
+import { appContext } from "../../../../../../../context/appContext";
+import ProgressBar from "../../../../../../../components/ProgressBar";
 
 const Settings = ({ navigation, route }) => {
     const { backgroundColor } = useContext(appContext)
@@ -12,16 +12,17 @@ const Settings = ({ navigation, route }) => {
 
     useEffect(() => {
         setTaskId(route.params?.taskId);
-        (async () => {
-        try {
-            const a = await getTasks(user.uid, taskId);
-            if (a) {
-            setData(a);
-            }
-        } catch (err) {
-            Alert.alert("err");
-        }
-        })();
+        // TODO: Créer la CRUD de modification et de suppression
+        // (async () => {
+        // try {
+        //     const a = await getTasks(user.uid, taskId);
+        //     if (a) {
+        //     setData(a);
+        //     }
+        // } catch (err) {
+        //     Alert.alert("err");
+        // }
+        // })();
     }, []);
 
     function deleteTask(event){
