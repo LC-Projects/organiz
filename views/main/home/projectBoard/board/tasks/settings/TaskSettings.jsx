@@ -5,6 +5,7 @@ import { appContext } from "../../../../../../../context/appContext";
 import ProgressBar from "../../../../../../../components/ProgressBar";
 import { userContext } from "../../../../../../../context/userContext";
 import { deleteTask, getTask, modifyTask } from "../../../../../../../api/firebase/realTime/tasks";
+import InputLayout from "../../../../../../../components/wrapper/InputWrapper";
 
 const TaskSettings = ({ navigation, route }) => {
     const [boardId, setBoardId] = useState(route.params?.boardId);
@@ -85,15 +86,14 @@ const TaskSettings = ({ navigation, route }) => {
     
     return (
         <ScrollView style={[styles.container, backgroundColor ? {backgroundColor:COLORS.dark} : {backgroundColor:COLORS.light}]}>
-            <View style={styles.containerProgressBar}>
+            <InputLayout >
                 <ProgressBar percentage={68} />
-                <Text style={styles.percent}>68 %</Text>
-            </View>
+            </InputLayout>
 
 
-            <View style={styles.containerTitle}>
+            <InputLayout>
                 <TextInput style={styles.name} onChangeText={setTitle}>{title}</TextInput>
-            </View>
+            </InputLayout>
 
             <View style={styles.containerStatus}>
                 <Text style={styles.title}>Move :</Text>
@@ -149,17 +149,9 @@ export default TaskSettings;
 
 const styles = StyleSheet.create({
     container: {
-        height: '100%',
-        padding:10,
+        padding: THEME.spacing.m,
     },
     containerProgressBar: {
-        alignItems:'center',
-        flex:2,
-        flexDirection:"row",
-        margin:10,
-        gap:10,
-        padding:2,
-        height: 22,
         backgroundColor:COLORS.white,
         borderRadius:15,
     },
