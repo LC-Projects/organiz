@@ -30,7 +30,7 @@ const ProjectBoard = ({ navigation, route }) => {
   ]);
   const renderScene = SceneMap({
     todo: () => (
-      <Board navigation={navigation} title={titles[0].name} data={data?.todo} keyName={titles[0].key} />
+      <Board navigation={navigation} boardId={boardId} title={titles[0].name} data={data?.todo} keyName={titles[0].key} />
     ),
     doing: () => (
       <Board

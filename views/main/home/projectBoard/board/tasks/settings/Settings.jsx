@@ -3,15 +3,28 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert 
 import { COLORS, THEME } from "../../../../../../../constants";
 import { appContext } from "../../../../../../../context/appContext";
 import ProgressBar from "../../../../../../../components/ProgressBar";
+import { userContext } from "../../../../../../../context/userContext";
+import { modifyTask } from "../../../../../../../api/firebase/realTime/tasks";
 
 const Settings = ({ navigation, route }) => {
-    const { backgroundColor } = useContext(appContext)
-    const [status, setStatus] = useState(1)
+    const [boardId, setBoardId] = useState(route.params?.boardId);
+    const [column, setColumn] = useState(route.params?.column)
+    const [title, setTitle] = useState(route.params?.title);
+    const [status, setStatus] = useState(1);
+    const [tag, setTag] = useState(route.params?.tag);
+    const [image, setImage] = useState("");
+    const [description, setDescription] = useState("");
+    const { backgroundColor } = useContext(appContext);
     const [data, setData] = useState(null);
-    const [taskId, setTaskId] = useState()
+    const [taskId, setTaskId] = useState();
+    const { user, setUser } = useContext(userContext);
 
     useEffect(() => {
+        setBoardId(route.params?.boardId);
+        setColumn(route.params?.column);
         setTaskId(route.params?.taskId);
+        setTitle(route.params?.title);
+        setTag(route.params?.tag);
         // TODO: Créer la CRUD de modification et de suppression
         // (async () => {
         // try {
@@ -23,14 +36,19 @@ const Settings = ({ navigation, route }) => {
         //     Alert.alert("err");
         // }
         // })();
-    }, []);
+    }, [route.params]);
 
     function deleteTask(event){
-        
     }
 
     function saveTask(event){
-        
+        const task = {
+            title:title,
+            status:status,
+            tag:tag,
+            description:description
+        }
+        modifyTask(user.uid, boardId, column, taskId, task);
     }
 
     function uploadImage(event){
@@ -62,7 +80,7 @@ const Settings = ({ navigation, route }) => {
 
 
             <View style={styles.containerTitle}>
-                <TextInput style={styles.name}>Create Homepage</TextInput>
+                <TextInput style={styles.name} onChangeText={setTitle}>{title}</TextInput>
             </View>
 
             <View style={styles.containerStatus}>
@@ -82,7 +100,7 @@ const Settings = ({ navigation, route }) => {
             <View style={styles.containerColor}>
                 <Text style={styles.title}>Color :</Text>
                 <View style={styles.colorInput}>
-                    <TextInput style={styles.name} placeholder="#FFFFFF"></TextInput>
+                    <TextInput style={styles.name} onChangeText={setTag} placeholder="#FFFFFF">{tag}</TextInput>
                     <View style={styles.colorIamge} />
                 </View>
             </View>
@@ -98,7 +116,7 @@ const Settings = ({ navigation, route }) => {
 
             <View style={styles.containerDescription}>
                 <Text style={styles.title}>Description :</Text>
-                <TextInput style={styles.description} placeholder="Add a description to your task"></TextInput>
+                <TextInput style={styles.description} onChangeText={setDescription} placeholder="Add a description to your task">{description}</TextInput>
             </View>
             <View style={styles.containerButton}>
                 <TouchableOpacity style={styles.buttonAction} onPress={(event) => deleteTask(event)}>
