@@ -20,8 +20,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         gap: THEME.spacing.s,
-        paddingLeft: THEME.spacing.s,
-        paddingRight: THEME.spacing.s,
     },
     ProgessBarParent: {
         backgroundColor: COLORS.medium_purple,
