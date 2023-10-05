@@ -4,7 +4,7 @@ import { COLORS, THEME } from "../../../../../../../constants";
 import { appContext } from "../../../../../../../context/appContext";
 import ProgressBar from "../../../../../../../components/ProgressBar";
 import { userContext } from "../../../../../../../context/userContext";
-import { modifyTask } from "../../../../../../../api/firebase/realTime/tasks";
+import { getTask, modifyTask } from "../../../../../../../api/firebase/realTime/tasks";
 
 const Settings = ({ navigation, route }) => {
     const [boardId, setBoardId] = useState(route.params?.boardId);
@@ -25,17 +25,18 @@ const Settings = ({ navigation, route }) => {
         setTaskId(route.params?.taskId);
         setTitle(route.params?.title);
         setTag(route.params?.tag);
-        // TODO: Créer la CRUD de modification et de suppression
-        // (async () => {
-        // try {
-        //     const a = await getTasks(user.uid, taskId);
-        //     if (a) {
-        //     setData(a);
-        //     }
-        // } catch (err) {
-        //     Alert.alert("err");
-        // }
-        // })();
+        (async () => {
+        try {
+            const a = await getTask(user.uid, boardId, column, taskId);
+            if (a) {
+            console.log(a);
+            setData(a);
+            }
+        } catch (err) {
+            Alert.alert("err");
+        }
+        })();
+        console.log(data);
     }, [route.params]);
 
     function deleteTask(event){

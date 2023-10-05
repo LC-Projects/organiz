@@ -27,18 +27,34 @@ export async function addTask(userId, boardId, column, task) {
   }
 }
 
+export async function getTask(userId, boardId, column, taskId) {
+  try {
+    const userTask = ref(FIREBASE_DBRT, `${userId}/boards/${boardId}/${column}/${taskId}`);
+    return new Promise((res, rej) => {
+      onValue(userTask, (data) => {
+        res(data.val());
+      });
+    });
+  } catch (err) {
+    console.error(err);
+    throw new Error(err);
+  }
+}
 
 export function modifyTask(userId, boardId, column, taskId, task) {
-  update(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${column}/${taskId}`), task );
-  return ;
+  try {
+    update(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${column}/${taskId}`), task );
+    return;
+  } catch (err) {
+    throw new Error(err);
+  }
 }
 
 export async function deleteTask(userId, boardId, taskId) {
   try {
-    set(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}/task/${taskId}`), []);
+    set(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}/${taskId}`), []);
     return;
   } catch (err) {
-    console.error(err);
     throw new Error(err);
   }
 }
