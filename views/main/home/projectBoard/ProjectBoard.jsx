@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, StyleSheet, useWindowDimensions } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { appContext } from "../../../../context/appContext";
 import { userContext } from "../../../../context/userContext";
-import { COLORS } from "../../../../constants";
+import { COLORS, ROUTES } from "../../../../constants";
 import { getTasks } from "../../../../api/firebase/realTime/tasks";
 import Board from "./board/Board";
+import Button from "./board/tasks/add/Button";
 
 const ProjectBoard = ({ navigation, route }) => {
   // Context
@@ -30,7 +31,13 @@ const ProjectBoard = ({ navigation, route }) => {
   ]);
   const renderScene = SceneMap({
     todo: () => (
-      <Board navigation={navigation} boardId={boardId} title={titles[0].name} data={data?.todo} keyName={titles[0].key} />
+      <View>
+        <Board navigation={navigation} boardId={boardId} title={titles[0].name} data={data?.todo} keyName={titles[0].key} />
+        <TouchableOpacity onPress={() => navigation.navigate(ROUTES.BOARDSETTINGS, { "boardId": boardId, "title": titles[0].name})} >
+          <Text>Settings</Text>
+        </TouchableOpacity>
+      </View>
+      
     ),
     doing: () => (
       <Board

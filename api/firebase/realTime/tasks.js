@@ -1,4 +1,4 @@
-import { child, get, onValue, push, ref, set, update} from "firebase/database";
+import { child, get, onValue, ref, remove, set, update} from "firebase/database";
 import { FIREBASE_DBRT } from "../connect";
 
 /**
@@ -9,20 +9,15 @@ import { FIREBASE_DBRT } from "../connect";
  * @param {json} task Task Json
  * @returns none
  */
-export async function addTask(userId, boardId, column, task) {
+export async function getTasks(userId, boardId) {
   try {
-    let snapshot = await get(
-      child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}`)
-    );
-    boards = snapshot.val();
-
-    if (!boards[column]) boards[column] = [];
-    boards[column].push(task);
-
-    set(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}`), boards);
-    return;
+    const userTasks = ref(FIREBASE_DBRT, `${userId}/boards/${boardId}`);
+    return new Promise((res, rej) => {
+      onValue(userTasks, (data) => {
+        res(data.val());
+      });
+    });
   } catch (err) {
-    console.error(err);
     throw new Error(err);
   }
 }
@@ -36,39 +31,42 @@ export async function getTask(userId, boardId, column, taskId) {
       });
     });
   } catch (err) {
-    console.error(err);
     throw new Error(err);
   }
 }
+
+export async function addTask(userId, boardId, column, task) {
+  try {
+    let snapshot = await get(
+      child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}`)
+    );
+    boards = snapshot.val();
+
+    if (!boards[column]) boards[column] = [];
+    boards[column].push(task);
+
+    set(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}`), boards);
+    return;
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
 
 export function modifyTask(userId, boardId, column, taskId, task) {
   try {
     update(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${column}/${taskId}`), task );
-    return;
+    return true;
   } catch (err) {
     throw new Error(err);
   }
 }
 
-export async function deleteTask(userId, boardId, taskId) {
+export function deleteTask(userId, boardId, column, taskId) {
   try {
-    set(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}/${taskId}`), []);
-    return;
+    remove(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}/${column}/${taskId}`));
+    return true;
   } catch (err) {
-    throw new Error(err);
-  }
-}
-
-export async function getTasks(userId, boardId) {
-  try {
-    const userTasks = ref(FIREBASE_DBRT, `${userId}/boards/${boardId}`);
-    return new Promise((res, rej) => {
-      onValue(userTasks, (data) => {
-        res(data.val());
-      });
-    });
-  } catch (err) {
-    console.error(err);
     throw new Error(err);
   }
 }

@@ -4,9 +4,9 @@ import { COLORS, THEME } from "../../../../../../../constants";
 import { appContext } from "../../../../../../../context/appContext";
 import ProgressBar from "../../../../../../../components/ProgressBar";
 import { userContext } from "../../../../../../../context/userContext";
-import { getTask, modifyTask } from "../../../../../../../api/firebase/realTime/tasks";
+import { deleteTask, getTask, modifyTask } from "../../../../../../../api/firebase/realTime/tasks";
 
-const Settings = ({ navigation, route }) => {
+const TaskSettings = ({ navigation, route }) => {
     const [boardId, setBoardId] = useState(route.params?.boardId);
     const [column, setColumn] = useState(route.params?.column)
     const [title, setTitle] = useState(route.params?.title);
@@ -14,7 +14,7 @@ const Settings = ({ navigation, route }) => {
     const [tag, setTag] = useState(route.params?.tag);
     const [image, setImage] = useState("");
     const [description, setDescription] = useState("");
-    const { backgroundColor } = useContext(appContext);
+    const { backgroundColor, refresh, setRefresh } = useContext(appContext);
     const [data, setData] = useState(null);
     const [taskId, setTaskId] = useState();
     const { user, setUser } = useContext(userContext);
@@ -29,30 +29,41 @@ const Settings = ({ navigation, route }) => {
         try {
             const a = await getTask(user.uid, boardId, column, taskId);
             if (a) {
-            console.log(a);
             setData(a);
             }
         } catch (err) {
-            Alert.alert("err");
+            Alert.alert("You have encountered an error !");
         }
         })();
-        console.log(data);
     }, [route.params]);
 
-    function deleteTask(event){
-    }
-
-    function saveTask(event){
-        const task = {
-            title:title,
-            status:status,
-            tag:tag,
-            description:description
+    function remove(){
+        try {
+            deleteTask(user.uid, boardId, column, taskId);
+            setRefresh(!refresh);
+            navigation.goBack();
+        } catch {
+            Alert.alert("You have encountered an error !");
         }
-        modifyTask(user.uid, boardId, column, taskId, task);
     }
 
-    function uploadImage(event){
+    function save(){
+        try {
+            const task = {
+                title:title,
+                status:status,
+                tag:tag,
+                description:description
+            }
+            modifyTask(user.uid, boardId, column, taskId, task);
+            setRefresh(!refresh);
+            navigation.goBack();
+        } catch {
+            Alert.alert("You have encountered an error !");
+        }
+    }
+
+    function uploadImage(){
 
     }
 
@@ -120,13 +131,13 @@ const Settings = ({ navigation, route }) => {
                 <TextInput style={styles.description} onChangeText={setDescription} placeholder="Add a description to your task">{description}</TextInput>
             </View>
             <View style={styles.containerButton}>
-                <TouchableOpacity style={styles.buttonAction} onPress={(event) => deleteTask(event)}>
+                <TouchableOpacity style={styles.buttonAction} onPress={() => remove()}>
                     <Text style={styles.titleButton}>Delete</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonAction}  onPress={() => navigation.goBack()}>
                     <Text style={styles.titleButton}>Cancel</Text>    
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.buttonAction, backgroundColor ? {backgroundColor:COLORS.white} : {backgroundColor:COLORS.green}]} onPress={(event) => saveTask(event)}>
+                <TouchableOpacity style={[styles.buttonAction, backgroundColor ? {backgroundColor:COLORS.white} : {backgroundColor:COLORS.green}]} onPress={(event) => save(event)}>
                     <Text style={[styles.titleButton, backgroundColor ? {color:COLORS.black} : {color:COLORS.white}]}>Save</Text>
                 </TouchableOpacity>
             </View>
@@ -134,7 +145,7 @@ const Settings = ({ navigation, route }) => {
     );
 };
 
-export default Settings;
+export default TaskSettings;
 
 const styles = StyleSheet.create({
     container: {
