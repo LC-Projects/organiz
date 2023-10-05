@@ -8,16 +8,21 @@ import { userContext } from "../../../context/userContext";
 import { connectUser } from "../../../api/firebase/authUtils";
 import LottieView from "lottie-react-native";
 import { appContext } from "../../../context/appContext";
+import AuthBottomMessage from "../../../components/AuthBottomMessage";
+import SeparatorWithLabel from "../../../components/SeparatorWithLabel";
 
 
 const Login = ({ navigation }) => {
+  // Context
   const { user, setUser } = useContext(userContext);
   const { backgroundColor } = useContext(appContext)
 
+  // Initialization
   const [errMessage, setErrMessage] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Handler
   async function handleSubmit() {
     Keyboard.dismiss();
     try {
@@ -28,46 +33,40 @@ const Login = ({ navigation }) => {
     }
   }
 
+  // Render
   return (
-    <SafeAreaView style={[styles.container, backgroundColor ? {backgroundColor:COLORS.dark} : {backgroundColor:COLORS.light}]}>
+    <SafeAreaView style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}>
       {errMessage && <Text>{errMessage}</Text>}
       <View>
-
         <View style={styles.loginImg}>
-          <LottieView source={IMGS.json.login} autoPlay loop style={{ transform: [{scale: 1.4}] }} />
+          <LottieView source={IMGS.json.login} autoPlay loop style={{ transform: [{ scale: 1.4 }] }} />
         </View>
-        <Input text="Email" value={email} onChangeText={(e) => setEmail(e)} />
+
+        <Input placeholder="Email" value={email} onChangeText={(e) => setEmail(e)} />
         <Input
-          text="Password"
+          placeholder="Password"
           value={password}
           secureTextEntry={true}
           onChangeText={(e) => setPassword(e)}
         />
-        <ButtonSubmit onPress={() => handleSubmit()} text="Login" />
-        <View style={styles.transitionButton}>
-          <Text style={[styles.textBetween, backgroundColor ? {backgroundColor:COLORS.dark, color:COLORS.light} : {backgroundColor:COLORS.light, color:COLORS.dark}]}>OR</Text>
-          <Text style={[styles.horizontalBar, backgroundColor ? {backgroundColor:COLORS.light} : {backgroundColor:COLORS.dark}]}></Text>
-        </View>
-        <ButtonSubmit text={"Login with Google"} image={"google"}/>
-        {/* Sign Up Message */}
-        <View style={styles.message}>
-          <Text style={[styles.text, backgroundColor ? {color:COLORS.light} : {color:COLORS.dark}]}>You don't have an account yet ?</Text>
-          <Text
-            style={styles.redirect}
-            onPress={() =>
-              navigation.navigate(ROUTES.REGISTER, { screen: ROUTES.REGISTER })
-            }
-          >
-            Sign up now !
-          </Text>
-        </View>
-        {/* Sign Up Message */}
 
+        <ButtonSubmit onPress={() => handleSubmit()} text="Login" />
+        <SeparatorWithLabel label="Or" />
+        <ButtonSubmit text={"Login with Google"} image={IMGS.logo.google} style={styles.google} textColor={COLORS.black} />
+
+        <AuthBottomMessage
+          message="You don't have an account yet?"
+          button="Sign up now!"
+          link={() => navigation.navigate(ROUTES.REGISTER, { screen: ROUTES.REGISTER })}
+        />
       </View>
     </SafeAreaView>
   );
 };
 
+export default Login;
+
+// Style
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -81,42 +80,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderRadius: 1,
   },
-  text: {
-    marginTop: 20,
-    textAlign: "center",
-  },
-  redirect: {
-    textAlign: "center",
-    fontWeight: "800",
-    color: COLORS.purple,
-  },
-  transitionButton: {
-    position:"relative",
-    alignItems:"baseline",
-    textAlign:"center"
-  },
-  textBetween: {
-    margin:'auto',
-    fontWeight:"600",
-    padding:10,
-    alignSelf:"center",
-    zIndex:1,
-  },
-  horizontalBar: {
-    height: 2,
-    borderRadius:5,
-    position:"absolute",
-    left:20,
-    right:20,
-    top:'50%',
-  },
   loginImg: {
     height: '30%',
-    // backgroundColor: COLORS.gray
   },
-  message: {
-    marginTop: 50
+  google: {
+    backgroundColor: COLORS.light,
+    borderColor: COLORS.black,
+    borderWidth: 2,
   }
 });
-
-export default Login;

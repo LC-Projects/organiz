@@ -8,9 +8,10 @@ import { userContext } from "../../../context/userContext";
 import { createUser } from "../../../api/firebase/authUtils";
 import LottieView from "lottie-react-native";
 import { appContext } from "../../../context/appContext";
+import AuthBottomMessage from "../../../components/AuthBottomMessage";
 
-const Register = ({navigation}) => {
-  const {user, setUser} = useContext(userContext)
+const Register = ({ navigation }) => {
+  const { user, setUser } = useContext(userContext)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -20,38 +21,38 @@ const Register = ({navigation}) => {
   const handleSubmit = async () => {
     Keyboard.dismiss()
     if (password != passwordConfirm) {
-        Alert.alert('Passwords are not the same')
+      Alert.alert('Passwords are not the same')
     } else {
-        try {
-            setUser(await createUser(email, password))
-        }
-        catch (err) {
-            setUser(false)
-            Alert.alert("Can't create an user: Email or Password is incorrect");
-        }
+      try {
+        setUser(await createUser(email, password))
+      }
+      catch (err) {
+        setUser(false)
+        Alert.alert("Can't create an user: Email or Password is incorrect");
+      }
     }
-}
+  }
   return (
-    <SafeAreaView style={[styles.container, backgroundColor ? {backgroundColor:COLORS.dark} : {backgroundColor:COLORS.light}]}>
+    <SafeAreaView style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}>
       <View>
         <View style={styles.registerImg}>
-          <LottieView source={IMGS.json.register} autoPlay loop style={{ transform: [{scale: 0.9}] }} />
+          <LottieView source={IMGS.json.register} autoPlay loop style={{ transform: [{ scale: 0.9 }] }} />
         </View>
-        <Input text="Email" value={email} onChangeText={setEmail} />
-        <View>
-          <Text style={[styles.horizontalBar, backgroundColor ? {backgroundColor:COLORS.light} : {backgroundColor:COLORS.dark}]}></Text>
-        </View>
-        <Input text="Password" value={password} secureTextEntry={true} onChangeText={setPassword} />
-        <Input text="Confim Password" value={passwordConfirm} secureTextEntry={true} onChangeText={setPasswordConfirm} />
-        <View>
-          <Text style={[styles.horizontalBar, backgroundColor ? {backgroundColor:COLORS.light} : {backgroundColor:COLORS.dark}]}></Text>
-        </View>
-        <ButtonSubmit onPress={handleSubmit} text={"Sign Up"}/>
-        <Text style={[styles.text, backgroundColor ? {color:COLORS.light} : {color:COLORS.dark}]}>Already have an account ?</Text>
-        <Text style={styles.redirect} onPress={() => navigation.navigate(ROUTES.LOGIN)} >Sign in now !</Text>
+
+        <Input placeholder="Email" value={email} onChangeText={setEmail} />
+        <Input placeholder="Password" value={password} secureTextEntry={true} onChangeText={setPassword} />
+        <Input placeholder="Confirm Password" value={passwordConfirm} secureTextEntry={true} onChangeText={setPasswordConfirm} />
+
+        <ButtonSubmit onPress={handleSubmit} text={"Sign Up"} />
+
+        <AuthBottomMessage
+          message="Already have an account?"
+          button="Sign in now!"
+          link={() => navigation.navigate(ROUTES.LOGIN)}
+        />
       </View>
     </SafeAreaView>
-    
+
   )
 }
 
@@ -59,34 +60,24 @@ export default Register
 
 const styles = StyleSheet.create({
   container: {
-    height:'100%',
+    height: '100%',
   },
   input: {
-    padding:10,
-    margin:10,
-    borderColor:'black',
-    borderWidth:2,
+    padding: 10,
+    margin: 10,
+    borderColor: 'black',
+    borderWidth: 2,
     textAlign: 'center',
     borderRadius: 1,
-  },
-  text: {
-    marginTop:20,
-    fontWeight:"800",
-    textAlign: 'center',
-  },
-  redirect: {
-    textAlign: 'center',
-    fontWeight:"800",
-    color:"purple"
   },
   registerImg: {
     height: '40%',
   },
   horizontalBar: {
     height: 2,
-    borderRadius:5,
-    margin:10,
-    left:40,
-    right:40,
+    borderRadius: 5,
+    margin: 10,
+    left: 40,
+    right: 40,
   },
 })

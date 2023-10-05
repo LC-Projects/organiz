@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -6,6 +6,7 @@ import Access from "./routes/AccessRoutes";
 import Auth from "./routes/AuthRoutes";
 import { userContext } from "./context/userContext";
 import { appContext } from "./context/appContext";
+import { useEffect, useState } from "react";
 
 const Stack = createStackNavigator();
 
