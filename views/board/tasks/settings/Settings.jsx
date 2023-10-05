@@ -58,10 +58,12 @@ const Settings = ({ navigation, route }) => {
                 <ProgressBar percentage={68} />
                 <Text style={styles.percent}>68 %</Text>
             </View>
+
+
             <View style={styles.containerTitle}>
-                <Text style={styles.name}>Create Homepage</Text>
-                <Text style={styles.horizontalBar}></Text>
+                <TextInput style={styles.name}>Create Homepage</TextInput>
             </View>
+
             <View style={styles.containerStatus}>
                 <Text style={styles.title}>Move :</Text>
                 <TouchableOpacity style={[styles.button, status == 1 ? {backgroundColor:COLORS.dark_purple} : {backgroundColor:COLORS.medium_purple}]} onPress={(event) => selectStatus(event, 1)}>
@@ -74,21 +76,25 @@ const Settings = ({ navigation, route }) => {
                     <Text style={styles.titleButtonStatus}>Done</Text>
                 </TouchableOpacity>
             </View>
+
+            
             <View style={styles.containerColor}>
                 <Text style={styles.title}>Color :</Text>
-                <TextInput style={styles.description} placeholder="#FFFFFF"></TextInput>
-                <Text style={styles.colorIamge}></Text>
-                <Text style={styles.horizontalBar}></Text>
+                <View style={styles.colorInput}>
+                    <TextInput style={styles.name} placeholder="#FFFFFF"></TextInput>
+                    <View style={styles.colorIamge} />
+                </View>
             </View>
+
             <View style={styles.containerImage}>
                 <Text style={styles.title}>Image :</Text>
-                <Text style={styles.inputURLImage}></Text>
+                <Text style={styles.name}></Text>
                 <TouchableOpacity style={styles.uploadButton} onPress={(event) => uploadImage(event)}>
                     <Text style={styles.titleButton}>Upload</Text>
                 </TouchableOpacity>
-                <Text style={styles.horizontalBar}></Text>
-
             </View>
+
+
             <View style={styles.containerDescription}>
                 <Text style={styles.title}>Description :</Text>
                 <TextInput style={styles.description} placeholder="Add a description to your task"></TextInput>
@@ -97,7 +103,7 @@ const Settings = ({ navigation, route }) => {
                 <TouchableOpacity style={styles.buttonAction} onPress={(event) => deleteTask(event)}>
                     <Text style={styles.titleButton}>Delete</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonAction}  onPress={() => navigation.navigate(ROUTES.TASK)}>
+                <TouchableOpacity style={styles.buttonAction}  onPress={() => navigation.goBack()}>
                     <Text style={styles.titleButton}>Cancel</Text>    
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.buttonAction, backgroundColor ? {backgroundColor:COLORS.white} : {backgroundColor:COLORS.green}]} onPress={(event) => saveTask(event)}>
@@ -139,6 +145,9 @@ const styles = StyleSheet.create({
     },
     name: {
         textAlign:'center',
+        borderBottomWidth: 2,
+        fontSize: THEME.font.size.l,
+        flex: 1,
     },
     title: {
         fontSize:THEME.font.size.m,
@@ -151,12 +160,12 @@ const styles = StyleSheet.create({
         borderRadius:10,
         margin:10,
         padding:10,
+        gap: 20,
     },
     button: {
         backgroundColor:COLORS.dark_purple,
         borderRadius:10,
         padding:10,
-        marginLeft:20,
     },
     titleButtonStatus: {
         fontSize:THEME.font.size.m,
@@ -169,12 +178,20 @@ const styles = StyleSheet.create({
         borderRadius:10,
         padding:10,
         margin:10,
+        alignItems: "center"
     },
+    colorInput: {
+        flex: 2,
+        flexDirection: "row",
+        gap: 20,
+        alignItems: "center"
+    },  
     colorIamge: {
         backgroundColor:COLORS.green,
         padding:10,
-        height:10,
-        width:10,
+        height:25,
+        width:25,
+        borderRadius: THEME.border.xs
     },
     containerImage: {
         flex:2,
@@ -189,6 +206,7 @@ const styles = StyleSheet.create({
     },
     uploadButton: {
         flex:1,
+        backgroundColor: "black"
     },
     containerDescription: {
         backgroundColor:COLORS.white,
@@ -200,36 +218,24 @@ const styles = StyleSheet.create({
         margin:10,
         paddingLeft:10,
         paddingRight:10,
-        borderRadius:10,
-        borderColor:COLORS.light_gray,
-        backgroundColor:COLORS.light_gray,
         color:COLORS.black
     },
     containerButton: {
         flexDirection:'row',
         flex:1,
         gap:20,
+        padding: 10,
     },
     buttonAction: {
         backgroundColor:COLORS.dark_purple,
         borderRadius:10,
         padding:15,
-        margin:10,
-        paddingLeft:20,
-        paddingRight:20,
+        flex: 1
     },
     titleButton: {
         fontSize:THEME.font.size.l,
         fontWeight:'600',
         color:COLORS.white,
-    },
-    horizontalBar: {
-        backgroundColor:COLORS.black,
-        height: 2,
-        borderRadius:5,
-        marginTop:5,
-        marginBottom:10,
-        width:'50%',
-        alignSelf:"center",
+        textAlign: "center"
     },
 });
