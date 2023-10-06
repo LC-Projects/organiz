@@ -10,12 +10,14 @@ const BoardContainer = ({ data, navigation }) => {
         data?.map((element, key) => (
           <TouchableOpacity
             key={key}
-            onPress={() => navigation.navigate(ROUTES.PROJECTBOARD, { boardId: key })}
+            onPress={() =>
+              navigation.navigate(ROUTES.PROJECTBOARD, {
+                boardId: key,
+                name: element.title,
+              })
+            }
           >
-            <Board
-              data={element}
-              percentage={68}
-            />
+            <Board data={element} percentage={68} />
           </TouchableOpacity>
         ))}
     </View>

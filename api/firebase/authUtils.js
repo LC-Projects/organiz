@@ -1,4 +1,4 @@
-import { getAuth, deleteUser, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, sendEmailVerification, signInWithCredential, signInWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH } from "./connect";
 
 const auth = FIREBASE_AUTH;
@@ -6,8 +6,14 @@ const auth = FIREBASE_AUTH;
 export async function createUser(email, password) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-        const user = userCredential.user;
-        return user
+            .then(() => {
+                sendEmailVerification(auth.currentUser, {
+                    handleCodeInApp: true,
+                    url: "https://organiz-f07be.firebaseapp.com",
+                })
+        })
+        // const user = userCredential.user;
+        return "Please check your email!"
     }
     catch (error) {
         const errorCode = error.code;
@@ -28,6 +34,9 @@ export async function connectUser(email, password) {
         throw new Error(`${errorCode}: ${errorMessage}`)
     }
 }
+
+import { getAuth, deleteUser } from "firebase/auth";
+
 
 export async function remove() {
     try {

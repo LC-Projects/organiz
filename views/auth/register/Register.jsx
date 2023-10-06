@@ -24,7 +24,7 @@ const Register = ({ navigation }) => {
       Alert.alert('Passwords are not the same')
     } else {
       try {
-        setUser(await createUser(email, password))
+        Alert.alert(await createUser(email, password))
       }
       catch (err) {
         setUser(false)

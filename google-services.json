@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "708456224457",
+    "firebase_url": "https://organiz-f07be-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "organiz-f07be",
+    "storage_bucket": "organiz-f07be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708456224457:android:c07cf60f22e780a556df18",
+        "android_client_info": {
+          "package_name": "com.wartflyer.organiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708456224457-c26pvvv8lll76shhjihpbflhcbc2odb2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMSZtYa5tlCWokHwiGgqMbbc9EMxOirbI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708456224457-c26pvvv8lll76shhjihpbflhcbc2odb2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
