@@ -24,6 +24,7 @@ const TaskSettings = ({ navigation, route }) => {
   // context
   const { backgroundColor, refresh, setRefresh } = useContext(appContext);
   const { user, setUser } = useContext(userContext);
+  const [percentage, setPercentage] = useState(route.params?.percentage)
 
   // Initialization
   const move = [
@@ -141,7 +142,7 @@ const TaskSettings = ({ navigation, route }) => {
               borderRadius: 10,
             }}
           >
-            <ProgressBar percentage={68} />
+            <ProgressBar percentage={percentage} />
           </InputWrapper>
           <Title value={title} onChangeText={setTitle} />
           <Move data={move} active={status} onPress={setStatus} />

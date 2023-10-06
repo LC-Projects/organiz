@@ -14,6 +14,8 @@ const BoardCard = ({data, percentage}) => {
     // Initialization
     const [importanceColor, setImportanceColor] = useState(null)
     const [title, setTitle] = useState("")
+    const [percentage, setPercentage] = useState(0)
+
 
     const importanceStatus = [
         {name: "Low", color: COLORS.blue},
@@ -22,6 +24,7 @@ const BoardCard = ({data, percentage}) => {
     ]
 
     useEffect(() => {
+        (data && setPercentage(() => calculatePercentage(data)));
         setImportanceColor(importanceStatus[data?.important - 1]?.color)
         setTitle(importanceStatus[data?.important - 1]?.name)
     }, [refresh])

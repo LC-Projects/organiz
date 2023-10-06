@@ -22,6 +22,7 @@ const BoardSettings = ({ navigation, route }) => {
   const [boardId, setBoardId] = useState(route.params?.boardId);
   const [title, setTitle] = useState(route.params?.title);
   const [data, setData] = useState(null);
+  const [percentage, setPercentage] = useState(route.params?.percentage);
   const [status, setStatus] = useState(1);
   const { backgroundColor, refresh, setRefresh } = useContext(appContext);
   const { user, setUser } = useContext(userContext);
@@ -75,8 +76,7 @@ const BoardSettings = ({ navigation, route }) => {
       ]}
     >
       <View style={styles.containerProgressBar}>
-        <ProgressBar percentage={68} />
-        <Text style={styles.percent}>68 %</Text>
+        <ProgressBar percentage={percentage} />
       </View>
 
       <View style={styles.containerTitle}>
