@@ -22,6 +22,6 @@ export default ProfilePicture;
 // Style
 const styles = StyleSheet.create({
   profileImg: {
-    height: "40%",
+    height: 300,
   },
 });
