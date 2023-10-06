@@ -4,13 +4,18 @@ import { ROUTES, THEME } from "../../../constants";
 import Board from "./Board";
 
 const BoardContainer = ({ data, navigation }) => {
+  function boardSettingLink(boardId) {
+    navigation.navigate(ROUTES.BOARDSETTINGS, {boardId})
+  }
+  
+
   return (
     <View style={styles.boards}>
       {data &&
         data?.map((element, key) => (
           <TouchableOpacity
             key={key}
-            onPress={() => navigation.navigate(ROUTES.PROJECTBOARD, { boardId: key })}
+            onPress={() => navigation.navigate(ROUTES.PROJECTBOARD, {boardId: key, name: element.title, boardSettingLink: () => boardSettingLink(key) })}
           >
             <Board
               data={element}
