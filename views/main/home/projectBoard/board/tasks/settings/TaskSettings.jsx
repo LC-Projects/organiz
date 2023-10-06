@@ -85,39 +85,39 @@ const TaskSettings = ({ navigation, route }) => {
     setTaskId(route.params?.taskId);
     (async () => {
       try {
-        const a = await getTask(
+        const gettingTask = await getTask(
           user.uid,
           route.params?.boardId,
           route.params?.column,
           route.params?.taskId
         );
-        if (a) {
+        if (gettingTask) {
           // setData(a);
-          setTitle(a.title);
-          setTag(a.tag);
-          setImage(a.image);
-          setStatus(a.status);
-          setDescription(a.description);
+          setTitle(gettingTask.title);
+          setTag(gettingTask.tag);
+          setImage(gettingTask.image);
+          setStatus(gettingTask.status);
+          setDescription(gettingTask.description);
+
+          (async () => {
+            try {
+              const gettingImg = await getImage(
+                user.uid,
+                route.params?.boardId,
+                route.params?.taskId,
+                gettingTask.image
+              );
+              if (gettingImg) {
+                setImgURI(gettingImg);
+              }
+            } catch (err) {
+              Alert.alert("Can't get image");
+              // console.error(err);
+            }
+          })();
         }
       } catch (err) {
         Alert.alert("You have encountered an error !");
-      }
-    })();
-
-    (async () => {
-      try {
-        const a = await getImage(
-          user.uid,
-          route.params?.boardId,
-          route.params?.taskId,
-          image
-        );
-        if (a) {
-          setImgURI(a);
-        }
-      } catch (err) {
-        Alert.alert("Can't get image");
-        // console.error(err);
       }
     })();
   }, [route.params]);
