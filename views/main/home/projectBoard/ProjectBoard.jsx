@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, StyleSheet, useWindowDimensions } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { appContext } from "../../../../context/appContext";
 import { userContext } from "../../../../context/userContext";
-import { COLORS } from "../../../../constants";
+import { COLORS, ROUTES } from "../../../../constants";
 import { getTasks } from "../../../../api/firebase/realTime/tasks";
 import Board from "./board/Board";
+import Button from "./board/tasks/add/Button";
 
 const ProjectBoard = ({ navigation, route }) => {
   // Context
@@ -30,17 +31,16 @@ const ProjectBoard = ({ navigation, route }) => {
   ]);
   const renderScene = SceneMap({
     todo: () => (
-      <Board navigation={navigation} title={titles[0].name} data={data?.todo} keyName={titles[0].key} />
+      <View>
+        <Board navigation={navigation} boardId={boardId} title={titles[0].name} data={data?.todo} keyName={titles[0].key} />
+      </View>
+
     ),
     doing: () => (
-      <Board
-        title={titles[1].name}
-        data={data?.doing}
-        keyName={titles[1].key}
-      />
+      <Board navigation={navigation} boardId={boardId} title={titles[1].name} data={data?.doing} keyName={titles[1].key} />
     ),
     done: () => (
-      <Board title={titles[2].name} data={data?.done} keyName={titles[2].key} />
+      <Board navigation={navigation} boardId={boardId} title={titles[2].name} data={data?.done} keyName={titles[2].key} />
     ),
   });
 
@@ -79,7 +79,7 @@ const ProjectBoard = ({ navigation, route }) => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
-      style={[styles.container, backgroundColor ? {backgroundColor:COLORS.dark} : {backgroundColor:COLORS.light}]}
+      style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}
     />
   );
 };

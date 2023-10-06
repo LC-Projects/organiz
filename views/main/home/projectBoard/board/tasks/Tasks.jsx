@@ -7,7 +7,7 @@ import { addTask } from "../../../../../../api/firebase/realTime/tasks";
 import { userContext } from "../../../../../../context/userContext";
 import { appContext } from "../../../../../../context/appContext";
 
-const Tasks = ({ navigation, data, keyName }) => {
+const Tasks = ({ navigation, boardId, data, keyName }) => {
   const { user, setUser } = useContext(userContext);
   const { refresh, setRefresh } = useContext(appContext);
 
@@ -25,8 +25,11 @@ const Tasks = ({ navigation, data, keyName }) => {
   function handleAdd() {
     addTask(user.uid, 0, keyName, 
         {
-          tag: "#FF7081",
           title,
+          status:1,
+          tag: "#FF7081",
+          image:"",
+          description:""
         },
     );
 
@@ -38,7 +41,7 @@ const Tasks = ({ navigation, data, keyName }) => {
   return (
     <View style={styles.tasks}>
       {data?.map((task,key) => (
-        <Task navigation={navigation} key={key} keyName={key} title={task?.title} tag={task?.tag} />
+        <Task navigation={navigation} boardId={boardId} column={keyName} taskId={key} key={key} title={task?.title} tag={task?.tag} />
       ))}
 
       {add ? (

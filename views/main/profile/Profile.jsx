@@ -8,16 +8,16 @@ import Title from './Title';
 import Form from './form/Form';
 
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   // Context
-  const { backgroundColor, setBackgroundColor } = useContext(appContext)
+  const { backgroundColor } = useContext(appContext)
 
   // Render
   return (
     <View style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}>
       <ProfilePicture />
       <Title />
-      <Form />
+      <Form navigation={navigation} />
       <Logout />
     </View>
   )

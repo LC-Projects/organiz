@@ -4,9 +4,9 @@ import { appContext } from "../../../../context/appContext";
 import { COLORS, THEME } from "../../../../constants";
 import Input from "../../../../components/Input.jsx"
 
-const InputWithLabel = ({ label, placeholder, value, onChangeText }) => {
+const InputWithLabel = ({ label, placeholder, value, secure }) => {
   // Context
-  const { backgroundColor, setBackgroundColor } = useContext(appContext);
+  const { backgroundColor } = useContext(appContext);
 
   // Render
   return (
@@ -22,7 +22,7 @@ const InputWithLabel = ({ label, placeholder, value, onChangeText }) => {
       <Input
         text={placeholder}
         value={value}
-        onChangeText={onChangeText}
+        secureTextEntry={secure}
       ></Input>
     </>
   );

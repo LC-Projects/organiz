@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Dots from "./Dots";
 import { COLORS, ROUTES, THEME } from "../../../../../../../constants";
 
-const Task = ({ navigation, title, tag, keyName }) => {
+const Task = ({ navigation, boardId, column, title, tag, taskId }) => {
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(ROUTES.TASKSETTINGS, { "taskId": keyName })}>
+    <TouchableOpacity onPress={() => navigation.navigate(ROUTES.TASKSETTINGS, { "boardId": boardId, "column":column, "taskId": taskId, "title": title, "tag": tag})}>
       <View style={styles.task}>
         <View style={[styles.tag, {backgroundColor: tag}]}></View>
         <Text style={styles.title}>{title}</Text>
