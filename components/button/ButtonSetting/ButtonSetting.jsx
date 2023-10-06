@@ -1,5 +1,4 @@
 import React from 'react'
-import { View, Text, Touchable } from 'react-native'
 import Dots from './Dots'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 

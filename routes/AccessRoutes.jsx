@@ -21,15 +21,13 @@ const Access = () => {
         component={Main}
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen name={ROUTES.HOMEPAGE} component={ProjectBoard} /> */}
-      {/* <Stack.Screen name={ROUTES.BOARD} component={Board} /> */}
       <Stack.Screen
         name={ROUTES.PROJECTBOARD}
         component={ProjectBoard}
-        options={({ route }) => ({
+        options={({ route, navigation }) => ({
           title: route.params.name,
           headerRight: () => (
-            <ButtonSetting color={COLORS.black} horizontal onPress={() => route.params.boardSettingLink()} />
+            <ButtonSetting color={COLORS.black} horizontal onPress={() => navigation.navigate(ROUTES.BOARDSETTINGS, {boardId: route.params.boardId})} />
           ),
           headerTitleContainerStyle: { alignItems: 'center' }
         })}
