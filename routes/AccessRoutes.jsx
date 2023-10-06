@@ -27,7 +27,7 @@ const Access = () => {
         options={({ route, navigation }) => ({
           title: route.params.name,
           headerRight: () => (
-            <ButtonSetting color={COLORS.black} horizontal onPress={() => navigation.navigate(ROUTES.BOARDSETTINGS, {boardId: route.params.boardId})} />
+            <ButtonSetting color={COLORS.black} horizontal onPress={() => navigation.navigate(ROUTES.BOARDSETTINGS, {percentage: percentage, boardId: route.params.boardId})} />
           ),
           headerTitleContainerStyle: { alignItems: 'center' }
         })}

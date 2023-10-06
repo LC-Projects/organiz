@@ -8,6 +8,7 @@ const BoardContainer = ({ data, navigation }) => {
     <View style={styles.boards}>
       {data &&
         data?.map((element, key) => (
+          
           <TouchableOpacity
             key={key}
             onPress={() =>
@@ -17,7 +18,7 @@ const BoardContainer = ({ data, navigation }) => {
               })
             }
           >
-            <Board data={element} percentage={68} />
+            <Board data={element}/>
           </TouchableOpacity>
         ))}
     </View>
