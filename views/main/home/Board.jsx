@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
-import { COLORS, THEME } from '../constants'
-import ProgressBar from './ProgressBar'
+import { COLORS, THEME } from '../../../constants'
+import ProgressBar from '../../../components/ProgressBar'
 
 const Board = ({importance, importanceColor, title, percentage}) => {
   return (
@@ -24,7 +24,6 @@ const Board = ({importance, importanceColor, title, percentage}) => {
         {/* ProgressBar Props: Nb Todo / Nb Doing / Nb Done */}
         <View style={styles.bottomBoard}>
             <ProgressBar percentage={68}/>
-            <Text style={styles.percentage}>{percentage} %</Text>
         </View>
         {/* END ProgressBar */}
     </View>

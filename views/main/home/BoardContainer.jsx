@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { ROUTES, THEME } from "../../../constants";
-import Board from "../../../components/Board";
+import Board from "./Board";
 
 const BoardContainer = ({ data, navigation }) => {
   return (
@@ -10,9 +10,7 @@ const BoardContainer = ({ data, navigation }) => {
         data?.map((element, key) => (
           <TouchableOpacity
             key={key}
-            onPress={() =>
-              navigation.navigate(ROUTES.PROJECTBOARD, { boardId: key })
-            }
+            onPress={() => navigation.navigate(ROUTES.PROJECTBOARD, { boardId: key })}
           >
             <Board
               importance="High"

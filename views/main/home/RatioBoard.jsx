@@ -1,30 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import DataBoard from "../../../components/DataBoard";
 import { COLORS, STRINGS, THEME } from "../../../constants";
 
-const RatioBoard = (dataBoard) => {
+const RatioBoard = ({ dataBoard }) => {
   // Initialization
   let todo = 0;
   let doing = 0;
   let done = 0;
-  dataBoard?.DataBoard?.forEach(DataBoard => {
+  dataBoard?.forEach(DataBoard => {
     todo += (DataBoard?.todo ? DataBoard?.todo?.length : 0);
   });
-  dataBoard?.DataBoard?.forEach(DataBoard => {
+  dataBoard?.forEach(DataBoard => {
     doing += (DataBoard?.doing ? DataBoard?.doing?.length : 0);
   });
-  dataBoard?.DataBoard?.forEach(DataBoard => {
+  dataBoard?.forEach(DataBoard => {
     done += (DataBoard?.done ? DataBoard?.done?.length : 0);
   });
-
-
   const data = [
-    { value: (dataBoard && (dataBoard.DataBoard)?.length), title: STRINGS.BOARDS, color: COLORS.dark_purple, separator: true },
+    { value: (dataBoard && dataBoard?.length), title: STRINGS.BOARDS, color: COLORS.dark_purple, separator: true },
     { value: (dataBoard && todo), title: STRINGS.TODO, color: COLORS.green },
     { value: (dataBoard && doing), title: STRINGS.DOING, color: COLORS.blue },
     { value: (dataBoard && done), title: STRINGS.DONE, color: COLORS.orange },
-  ];
+  ];  
 
   
   //   Render
