@@ -1,18 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { appContext } from "../../../../context/appContext";
 import { userContext } from "../../../../context/userContext";
 import { COLORS, ROUTES } from "../../../../constants";
 import { getTasks } from "../../../../api/firebase/realTime/tasks";
 import Board from "./board/Board";
-import Button from "./board/tasks/add/Button";
+import ProgressBar from "../../../../components/ProgressBar";
+import InputWrapper from "../../../../components/wrapper/InputWrapper";
 
 const ProjectBoard = ({ navigation, route }) => {
   // Context
   const { user, setUser } = useContext(userContext);
   const { refresh, setRefresh, backgroundColor } = useContext(appContext);
-
 
   // Inititalization
   const layout = useWindowDimensions();
@@ -32,28 +39,44 @@ const ProjectBoard = ({ navigation, route }) => {
   const renderScene = SceneMap({
     todo: () => (
       <View>
-        <Board navigation={navigation} boardId={boardId} title={titles[0].name} data={data?.todo} keyName={titles[0].key} />
+        <Board
+          navigation={navigation}
+          boardId={boardId}
+          title={titles[0].name}
+          data={data?.todo}
+          keyName={titles[0].key}
+        />
       </View>
-
     ),
     doing: () => (
-      <Board navigation={navigation} boardId={boardId} title={titles[1].name} data={data?.doing} keyName={titles[1].key} />
+      <Board
+        navigation={navigation}
+        boardId={boardId}
+        title={titles[1].name}
+        data={data?.doing}
+        keyName={titles[1].key}
+      />
     ),
     done: () => (
-      <Board navigation={navigation} boardId={boardId} title={titles[2].name} data={data?.done} keyName={titles[2].key} />
+      <Board
+        navigation={navigation}
+        boardId={boardId}
+        title={titles[2].name}
+        data={data?.done}
+        keyName={titles[2].key}
+      />
     ),
   });
 
-
   // Function
   const renderTabBar = (props) => (
-    <TabBar
-      {...props}
-      indicatorStyle={styles.tabBarIndicator}
-      style={styles.tabBarContainer}
-    />
-  );
+      <TabBar
+        {...props}
+        indicatorStyle={styles.tabBarIndicator}
+        style={styles.tabBarContainer}
+      />
 
+  );
 
   // Hook
   useEffect(() => {
@@ -70,7 +93,6 @@ const ProjectBoard = ({ navigation, route }) => {
     })();
   }, [boardId, refresh]);
 
-
   // Render
   return (
     <TabView
@@ -79,13 +101,17 @@ const ProjectBoard = ({ navigation, route }) => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
-      style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}
+      style={[
+        styles.container,
+        backgroundColor
+          ? { backgroundColor: COLORS.dark }
+          : { backgroundColor: COLORS.light },
+      ]}
     />
   );
 };
 
 export default ProjectBoard;
-
 
 // Style
 const styles = StyleSheet.create({

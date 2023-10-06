@@ -1,14 +1,19 @@
-import { View, Text, StyleSheet, Animated } from "react-native";
+import { View, Text, StyleSheet, Animated, Easing } from "react-native";
 import React, { useEffect, useRef } from "react";
 import { COLORS, THEME } from "../constants";
 
 const ProgressBar = ({ percentage }) => {
   const width = new Animated.Value(0);
+  const widthAsString = width.interpolate({
+    inputRange: [0, percentage],
+    outputRange: ['0%', `${percentage}%`],
+  })
 
   useEffect(() => {
     Animated.timing(width, {
       toValue: percentage,
-      duration: 5000,
+      duration: 1000,
+      easing: Easing.bounce,
       useNativeDriver: false
     }).start();
   }, [width]);
@@ -16,10 +21,7 @@ const ProgressBar = ({ percentage }) => {
   return (
     <View style={styles.container}>
       <View style={styles.ProgessBarParent}>
-        <Animated.View style={[styles.ProgessBarChild, {width: width.interpolate({
-          inputRange: [0, percentage],
-          outputRange: ['0%', `${percentage}%`],
-        })}]} />
+        <Animated.View style={[styles.ProgessBarChild, {width: widthAsString}]} />
       </View>
       <Text style={styles.percentage}>{percentage} %</Text>
     </View>
