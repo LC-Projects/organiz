@@ -28,7 +28,7 @@ const ProjectBoard = ({ navigation, route }) => {
     { name: "Doing", key: "doing" },
     { name: "Done", key: "done" },
   ];
-  const [boardId, setstate] = useState("");
+  const [boardId, setBoardId] = useState(route.params?.boardId);
   const [data, setData] = useState(null);
   const [index, setIndex] = useState(0);
   const [routes] = useState([
@@ -38,15 +38,13 @@ const ProjectBoard = ({ navigation, route }) => {
   ]);
   const renderScene = SceneMap({
     todo: () => (
-      <View>
-        <Board
-          navigation={navigation}
-          boardId={boardId}
-          title={titles[0].name}
-          data={data?.todo}
-          keyName={titles[0].key}
-        />
-      </View>
+      <Board
+        navigation={navigation}
+        boardId={boardId}
+        title={titles[0].name}
+        data={data?.todo}
+        keyName={titles[0].key}
+      />
     ),
     doing: () => (
       <Board
@@ -70,17 +68,16 @@ const ProjectBoard = ({ navigation, route }) => {
 
   // Function
   const renderTabBar = (props) => (
-      <TabBar
-        {...props}
-        indicatorStyle={styles.tabBarIndicator}
-        style={styles.tabBarContainer}
-      />
-
+    <TabBar
+      {...props}
+      indicatorStyle={styles.tabBarIndicator}
+      style={styles.tabBarContainer}
+    />
   );
 
   // Hook
   useEffect(() => {
-    setstate(route.params?.boardId);
+    setBoardId(route.params?.boardId);
     (async () => {
       try {
         const a = await getTasks(user.uid, boardId);
