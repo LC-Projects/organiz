@@ -16,6 +16,7 @@ const BoardSettings = ({ navigation, route }) => {
     const { user, setUser } = useContext(userContext);
 
     useEffect(() => {
+        console.log(route.params);
         setBoardId(route.params?.boardId);
         setTitle(route.params?.title);
         (async () => {
