@@ -17,7 +17,7 @@ export default InputWrapper
 const styles = StyleSheet.create({
     container: {
         backgroundColor: COLORS.white,
-        borderRadius: THEME.border.s,
+        borderRadius: THEME.border.m,
         padding: THEME.spacing.s,
         marginBottom: THEME.spacing.s,
         flexDirection: "row",
