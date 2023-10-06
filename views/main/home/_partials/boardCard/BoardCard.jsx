@@ -6,8 +6,9 @@ import { appContext } from '../../../../../context/appContext'
 import ButtonSetting from '../../../../../components/button/ButtonSetting/ButtonSetting'
 import Ratio from './Ratio'
 import Title from './Title'
+import { calculatePercentage } from '../../../../../utils/maths'
 
-const BoardCard = ({data, percentage}) => {
+const BoardCard = ({data}) => {
     // Context
     const { refresh } = useContext(appContext);
 
