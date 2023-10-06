@@ -21,7 +21,11 @@ const TaskSettings = ({ navigation, route }) => {
     const { user, setUser } = useContext(userContext);
 
     // Initialization
-    const move = [{name: STRINGS.TODO, keyName: "todo"}, {name: STRINGS.DOING, keyName: "doing"}, {name: STRINGS.DONE, keyName: "done"}];
+    const move = [
+        {name: STRINGS.TODO, keyName: "todo"}, 
+        {name: STRINGS.DOING, keyName: "doing"}, 
+        {name: STRINGS.DONE, keyName: "done"}
+    ];
     const [data, setData] = useState(null);
 
     const [boardId, setBoardId] = useState(route.params?.boardId);

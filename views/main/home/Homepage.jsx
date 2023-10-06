@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, IMGS, ROUTES, STRINGS, THEME } from "../../../constants";
 import { userContext } from "../../../context/userContext";
 import DataBoard from "../../../components/DataBoard";
-import Board from "../../../components/Board";
+import Board from "./Board";
 import LottieView from "lottie-react-native";
 import { getBoards } from "../../../api/firebase/realTime/boards";
 import { appContext } from "../../../context/appContext";
@@ -52,7 +52,7 @@ const Homepage = ({ navigation }) => {
       <SafeAreaView>
         <ScrollView>
           <Hero />
-          <RatioBoard />
+          <RatioBoard dataBoard={data} />
           <Title />
           <BoardContainer data={data} navigation={navigation} />
         </ScrollView>
