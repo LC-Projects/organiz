@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, deleteUser, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH } from "./connect";
 
 const auth = FIREBASE_AUTH;
@@ -29,10 +29,7 @@ export async function connectUser(email, password) {
     }
 }
 
-import { getAuth, deleteUser } from "firebase/auth";
-
-
-export async function deleteUser() {
+export async function remove() {
     try {
         const auth = getAuth();
         const user = auth.currentUser;
