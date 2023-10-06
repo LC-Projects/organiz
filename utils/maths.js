@@ -4,5 +4,6 @@ export function calculatePercentage(data)
     let doing = (data?.doing ? (data?.doing?.length) : 0);
     let done = (data?.done ? (data?.done?.length) : 0);
     let percentage = (todo + doing)/(todo + doing + done) * 100;
-    return percentage;
+    if (percentage) return percentage;
+    else return 0;
 }

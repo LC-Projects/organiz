@@ -13,8 +13,7 @@ import { userContext } from "../../../../context/userContext";
 import { COLORS, ROUTES } from "../../../../constants";
 import { getTasks } from "../../../../api/firebase/realTime/tasks";
 import Board from "./board/Board";
-import ProgressBar from "../../../../components/ProgressBar";
-import InputWrapper from "../../../../components/wrapper/InputWrapper";
+import { calculatePercentage } from "../../../../utils/maths";
 
 const ProjectBoard = ({ navigation, route }) => {
   // Context
@@ -29,6 +28,7 @@ const ProjectBoard = ({ navigation, route }) => {
     { name: "Done", key: "done" },
   ];
   const [boardId, setBoardId] = useState(route.params?.boardId);
+  const [percentage, setPercentage] = useState(0);
   const [data, setData] = useState(null);
   const [index, setIndex] = useState(0);
   const [routes] = useState([
@@ -39,6 +39,7 @@ const ProjectBoard = ({ navigation, route }) => {
   const renderScene = SceneMap({
     todo: () => (
       <Board
+        percentage={percentage}
         navigation={navigation}
         boardId={boardId}
         title={titles[0].name}
@@ -48,6 +49,7 @@ const ProjectBoard = ({ navigation, route }) => {
     ),
     doing: () => (
       <Board
+        percentage={percentage}
         navigation={navigation}
         boardId={boardId}
         title={titles[1].name}
@@ -57,8 +59,8 @@ const ProjectBoard = ({ navigation, route }) => {
     ),
     done: () => (
       <Board
-        navigation={navigation}
         percentage={percentage}
+        navigation={navigation}
         boardId={boardId}
         title={titles[2].name}
         data={data?.done}
@@ -89,6 +91,8 @@ const ProjectBoard = ({ navigation, route }) => {
         Alert.alert("err");
       }
     })();
+    setPercentage(calculatePercentage(data));
+    console.log(data, calculatePercentage(data));
   }, [boardId, refresh]);
 
   // Render

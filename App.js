@@ -11,8 +11,8 @@ import { useEffect, useState } from "react";
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [user, setUser] = useState(false);
-  // const [user, setUser] = useState({uid: "ktHXw6ROETaRHh5lJclP2o1Es5F2"});
+  // const [user, setUser] = useState(false);
+  const [user, setUser] = useState({uid: "ktHXw6ROETaRHh5lJclP2o1Es5F2"});
   const [refresh, setRefresh] = useState(false)
   const [backgroundColor, setBackgroundColor] = useState(false)
 

@@ -4,15 +4,8 @@ import Tasks from "./tasks/Tasks";
 import { COLORS, THEME } from "../../../../../constants";
 import InputWrapper from "../../../../../components/wrapper/InputWrapper";
 import ProgressBar from "../../../../../components/ProgressBar";
-import { calculatePercentage } from "../../../../../utils/maths";
 
-const Board = ({ navigation, boardId, title, data, keyName }) => {
-  const [percentage, setPercentage] = useState(0)
-
-  useEffect(() => {
-    setPercentage(() => calculatePercentage(data));
-  }, [])
-  
+const Board = ({ percentage, navigation, boardId, title, data, keyName }) => {
  
   return (
     <ScrollView style={styles.container} >
@@ -27,6 +20,7 @@ const Board = ({ navigation, boardId, title, data, keyName }) => {
         </View>
 
         <Tasks
+          percentage={percentage}
           navigation={navigation}
           boardId={boardId}
           data={data}

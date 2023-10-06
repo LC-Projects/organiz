@@ -8,11 +8,11 @@ const RatioBoard = ({ dataBoard }) => {
   let todo = 0;
   let doing = 0;
   let done = 0;
-  let board = (dataBoard ? dataBoard?.length : 0);
+  let board = ((dataBoard?.length) ? (dataBoard?.length) : 0);
   dataBoard?.forEach(DataBoard => {
-    todo += (DataBoard?.todo ? DataBoard?.todo?.length : 0);
-    doing += (DataBoard?.doing ? DataBoard?.doing?.length : 0);
-    done += (DataBoard?.done ? DataBoard?.done?.length : 0);
+    todo += ((DataBoard?.todo?.length) ? (DataBoard?.todo?.length) : 0);
+    doing += ((DataBoard?.doing?.length) ? (DataBoard?.doing?.length) : 0);
+    done += ((DataBoard?.done?.length) ? (DataBoard?.done?.length) : 0);
   });
   
   const data = [

@@ -10,11 +10,11 @@ const Board = ({data}) => {
     const [title, setTitle] = useState("")
     const { refresh, setRefresh } = useContext(appContext);
     const [percentage, setPercentage] = useState(0)
-    let todo = (data?.todo ? (data?.todo?.length) : 0);
-    let doing = (data?.doing ? (data?.doing?.length) : 0);
-    let done = (data?.done ? (data?.done?.length) : 0);
+    let todo = ((data?.todo?.length) ? (data?.todo?.length) : 0);
+    let doing = ((data?.doing?.length) ? (data?.doing?.length) : 0);
+    let done = ((data?.done?.length) ? (data?.done?.length) : 0);
     useEffect(() => {
-        setPercentage(() => calculatePercentage(data));
+        (data && setPercentage(() => calculatePercentage(data)));
         switch(data?.important)
         {
             case 1:
