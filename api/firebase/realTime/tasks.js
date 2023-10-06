@@ -55,17 +55,12 @@ export async function addTask(userId, boardId, column, task) {
 
 export function modifyTask(userId, boardId, column, taskId, task, columns) {
   try {
-    let deleted = false
-    columns?.forEach((col, key) => {
-      if ((key+1) == task.status) {
-        console.log();
-        set(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${col.keyName}/${taskId}`), task);
-        remove(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}/${column}/${taskId}`));
-        deleted = true;
-      }
-    });
-
-    if (!deleted) update(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${column}/${taskId}`), task);
+    if (column == columns[task.status - 1].keyName) {
+      update(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${column}/${taskId}`), task);
+    } else {
+      set(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${columns[task.status - 1].keyName}/${taskId}`), task);
+      remove(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}/${column}/${taskId}`));
+    }
     return true;
   } catch (err) {
     throw new Error(err);
