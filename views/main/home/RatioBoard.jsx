@@ -10,13 +10,10 @@ const RatioBoard = ({ dataBoard }) => {
   let done = 0;
   dataBoard?.forEach(DataBoard => {
     todo += (DataBoard?.todo ? DataBoard?.todo?.length : 0);
-  });
-  dataBoard?.forEach(DataBoard => {
     doing += (DataBoard?.doing ? DataBoard?.doing?.length : 0);
-  });
-  dataBoard?.forEach(DataBoard => {
     done += (DataBoard?.done ? DataBoard?.done?.length : 0);
   });
+  
   const data = [
     { value: (dataBoard && dataBoard?.length), title: STRINGS.BOARDS, color: COLORS.dark_purple, separator: true },
     { value: (dataBoard && todo), title: STRINGS.TODO, color: COLORS.green },

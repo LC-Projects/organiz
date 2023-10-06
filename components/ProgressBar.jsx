@@ -3,25 +3,23 @@ import React, { useEffect, useRef } from "react";
 import { COLORS, THEME } from "../constants";
 
 const ProgressBar = ({ percentage }) => {
-  const width = useRef(new Animated.Value(0)).current;
-  console.log(width);
+  const width = new Animated.Value(0);
 
   useEffect(() => {
     Animated.timing(width, {
       toValue: percentage,
-      duration: 10000,
-      useNativeDriver: false,
+      duration: 5000,
+      useNativeDriver: false
     }).start();
-
-    console.log(width);
   }, [width]);
 
   return (
     <View style={styles.container}>
       <View style={styles.ProgessBarParent}>
-        <Animated.View
-          style={[styles.ProgessBarChild ]}
-        />
+        <Animated.View style={[styles.ProgessBarChild, {width: width.interpolate({
+          inputRange: [0, percentage],
+          outputRange: ['0%', `${percentage}%`],
+        })}]} />
       </View>
       <Text style={styles.percentage}>{percentage} %</Text>
     </View>
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
     gap: THEME.spacing.s,
   },
   ProgessBarParent: {
-    backgroundColor: COLORS.medium_purple,
+    backgroundColor: COLORS.light_gray,
     position: "relative",
     borderRadius: 10,
     flex: 7,
