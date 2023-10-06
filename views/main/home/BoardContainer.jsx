@@ -13,9 +13,7 @@ const BoardContainer = ({ data, navigation }) => {
             onPress={() => navigation.navigate(ROUTES.PROJECTBOARD, { boardId: key })}
           >
             <Board
-              importance="High"
-              importanceColor={element?.important}
-              title={element?.title}
+              data={element}
               percentage={68}
             />
           </TouchableOpacity>

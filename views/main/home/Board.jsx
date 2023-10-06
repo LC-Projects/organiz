@@ -1,29 +1,55 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { COLORS, THEME } from '../../../constants'
 import ProgressBar from '../../../components/ProgressBar'
+import { appContext } from '../../../context/appContext'
 
-const Board = ({importance, importanceColor, title, percentage}) => {
-  return (
+const Board = ({data, percentage}) => {
+    const [importanceColor, setImportanceColor] = useState(null)
+    const [title, setTitle] = useState("")
+    const { refresh, setRefresh } = useContext(appContext);
+    let todo = (data?.todo ? (data?.todo?.length) : 0)
+    let doing = (data?.doing ? (data?.doing?.length) : 0)
+    let done = (data?.done ? (data?.done?.length) : 0)
+
+    useEffect(() => {
+        switch(data?.important)
+        {
+            case 1:
+                setImportanceColor(COLORS.blue)
+                setTitle("Low")
+                break;
+            case 2:
+                setImportanceColor(COLORS.orange)
+                setTitle("Medium")
+                break;
+            case 3:
+                setImportanceColor(COLORS.red)
+                setTitle("High")
+                break;
+        }
+    }, [refresh])
+    
+    return (
     <View style={styles.container}>
         <View style={styles.topBoard}>
-            <Text style={[styles.importanceStatus, {backgroundColor: importanceColor}]}>{importance}</Text>
+            <Text style={[styles.importanceStatus, {backgroundColor: importanceColor}]}>{title}</Text>
             <View style={styles.statusBoard}>
-                <Text style={[styles.firstvalue, styles.fontSize]}>4</Text>
+                <Text style={[styles.firstvalue, styles.fontSize]}>{todo}</Text>
                 <Text style={styles.fontSize}> / </Text>
-                <Text style={[styles.secondvalue, styles.fontSize]}>1</Text>
+                <Text style={[styles.secondvalue, styles.fontSize]}>{doing}</Text>
                 <Text style={styles.fontSize}> / </Text>
-                <Text style={[styles.thirdvalue, styles.fontSize]}>2</Text>
+                <Text style={[styles.thirdvalue, styles.fontSize]}>{done}</Text>
             </View>
             <Text style={styles.informations}>. . .</Text>
         </View>
         <View style={styles.middleBoard}>
-            <Text style={styles.textBoard}>{title}</Text>
+            <Text style={styles.textBoard}>{data?.title}</Text>
         </View>
 
         {/* ProgressBar Props: Nb Todo / Nb Doing / Nb Done */}
         <View style={styles.bottomBoard}>
-            <ProgressBar percentage={68}/>
+            <ProgressBar percentage={percentage}/>
         </View>
         {/* END ProgressBar */}
     </View>
