@@ -23,7 +23,7 @@ const Tasks = ({ navigation, boardId, data, keyName }) => {
   }
 
   function handleAdd() {
-    addTask(user.uid, 0, keyName, 
+    addTask(user.uid, boardId, keyName, 
         {
           title,
           status:1,
