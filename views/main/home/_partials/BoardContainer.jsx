@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { ROUTES, THEME } from "../../../constants";
-import Board from "./Board";
+import { ROUTES, THEME } from "../../../../constants";
+import Board from "./boardCard/BoardCard";
 
 const BoardContainer = ({ data, navigation }) => {
   return (
