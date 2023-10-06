@@ -1,8 +1,8 @@
 import AnimatedLottieView from "lottie-react-native";
 import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
-import { COLORS, IMGS } from "../../../constants";
-import { appContext } from "../../../context/appContext";
+import { COLORS, IMGS } from "../../../../constants";
+import { appContext } from "../../../../context/appContext";
 
 const Hero = () => {
   // Initialization

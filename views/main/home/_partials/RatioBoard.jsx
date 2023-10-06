@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import DataBoard from "../../../components/DataBoard";
-import { COLORS, STRINGS, THEME } from "../../../constants";
+import DataBoard from "../../../../components/DataBoard";
+import { COLORS, STRINGS, THEME } from "../../../../constants";
 
 const RatioBoard = ({ dataBoard }) => {
   // Initialization

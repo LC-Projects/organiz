@@ -1,32 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, ScrollView, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, IMGS, ROUTES, STRINGS, THEME } from "../../../constants";
-import { userContext } from "../../../context/userContext";
-import DataBoard from "../../../components/DataBoard";
-import Board from "./Board";
-import LottieView from "lottie-react-native";
+import { COLORS } from "../../../constants";
 import { getBoards } from "../../../api/firebase/realTime/boards";
+// Context
 import { appContext } from "../../../context/appContext";
-import RatioBoard from "./RatioBoard";
-import Hero from "./Hero";
-import Title from "./Title";
-import BoardContainer from "./BoardContainer";
+import { userContext } from "../../../context/userContext";
+// Component
+import Title from "./_partials/Title";
+import Hero from "./_partials/Hero";
+import RatioBoard from "./_partials/RatioBoard";
+import BoardContainer from "./_partials/BoardContainer";
 
 const Homepage = ({ navigation }) => {
-  const { user, setUser } = useContext(userContext);
-  const { refresh, setRefresh } = useContext(appContext);
-  const { backgroundColor } = useContext(appContext);
+  // Context
+  const { user } = useContext(userContext);
+  const { refresh, backgroundColor } = useContext(appContext);
 
+  // Initalization
   const [data, setData] = useState(null);
 
+  // Hook
   useEffect(() => {
     (async () => {
       try {
@@ -40,6 +34,7 @@ const Homepage = ({ navigation }) => {
     })();
   }, [refresh]);
 
+  // Render
   return (
     <View
       style={[

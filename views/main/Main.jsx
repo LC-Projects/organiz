@@ -5,7 +5,7 @@ import Profile from "./profile/Profile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from "../../constants";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import AddBoard from "./home/AddBoard";
+import AddBoard from "./home/_partials/AddBoard";
 import { userContext } from "../../context/userContext";
 import { addBoard } from "../../api/firebase/realTime/boards";
 import { appContext } from "../../context/appContext";

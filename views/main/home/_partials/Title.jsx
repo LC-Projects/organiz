@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { StyleSheet, Text } from "react-native";
-import { COLORS, STRINGS } from "../../../constants";
-import { appContext } from "../../../context/appContext";
+import { COLORS, STRINGS } from "../../../../constants";
+import { appContext } from "../../../../context/appContext";
 
 const Title = () => {
   // Initialization
