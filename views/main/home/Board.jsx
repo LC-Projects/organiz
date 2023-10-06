@@ -3,16 +3,18 @@ import React, { useContext, useEffect, useState } from 'react'
 import { COLORS, THEME } from '../../../constants'
 import ProgressBar from '../../../components/ProgressBar'
 import { appContext } from '../../../context/appContext'
+import { calculatePercentage } from '../../../utils/maths'
 
-const Board = ({data, percentage}) => {
+const Board = ({data}) => {
     const [importanceColor, setImportanceColor] = useState(null)
     const [title, setTitle] = useState("")
     const { refresh, setRefresh } = useContext(appContext);
-    let todo = (data?.todo ? (data?.todo?.length) : 0)
-    let doing = (data?.doing ? (data?.doing?.length) : 0)
-    let done = (data?.done ? (data?.done?.length) : 0)
-
+    const [percentage, setPercentage] = useState(0)
+    let todo = (data?.todo ? (data?.todo?.length) : 0);
+    let doing = (data?.doing ? (data?.doing?.length) : 0);
+    let done = (data?.done ? (data?.done?.length) : 0);
     useEffect(() => {
+        setPercentage(() => calculatePercentage(data));
         switch(data?.important)
         {
             case 1:

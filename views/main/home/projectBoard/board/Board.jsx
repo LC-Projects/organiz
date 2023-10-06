@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import Tasks from "./tasks/Tasks";
 import { COLORS, THEME } from "../../../../../constants";
 import InputWrapper from "../../../../../components/wrapper/InputWrapper";
 import ProgressBar from "../../../../../components/ProgressBar";
+import { calculatePercentage } from "../../../../../utils/maths";
 
 const Board = ({ navigation, boardId, title, data, keyName }) => {
+  const [percentage, setPercentage] = useState(0)
+
+  useEffect(() => {
+    setPercentage(() => calculatePercentage(data));
+  }, [])
+  
+ 
   return (
     <ScrollView style={styles.container} >
       <InputWrapper style={styles.percentage}>
-        <ProgressBar percentage={68} />
+        <ProgressBar percentage={percentage} />
       </InputWrapper>
 
       <View style={styles.boardContainer} >

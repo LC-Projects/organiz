@@ -58,6 +58,7 @@ const ProjectBoard = ({ navigation, route }) => {
     done: () => (
       <Board
         navigation={navigation}
+        percentage={percentage}
         boardId={boardId}
         title={titles[2].name}
         data={data?.done}
