@@ -8,7 +8,19 @@ import ButtonsActions from "../../../../components/button/ButtonsActions";
 
 
 
-const Form = () => {
+const Form = ({ navigation }) => {
+  // Context
+  const { user, setUser } = useContext(userContext);
+
+  // Initialization
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const inputs = [
+    {label: "Your Email", placeholder: "New Email", value: user.email, secure:false},
+    {label: "Your Password", placeholder: "New Password", secure:true},
+  ]
+
+  // Handler
   function updateEmail() {
     (newEmail ? updateEmailUser(newEmail) : null);
   }
@@ -17,19 +29,11 @@ const Form = () => {
     (newPassword ? updatePasswordUser(newPassword) : null);
   }
 
-  const { user, setUser } = useContext(userContext);
-  const [newEmail, setNewEmail] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const inputs = [
-    {label: "Your Email", placeholder: "New Email", value: user.email, secure:false},
-    {label: "Your Password", placeholder: "New Password", secure:true},
-  ]
-
   // Render
   return (
     <View>
         {inputs.map((input, key) => <InputWithLabel key={key} label={input.label} placeholder={input.placeholder} value={input.value} />)}
-        <ButtonsActions cancel={navigation.goBack()} add={[updateEmail(), updatePassword()]}/>
+        {/* <ButtonsActions cancel={navigation.goBack()} add={[updateEmail(), updatePassword()]}/> */}
         <ThemeMode />
     </View>
   );

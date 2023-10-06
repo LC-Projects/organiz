@@ -1,4 +1,4 @@
-import { child, get, onValue, ref, remove, set, update} from "firebase/database";
+import { child, get, onValue, ref, remove, set, update } from "firebase/database";
 import { FIREBASE_DBRT } from "../connect";
 
 /**
@@ -53,9 +53,19 @@ export async function addTask(userId, boardId, column, task) {
 }
 
 
-export function modifyTask(userId, boardId, column, taskId, task) {
+export function modifyTask(userId, boardId, column, taskId, task, columns) {
   try {
-    update(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${column}/${taskId}`), task );
+    let deleted = false
+    columns?.forEach((col, key) => {
+      if ((key+1) == task.status) {
+        console.log();
+        set(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${col.keyName}/${taskId}`), task);
+        remove(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}/${column}/${taskId}`));
+        deleted = true;
+      }
+    });
+
+    if (!deleted) update(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${column}/${taskId}`), task);
     return true;
   } catch (err) {
     throw new Error(err);

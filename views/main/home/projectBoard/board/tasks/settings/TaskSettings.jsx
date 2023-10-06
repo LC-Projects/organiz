@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Alert } from "react-native";
-import { COLORS, STRINGS, THEME } from "../../../../../../../constants";
-import { appContext } from "../../../../../../../context/appContext";
-import ProgressBar from "../../../../../../../components/ProgressBar";
-import { userContext } from "../../../../../../../context/userContext";
 import { deleteTask, getTask, modifyTask } from "../../../../../../../api/firebase/realTime/tasks";
+import { View, StyleSheet, ScrollView, Alert } from "react-native";
+import { COLORS, STRINGS, THEME } from "../../../../../../../constants";
+// Context
+import { appContext } from "../../../../../../../context/appContext";
+import { userContext } from "../../../../../../../context/userContext";
+// Component
+import ProgressBar from "../../../../../../../components/ProgressBar";
 import InputWrapper from "../../../../../../../components/wrapper/InputWrapper";
 import Button1 from "../../../../../../../components/button/Button1";
 import Title from "./Title";
@@ -19,6 +21,7 @@ const TaskSettings = ({ navigation, route }) => {
     const { user, setUser } = useContext(userContext);
 
     // Initialization
+    const move = [{name: STRINGS.TODO, keyName: "todo"}, {name: STRINGS.DOING, keyName: "doing"}, {name: STRINGS.DONE, keyName: "done"}];
     const [data, setData] = useState(null);
 
     const [boardId, setBoardId] = useState(route.params?.boardId);
@@ -45,12 +48,12 @@ const TaskSettings = ({ navigation, route }) => {
     function save() {
         try {
             const task = {
-                title: title,
-                status: status,
-                tag: tag,
-                description: description
+                title,
+                status,
+                tag,
+                description
             }
-            modifyTask(user.uid, boardId, column, taskId, task);
+            modifyTask(user.uid, boardId, column, taskId, task, move);
             setRefresh(!refresh);
             navigation.goBack();
         } catch {
@@ -67,21 +70,21 @@ const TaskSettings = ({ navigation, route }) => {
         setBoardId(route.params?.boardId);
         setColumn(route.params?.column);
         setTaskId(route.params?.taskId);
-        setTitle(route.params?.title);
-        setTag(route.params?.tag);
         (async () => {
             try {
-                const a = await getTask(user.uid, boardId, column, taskId);
+                const a = await getTask(user.uid, route.params?.boardId, route.params?.column, route.params?.taskId);
                 if (a) {
-                    setData(a);
+                    // setData(a);
+                    setTitle(a.title);
+                    setTag(a.tag);
+                    setStatus(a.status)
+                    setDescription(a.description)
                 }
             } catch (err) {
                 Alert.alert("You have encountered an error !");
             }
         })();
     }, [route.params]);
-
-    const move = [STRINGS.TODO, STRINGS.DOING, STRINGS.DONE];
 
     return (
         <ScrollView style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}>
@@ -93,12 +96,12 @@ const TaskSettings = ({ navigation, route }) => {
             <Move data={move} active={status} onPress={setStatus} />
             <Color value={tag} onChangeText={setTag} />
             <Image onPress={() => uploadImage()} />
-            <Description />
+            <Description value={description} onChangeText={setDescription} />
 
             <View style={styles.actionsButton}>
-                <Button1 flex label="Delete" onPress={() => remove()} />
+                <Button1 flex label="Delete" style={{backgroundColor: COLORS.red}} onPress={() => remove()} />
                 <Button1 flex label="Cancel" onPress={() => navigation.goBack()} />
-                <Button1 flex label="Save" style={[backgroundColor ? { backgroundColor: COLORS.white } : { backgroundColor: COLORS.green }]} labelStyle={backgroundColor ? { color: COLORS.black } : { color: COLORS.white }} onPress={() => save()} />
+                <Button1 flex label="Save"   style={[backgroundColor ? { backgroundColor: COLORS.white } : { backgroundColor: COLORS.green }]} labelStyle={backgroundColor ? { color: COLORS.black } : { color: COLORS.white }} onPress={() => save()} />
             </View>
         </ScrollView>
     );

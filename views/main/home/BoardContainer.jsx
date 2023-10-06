@@ -10,9 +10,7 @@ const BoardContainer = ({ data, navigation }) => {
         data?.map((element, key) => (
           <TouchableOpacity
             key={key}
-            onPress={() =>
-              navigation.navigate(ROUTES.PROJECTBOARD, { boardId: key })
-            }
+            onPress={() => navigation.navigate(ROUTES.PROJECTBOARD, { boardId: key })}
           >
             <Board
               importance="High"

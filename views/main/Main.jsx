@@ -10,7 +10,7 @@ import { userContext } from "../../context/userContext";
 import { addBoard } from "../../api/firebase/realTime/boards";
 import { appContext } from "../../context/appContext";
 
-const Main = () => {
+const Main = ({ navigation }) => {
   // Context
   const { refresh, setRefresh } = useContext(appContext);
   const { user } = useContext(userContext);

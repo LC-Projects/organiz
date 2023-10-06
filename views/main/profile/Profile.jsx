@@ -8,7 +8,7 @@ import Title from './Title';
 import Form from './form/Form';
 
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   // Context
   const { backgroundColor } = useContext(appContext)
 
@@ -17,7 +17,7 @@ const Profile = () => {
     <View style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}>
       <ProfilePicture />
       <Title />
-      <Form />
+      <Form navigation={navigation} />
       <Logout />
     </View>
   )

@@ -33,21 +33,14 @@ const ProjectBoard = ({ navigation, route }) => {
     todo: () => (
       <View>
         <Board navigation={navigation} boardId={boardId} title={titles[0].name} data={data?.todo} keyName={titles[0].key} />
-        <TouchableOpacity onPress={() => navigation.navigate(ROUTES.BOARDSETTINGS, { "boardId": boardId, "title": titles[0].name})} >
-          <Text>Settings</Text>
-        </TouchableOpacity>
       </View>
-      
+
     ),
     doing: () => (
-      <Board
-        title={titles[1].name}
-        data={data?.doing}
-        keyName={titles[1].key}
-      />
+      <Board navigation={navigation} boardId={boardId} title={titles[1].name} data={data?.doing} keyName={titles[1].key} />
     ),
     done: () => (
-      <Board title={titles[2].name} data={data?.done} keyName={titles[2].key} />
+      <Board navigation={navigation} boardId={boardId} title={titles[2].name} data={data?.done} keyName={titles[2].key} />
     ),
   });
 
@@ -86,7 +79,7 @@ const ProjectBoard = ({ navigation, route }) => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
-      style={[styles.container, backgroundColor ? {backgroundColor:COLORS.dark} : {backgroundColor:COLORS.light}]}
+      style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}
     />
   );
 };
