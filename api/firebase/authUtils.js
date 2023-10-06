@@ -32,7 +32,7 @@ export async function connectUser(email, password) {
 import { getAuth, deleteUser } from "firebase/auth";
 
 
-export async function deleteUser() {
+export async function remove() {
     try {
         const auth = getAuth();
         const user = auth.currentUser;
