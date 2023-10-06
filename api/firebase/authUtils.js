@@ -28,3 +28,24 @@ export async function connectUser(email, password) {
         throw new Error(`${errorCode}: ${errorMessage}`)
     }
 }
+
+import { getAuth, deleteUser } from "firebase/auth";
+
+
+export async function deleteUser() {
+    try {
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        deleteUser(user).then(() => {
+        return true;
+        }).catch((error) => {
+                throw new Error(error)
+        });
+    }
+    catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        throw new Error(`${errorCode}: ${errorMessage}`)
+    }
+}
