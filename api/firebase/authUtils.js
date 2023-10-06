@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithCredential, signInWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH } from "./connect";
 
 const auth = FIREBASE_AUTH;

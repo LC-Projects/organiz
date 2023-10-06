@@ -5,7 +5,7 @@ import { COLORS, IMGS, ROUTES, THEME } from "../../../constants";
 import ButtonSubmit from "../../../components/ButtonSubmit";
 import Input from "../../../components/Input";
 import { userContext } from "../../../context/userContext";
-import { connectUser } from "../../../api/firebase/authUtils";
+import { connectUser, connectUserWithGoogle } from "../../../api/firebase/authUtils";
 import LottieView from "lottie-react-native";
 import { appContext } from "../../../context/appContext";
 import AuthBottomMessage from "../../../components/AuthBottomMessage";
@@ -33,6 +33,7 @@ const Login = ({ navigation }) => {
     }
   }
 
+
   // Render
   return (
     <SafeAreaView style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}>
@@ -51,8 +52,8 @@ const Login = ({ navigation }) => {
         />
 
         <ButtonSubmit onPress={() => handleSubmit()} text="Login" />
-        <SeparatorWithLabel label="Or" />
-        <ButtonSubmit text={"Login with Google"} image={IMGS.logo.google} style={styles.google} textColor={COLORS.black} />
+        {/* <SeparatorWithLabel label="Or" />
+        <ButtonSubmit onPress={() => connectUserWithGoogle()} text={"Login with Google"} image={IMGS.logo.google} style={styles.google} textColor={COLORS.black} /> */}
 
         <AuthBottomMessage
           message="You don't have an account yet?"
