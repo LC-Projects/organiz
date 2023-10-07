@@ -18,6 +18,8 @@ import { COLORS, THEME } from "../../../../../constants";
 import ProgressBar from "../../../../../components/ProgressBar";
 import { getBoard } from "../../../../../api/firebase/realTime/boards";
 import Title from "./_partials/Title";
+import RadioButtons from "../../../../../components/button/RadioButtons";
+import StatusButtons from "./_partials/StatusButtons";
 
 const BoardSettings = ({ navigation, route }) => {
   const [boardId, setBoardId] = useState(route.params?.boardId);
@@ -29,9 +31,9 @@ const BoardSettings = ({ navigation, route }) => {
   const { user, setUser } = useContext(userContext);
 
   const statusRadioBtn = [
-    { name: "Low", value: 1 },
-    { name: "Medium", value: 2 },
-    { name: "Heigh", value: 3 },
+    { name: "Low", value: 1, bg: status == 1 ? COLORS.blue : COLORS.urgent_blue },
+    { name: "Medium", value: 2, bg: status == 2 ? COLORS.orange : COLORS.urgent_orange },
+    { name: "High", value: 3, bg: status == 3 ? COLORS.red : COLORS.urgent_red },
   ];
 
   useEffect(() => {
@@ -89,43 +91,8 @@ const BoardSettings = ({ navigation, route }) => {
 
       <Title value={data?.title} onChangeText={setTitle} />
 
-      <View style={styles.containerStatus}>
-        <Text style={styles.title}>Status :</Text>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            status == 1
-              ? { backgroundColor: COLORS.blue }
-              : { backgroundColor: COLORS.urgent_blue },
-          ]}
-          onPress={() => setStatus(1)}
-        >
-          <Text style={styles.titleButtonStatus}>Low</Text>
-        </TouchableOpacity>
+      <StatusButtons data={statusRadioBtn} active={status} onPress={setStatus} />
 
-        <TouchableOpacity
-          style={[
-            styles.button,
-            status == 2
-              ? { backgroundColor: COLORS.orange }
-              : { backgroundColor: COLORS.urgent_orange },
-          ]}
-          onPress={() => setStatus(2)}
-        >
-          <Text style={styles.titleButtonStatus}>Medium</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            status == 3
-              ? { backgroundColor: COLORS.red }
-              : { backgroundColor: COLORS.urgent_red },
-          ]}
-          onPress={() => setStatus(3)}
-        >
-          <Text style={styles.titleButtonStatus}>High</Text>
-        </TouchableOpacity>
-      </View>
       <View style={styles.containerButton}>
         <TouchableOpacity style={styles.buttonAction} onPress={remove}>
           <Text style={styles.titleButton}>Delete</Text>
