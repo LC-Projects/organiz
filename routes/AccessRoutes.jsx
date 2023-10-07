@@ -25,9 +25,9 @@ const Access = () => {
         name={ROUTES.PROJECTBOARD}
         component={Board}
         options={({ route, navigation }) => ({
-          title: route.params.name,
+          title: '[BOARD] - ' + route.params.name,
           headerRight: () => (
-            <ButtonSetting color={COLORS.black} horizontal onPress={() => navigation.navigate(ROUTES.BOARDSETTINGS, {percentage: route.params.percentage, boardId: route.params.boardId})} />
+            <ButtonSetting color={COLORS.black} horizontal onPress={() => navigation.navigate(ROUTES.BOARDSETTINGS, {percentage: route.params.percentage, boardId: route.params.boardId, title: route.params.title, status: route.params.status })} />
           ),
           headerTitleContainerStyle: { alignItems: 'center' }
         })}
@@ -35,12 +35,12 @@ const Access = () => {
       <Stack.Screen
         name={ROUTES.TASKSETTINGS}
         component={TaskSettings}
-        options={({ route }) => ({ title: route.params.name })}
+        options={({ route }) => ({ title: '[SETTINGS] - ' + route.params.title })}
       />
       <Stack.Screen
         name={ROUTES.BOARDSETTINGS}
         component={BoardSettings}
-        options={({ route }) => ({ title: route.params.name })}
+        options={({ route }) => ({ title: '[SETTINGS] - ' + route.params.title })}
       />
     </Stack.Navigator>
   );

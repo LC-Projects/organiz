@@ -28,6 +28,8 @@ const Board = ({ navigation, route }) => {
     { name: "Done", key: "done" },
   ];
   const [boardId, setBoardId] = useState(route.params?.boardId);
+  const [title, setTitle] = useState(route.params?.title);
+  const [status, setStatus] = useState(route.params?.status);
   const [percentage, setPercentage] = useState(0);
   const [data, setData] = useState(null);
   const [index, setIndex] = useState(0);
@@ -81,6 +83,8 @@ const Board = ({ navigation, route }) => {
   // Hook
   useEffect(() => {
     setBoardId(route.params?.boardId);
+    setTitle(route.params?.title);
+    setStatus(route.params?.status);
     (async () => {
       try {
         const a = await getTasks(user.uid, boardId);

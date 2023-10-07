@@ -16,6 +16,8 @@ const BoardContainer = ({ data, navigation }) => {
               navigation.navigate(ROUTES.PROJECTBOARD, {
                 boardId: key,
                 name: element.title,
+                title: element.title,
+                status: element.status,
                 percentage: calculatePercentage(element)
               })
             }

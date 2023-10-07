@@ -6,7 +6,7 @@ import { COLORS, ROUTES, THEME } from "../../../../../../../constants";
 const Task = ({ percentage, navigation, boardId, column, title, tag, taskId }) => {
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(ROUTES.TASKSETTINGS, { "percentage":percentage, name: `[SETTINGS] - ${title}`, "boardId": boardId, "column":column, "taskId": taskId, "title": title, "tag": tag})}>
+    <TouchableOpacity onPress={() => navigation.navigate(ROUTES.TASKSETTINGS, { "percentage":percentage, title: title, "boardId": boardId, "column":column, "taskId": taskId, "title": title, "tag": tag})}>
       <View style={styles.task}>
         <View style={[styles.tag, {backgroundColor: tag}]}></View>
         <Text style={styles.title}>{title}</Text>
