@@ -1,4 +1,4 @@
-import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { FIREBASE_STORAGE } from "../connect";
 
 export async function upload(userId, boardId, taskId, fileName, file) {

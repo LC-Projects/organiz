@@ -7,7 +7,7 @@ import Save from "../Save";
 
 
 
-const Form = ({ navigation }) => {
+const Form = () => {
   // Context
   const { user, setUser } = useContext(userContext);
 
@@ -22,7 +22,7 @@ const Form = ({ navigation }) => {
   // Render
   return (
     <View>
-        {inputs.map((input, key) => <InputWithLabel key={key} label={input.label} placeholder={input.placeholder} value={input.value} />)}
+        {inputs.map((input, key) => <InputWithLabel key={key} label={input.label} placeholder={input.placeholder} value={input.value} secure={input.secure} />)}
         {/* <ButtonsActions cancel={navigation.goBack()} add={[updateEmail(), updatePassword()]}/> */}
         <Save email={newEmail} password={newPassword}/>
         <ThemeMode />
