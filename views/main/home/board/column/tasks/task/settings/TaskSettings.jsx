@@ -112,8 +112,9 @@ const TaskSettings = ({ navigation, route }) => {
                 setImgURI(gettingImg);
               }
             } catch (err) {
-              Alert.alert("Can't get image");
-              // console.error(err);
+              // Alert.alert("Can't get image");
+              // console.log("Can't get image");
+              return
             }
           })();
         }

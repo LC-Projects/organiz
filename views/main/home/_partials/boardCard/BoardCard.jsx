@@ -25,7 +25,6 @@ const BoardCard = ({data}) => {
 
     // Hook
     useEffect(() => {
-        console.log(calculatePercentage(data));
         setImportanceColor(importanceStatus[data?.important - 1]?.color)
         setTitle(importanceStatus[data?.important - 1]?.name)
     }, [refresh])
