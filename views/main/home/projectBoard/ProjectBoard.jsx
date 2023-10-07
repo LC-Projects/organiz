@@ -92,7 +92,6 @@ const ProjectBoard = ({ navigation, route }) => {
       }
     })();
     setPercentage(calculatePercentage(data));
-    console.log(data, calculatePercentage(data));
   }, [boardId, refresh]);
 
   // Render
