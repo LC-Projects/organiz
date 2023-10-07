@@ -25,7 +25,7 @@ const BoardCard = ({data}) => {
 
     // Hook
     useEffect(() => {
-        (data && setPercentage(() => calculatePercentage(data)));
+        console.log(calculatePercentage(data));
         setImportanceColor(importanceStatus[data?.important - 1]?.color)
         setTitle(importanceStatus[data?.important - 1]?.name)
     }, [refresh])
@@ -41,7 +41,7 @@ const BoardCard = ({data}) => {
         <Title value={data?.title} />
 
         <View style={styles.bottomBoard}>
-            <ProgressBar percentage={percentage}/>
+            <ProgressBar percentage={data && calculatePercentage(data)}/>
         </View>
     </View>
   )

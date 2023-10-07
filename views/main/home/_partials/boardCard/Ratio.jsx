@@ -6,19 +6,19 @@ const Ratio = ({ data }) => {
   return (
     <View style={styles.statusBoard}>
       <Text style={[styles.firstvalue, styles.fontSize]}>
-        {data?.todo ? data?.todo?.length : 0}
+        {data?.todo.filter(e => e !== undefined) ? data?.todo?.filter(e => e !== undefined).length : 0}
       </Text>
 
       <Text style={styles.fontSize}> / </Text>
 
       <Text style={[styles.secondvalue, styles.fontSize]}>
-        {data?.doing ? data?.doing?.length : 0}
+        {data?.doing.filter(e => e !== undefined) ? data?.doing?.filter(e => e !== undefined).length : 0}
       </Text>
 
       <Text style={styles.fontSize}> / </Text>
 
       <Text style={[styles.thirdvalue, styles.fontSize]}>
-        {data?.done ? data?.done?.length : 0}
+        {data?.done.filter(e => e !== undefined) ? data?.done?.filter(e => e !== undefined).length : 0}
       </Text>
     </View>
   );

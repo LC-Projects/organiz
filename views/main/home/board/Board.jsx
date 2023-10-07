@@ -43,7 +43,7 @@ const Board = ({ navigation, route }) => {
         navigation={navigation}
         boardId={boardId}
         title={titles[0].name}
-        data={data?.todo}
+        data={data?.todo.filter(e => e !== undefined)}
         keyName={titles[0].key}
       />
     ),
@@ -53,7 +53,7 @@ const Board = ({ navigation, route }) => {
         navigation={navigation}
         boardId={boardId}
         title={titles[1].name}
-        data={data?.doing}
+        data={data?.doing.filter(e => e !== undefined)}
         keyName={titles[1].key}
       />
     ),
@@ -63,7 +63,7 @@ const Board = ({ navigation, route }) => {
         navigation={navigation}
         boardId={boardId}
         title={titles[2].name}
-        data={data?.done}
+        data={data?.done.filter(e => e !== undefined)}
         keyName={titles[2].key}
       />
     ),

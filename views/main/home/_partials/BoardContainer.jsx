@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { ROUTES, THEME } from "../../../../constants";
-import Board from "./boardCard/BoardCard";
+import BoardCard from "./boardCard/BoardCard";
 import { calculatePercentage } from "../../../../utils/maths";
 
 const BoardContainer = ({ data, navigation }) => {
@@ -20,7 +20,7 @@ const BoardContainer = ({ data, navigation }) => {
               })
             }
           >
-            <Board data={element}/>
+            <BoardCard data={element}/>
           </TouchableOpacity>
         ))}
     </View>
