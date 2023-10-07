@@ -19,7 +19,7 @@ const Profile = ({ navigation}) => {
           <ProfilePicture />
           <Title />
           <Form navigation={navigation}/>
-          <Logout />
+          <Logout navigation={navigation}/>
         </ScrollView>
       </View>
   )

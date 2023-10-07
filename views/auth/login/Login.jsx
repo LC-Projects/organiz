@@ -1,15 +1,14 @@
 import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, Keyboard, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, IMGS, ROUTES, THEME } from "../../../constants";
+import { COLORS, ROUTES } from "../../../constants";
 import ButtonSubmit from "../../../components/ButtonSubmit";
 import Input from "../../../components/Input";
 import { userContext } from "../../../context/userContext";
-import { connectUser, connectUserWithGoogle } from "../../../api/firebase/authUtils";
-import LottieView from "lottie-react-native";
+import { connectUser } from "../../../api/firebase/authUtils";
 import { appContext } from "../../../context/appContext";
 import AuthBottomMessage from "../../../components/AuthBottomMessage";
-import SeparatorWithLabel from "../../../components/SeparatorWithLabel";
+import Hero from "./_partials/Hero";
 
 
 const Login = ({ navigation }) => {
@@ -27,7 +26,7 @@ const Login = ({ navigation }) => {
     Keyboard.dismiss();
     try {
       setUser(await connectUser(email, password));
-    } catch (err) {
+    } catch {
       setUser(false);
       Alert.alert("User or Password is incorrect");
     }
@@ -39,10 +38,7 @@ const Login = ({ navigation }) => {
     <SafeAreaView style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}>
       {errMessage && <Text>{errMessage}</Text>}
       <View>
-        <View style={styles.loginImg}>
-          <LottieView source={IMGS.json.login} autoPlay loop style={{ transform: [{ scale: 1.4 }] }} />
-        </View>
-
+        <Hero />
         <Input placeholder="Email" value={email} onChangeText={(e) => setEmail(e)} />
         <Input
           placeholder="Password"
@@ -50,11 +46,9 @@ const Login = ({ navigation }) => {
           secureTextEntry={true}
           onChangeText={(e) => setPassword(e)}
         />
-
         <ButtonSubmit onPress={() => handleSubmit()} text="Login" />
         {/* <SeparatorWithLabel label="Or" />
         <ButtonSubmit onPress={() => connectUserWithGoogle()} text={"Login with Google"} image={IMGS.logo.google} style={styles.google} textColor={COLORS.black} /> */}
-
         <AuthBottomMessage
           message="You don't have an account yet?"
           button="Sign up now!"
@@ -72,17 +66,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-  },
-  input: {
-    padding: 10,
-    margin: 10,
-    borderColor: "black",
-    borderWidth: 2,
-    textAlign: "center",
-    borderRadius: 1,
-  },
-  loginImg: {
-    height: '30%',
   },
   google: {
     backgroundColor: COLORS.light,

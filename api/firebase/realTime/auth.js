@@ -1,5 +1,4 @@
 import { getAuth, updateEmail , updatePassword } from "firebase/auth";
-import { FIREBASE_DBRT } from "../connect";
 
 export async function updateEmailUser(email) {
     try {
@@ -10,7 +9,6 @@ export async function updateEmailUser(email) {
              throw new Error(err);
         });
     } catch (err) {
-      console.error(err);
       throw new Error(err);
     }
   }
@@ -23,10 +21,9 @@ export async function updatePasswordUser(password) {
         updatePassword(user, newPassword).then(() => {
             return true;
         }).catch((error) => {
-             throw new Error(err);
+             throw new Error(error);
         });
     } catch (err) {
-      console.error(err);
       throw new Error(err);
     }
   }

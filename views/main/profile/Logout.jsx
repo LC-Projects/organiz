@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Text, TouchableOpacity, StyleSheet, View, Alert } from "react-native";
-import { COLORS, THEME } from "../../../constants";
+import { COLORS, ROUTES, THEME } from "../../../constants";
 import { userContext } from "../../../context/userContext";
 import { appContext } from "../../../context/appContext";
 import { remove } from "../../../api/firebase/authUtils";
 
-const Logout = () => {
+const Logout = ({navigation}) => {
   // Context
   const { setUser } = useContext(userContext);
   const { backgroundColor } = useContext(appContext);
@@ -22,7 +22,25 @@ const Logout = () => {
         },
         {
           text: 'Delete', 
-          onPress: () => remove
+          onPress: () => [remove(), navigation.navigate(ROUTES.REGISTER)]
+        },
+      ],
+      {cancelable: false},
+    );
+  }
+
+  function disconnectAccount() {
+    Alert.alert(
+      'Disconnect',
+      'Do you want to disconnect your account an lost the connection to the application ?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Disconnect', 
+          onPress: () => [setUser(false), navigation.navigate(ROUTES.LOGIN)]
         },
       ],
       {cancelable: false},
@@ -40,7 +58,7 @@ const Logout = () => {
           Left the application
         </Text>
       <View style={styles.button}>
-        <TouchableOpacity style={[styles.buttonDisconnect, {backgroundColor:COLORS.red}]} onPress={() => setUser(false)}>
+        <TouchableOpacity style={[styles.buttonDisconnect, {backgroundColor:COLORS.red}]} onPress={() => disconnectAccount()}>
           <Text style={[styles.textButton]}>Disconnect</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.buttonDisconnect, {backgroundColor:COLORS.urgent_red}]} onPress={() => deleteAccount()}>

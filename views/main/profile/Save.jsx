@@ -9,7 +9,7 @@ const Save = ({email, password}) => {
   const { backgroundColor } = useContext(appContext);
   return (
     <View style={styles.button}>
-      <TouchableOpacity style={[styles.buttonSave, backgroundColor ? {backgroundColor: COLORS.green} : {backgroundColor: COLORS.white}]} onPress={() => [updateEmailUser(email), updatePasswordUser(password)]}>
+      <TouchableOpacity style={[styles.buttonSave, backgroundColor ? {backgroundColor: COLORS.white} : {backgroundColor: COLORS.green}]} onPress={() => [updateEmailUser(email), updatePasswordUser(password)]}>
         <Text style={[styles.textButton]}>Save</Text>
       </TouchableOpacity>
     </View>

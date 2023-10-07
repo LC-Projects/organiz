@@ -10,7 +10,6 @@ export async function getBoards(userId) {
       });
     });
   } catch (err) {
-    console.error(err);
     throw new Error(err);
   }
 }
@@ -26,7 +25,6 @@ export async function addBoard(userId, board) {
     set(ref(FIREBASE_DBRT, `${userId}/boards`), boards);
     return boards;
   } catch (err) {
-    console.error(err);
     throw new Error(err);
   }
 }
