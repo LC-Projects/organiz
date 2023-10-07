@@ -5,7 +5,7 @@ import { COLORS, THEME } from "../../../../../constants";
 import InputWrapper from "../../../../../components/wrapper/InputWrapper";
 import ProgressBar from "../../../../../components/ProgressBar";
 
-const Board = ({ percentage, navigation, boardId, title, data, keyName }) => {
+const Column = ({ percentage, navigation, boardId, title, data, keyName }) => {
  
   return (
     <ScrollView style={styles.container} >
@@ -31,7 +31,7 @@ const Board = ({ percentage, navigation, boardId, title, data, keyName }) => {
   );
 };
 
-export default Board;
+export default Column;
 
 const styles = StyleSheet.create({
   container: {

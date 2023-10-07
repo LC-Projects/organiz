@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import InputWrapper from "../../../../../../../components/wrapper/InputWrapper";
-import Button1 from "../../../../../../../components/button/Button1";
+import InputWrapper from "../../../../../../../../../components/wrapper/InputWrapper";
+import Button1 from "../../../../../../../../../components/button/Button1";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { COLORS, THEME } from "../../../../../../../constants";
+import { COLORS, THEME } from "../../../../../../../../../constants";
 import * as ImagePicker from "expo-image-picker";
-import { userContext } from "../../../../../../../context/userContext";
+import { userContext } from "../../../../../../../../../context/userContext";
 import { TextInput } from "react-native-gesture-handler";
 
 const TaskImage = ({ setImage, imgURI, setImgURI, data, value, onPress }) => {

@@ -11,23 +11,31 @@ import {
 import {
   modifyBoard,
   deleteBoard,
-} from "../../../../../../api/firebase/realTime/boards";
-import { userContext } from "../../../../../../context/userContext";
-import { appContext } from "../../../../../../context/appContext";
-import { COLORS, THEME } from "../../../../../../constants";
-import ProgressBar from "../../../../../../components/ProgressBar";
-import { getBoard } from "../../../../../../api/firebase/realTime/boards";
+} from "../../../../../api/firebase/realTime/boards";
+import { userContext } from "../../../../../context/userContext";
+import { appContext } from "../../../../../context/appContext";
+import { COLORS, THEME } from "../../../../../constants";
+import ProgressBar from "../../../../../components/ProgressBar";
+import { getBoard } from "../../../../../api/firebase/realTime/boards";
+import Title from "./_partials/Title";
 
 const BoardSettings = ({ navigation, route }) => {
   const [boardId, setBoardId] = useState(route.params?.boardId);
   const [title, setTitle] = useState(route.params?.title);
   const [data, setData] = useState(null);
-  const [percentage, setPercentage] = useState(route.params?.percentage);
+  const [percentage, setPercentage] = useState(0);
   const [status, setStatus] = useState(1);
   const { backgroundColor, refresh, setRefresh } = useContext(appContext);
   const { user, setUser } = useContext(userContext);
 
+  const statusRadioBtn = [
+    { name: "Low", value: 1 },
+    { name: "Medium", value: 2 },
+    { name: "Heigh", value: 3 },
+  ];
+
   useEffect(() => {
+    setPercentage(route.params?.percentage)
     setBoardId(route.params?.boardId);
     setTitle(route.params?.title);
     (async () => {
@@ -79,14 +87,10 @@ const BoardSettings = ({ navigation, route }) => {
         <ProgressBar percentage={percentage} />
       </View>
 
-      <View style={styles.containerTitle}>
-        <TextInput style={styles.name} onChangeText={setTitle}>
-          {data?.title}
-        </TextInput>
-      </View>
+      <Title value={data?.title} onChangeText={setTitle} />
 
       <View style={styles.containerStatus}>
-        <Text style={styles.title}>Move :</Text>
+        <Text style={styles.title}>Status :</Text>
         <TouchableOpacity
           style={[
             styles.button,
@@ -98,6 +102,7 @@ const BoardSettings = ({ navigation, route }) => {
         >
           <Text style={styles.titleButtonStatus}>Low</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={[
             styles.button,
@@ -184,12 +189,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     margin: 10,
-  },
-  name: {
-    textAlign: "center",
-    borderBottomWidth: 2,
-    fontSize: THEME.font.size.l,
-    flex: 1,
   },
   title: {
     fontSize: THEME.font.size.m,

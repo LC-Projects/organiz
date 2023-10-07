@@ -1,32 +1,29 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import DataBoard from "../../../../components/DataBoard";
 import { COLORS, STRINGS, THEME } from "../../../../constants";
 
-const RatioBoard = ({ dataBoard }) => {
+const RatioBoard = ({ data }) => {
   // Initialization
-  let todo = 0;
-  let doing = 0;
-  let done = 0;
-  let board = ((dataBoard?.length) ? (dataBoard?.length) : 0);
-  dataBoard?.forEach(DataBoard => {
+  let todo = 0, doing = 0, done = 0;
+  data?.forEach(DataBoard => {
     todo += ((DataBoard?.todo?.length) ? (DataBoard?.todo?.length) : 0);
     doing += ((DataBoard?.doing?.length) ? (DataBoard?.doing?.length) : 0);
     done += ((DataBoard?.done?.length) ? (DataBoard?.done?.length) : 0);
   });
   
-  const data = [
+  const board = ((data?.length) ? (data?.length) : 0);
+  const ratioData = [
     { value: (board), title: STRINGS.BOARDS, color: COLORS.dark_purple, separator: true },
     { value: (todo), title: STRINGS.TODO, color: COLORS.green },
     { value: (doing), title: STRINGS.DOING, color: COLORS.blue },
     { value: (done), title: STRINGS.DONE, color: COLORS.orange },
   ];  
 
-  
   //   Render
   return (
     <ScrollView horizontal={true} style={styles.container}>
-      {data?.map((e, key) => (
+      {ratioData?.map((e, key) => (
         <DataBoard
           key={key}
           value={e.value}

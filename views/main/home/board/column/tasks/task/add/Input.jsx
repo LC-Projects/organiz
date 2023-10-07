@@ -1,7 +1,7 @@
 import React from "react";
 import { View, KeyboardAvoidingView, TextInput, StyleSheet } from "react-native";
-import { COLORS, THEME } from "../../../../../../../constants";
-import ButtonsActions from "../../../../../../../components/button/ButtonsActions";
+import { COLORS, THEME } from "../../../../../../../../constants";
+import ButtonsActions from "../../../../../../../../components/button/ButtonsActions";
 
 const Input = ({ cancel, add, value, onChangeText }) => {
   return (

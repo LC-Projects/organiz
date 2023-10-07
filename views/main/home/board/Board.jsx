@@ -12,10 +12,10 @@ import { appContext } from "../../../../context/appContext";
 import { userContext } from "../../../../context/userContext";
 import { COLORS, ROUTES } from "../../../../constants";
 import { getTasks } from "../../../../api/firebase/realTime/tasks";
-import Board from "./board/Board";
+import Column from "./column/Column";
 import { calculatePercentage } from "../../../../utils/maths";
 
-const ProjectBoard = ({ navigation, route }) => {
+const Board = ({ navigation, route }) => {
   // Context
   const { user, setUser } = useContext(userContext);
   const { refresh, setRefresh, backgroundColor } = useContext(appContext);
@@ -38,7 +38,7 @@ const ProjectBoard = ({ navigation, route }) => {
   ]);
   const renderScene = SceneMap({
     todo: () => (
-      <Board
+      <Column
         percentage={percentage}
         navigation={navigation}
         boardId={boardId}
@@ -48,7 +48,7 @@ const ProjectBoard = ({ navigation, route }) => {
       />
     ),
     doing: () => (
-      <Board
+      <Column
         percentage={percentage}
         navigation={navigation}
         boardId={boardId}
@@ -58,7 +58,7 @@ const ProjectBoard = ({ navigation, route }) => {
       />
     ),
     done: () => (
-      <Board
+      <Column
         percentage={percentage}
         navigation={navigation}
         boardId={boardId}
@@ -69,7 +69,7 @@ const ProjectBoard = ({ navigation, route }) => {
     ),
   });
 
-  // Function
+  // Component
   const renderTabBar = (props) => (
     <TabBar
       {...props}
@@ -112,7 +112,7 @@ const ProjectBoard = ({ navigation, route }) => {
   );
 };
 
-export default ProjectBoard;
+export default Board;
 
 // Style
 const styles = StyleSheet.create({

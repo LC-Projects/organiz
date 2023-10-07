@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import Button from "./add/Button";
+import Button from "./task/add/Button";
 import Task from "./task/Task";
-import Input from "./add/Input";
+import Input from "./task/add/Input";
 import { addTask } from "../../../../../../api/firebase/realTime/tasks";
 import { userContext } from "../../../../../../context/userContext";
 import { appContext } from "../../../../../../context/appContext";

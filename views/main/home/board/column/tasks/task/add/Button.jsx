@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TouchableOpacity, Image, View, StyleSheet } from "react-native";
-import { IMGS, THEME } from "../../../../../../../constants";
+import { IMGS, THEME } from "../../../../../../../../constants";
 
 const Button = ({ onPress }) => {
   return (

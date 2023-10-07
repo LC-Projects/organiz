@@ -13,10 +13,9 @@ const BoardCard = ({data}) => {
     const { refresh } = useContext(appContext);
 
     // Initialization
-    const [importanceColor, setImportanceColor] = useState(null)
     const [title, setTitle] = useState("")
+    const [importanceColor, setImportanceColor] = useState(null)
     const [percentage, setPercentage] = useState(0)
-
 
     const importanceStatus = [
         {name: "Low", color: COLORS.blue},
@@ -24,12 +23,14 @@ const BoardCard = ({data}) => {
         {name: "High", color: COLORS.red},
     ]
 
+    // Hook
     useEffect(() => {
         (data && setPercentage(() => calculatePercentage(data)));
         setImportanceColor(importanceStatus[data?.important - 1]?.color)
         setTitle(importanceStatus[data?.important - 1]?.name)
     }, [refresh])
     
+    // Render
     return (
     <View style={styles.container}>
         <View style={styles.topBoard}>
@@ -39,11 +40,9 @@ const BoardCard = ({data}) => {
         </View>
         <Title value={data?.title} />
 
-        {/* ProgressBar Props: Nb Todo / Nb Doing / Nb Done */}
         <View style={styles.bottomBoard}>
             <ProgressBar percentage={percentage}/>
         </View>
-        {/* END ProgressBar */}
     </View>
   )
 }

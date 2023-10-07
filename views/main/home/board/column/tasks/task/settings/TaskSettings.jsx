@@ -3,22 +3,22 @@ import {
   deleteTask,
   getTask,
   modifyTask,
-} from "../../../../../../../api/firebase/realTime/tasks";
+} from "../../../../../../../../api/firebase/realTime/tasks";
 import { View, StyleSheet, ScrollView, Alert, SafeAreaView } from "react-native";
-import { COLORS, STRINGS, THEME } from "../../../../../../../constants";
+import { COLORS, STRINGS, THEME } from "../../../../../../../../constants";
 // Context
-import { appContext } from "../../../../../../../context/appContext";
-import { userContext } from "../../../../../../../context/userContext";
+import { appContext } from "../../../../../../../../context/appContext";
+import { userContext } from "../../../../../../../../context/userContext";
 // Component
-import ProgressBar from "../../../../../../../components/ProgressBar";
-import InputWrapper from "../../../../../../../components/wrapper/InputWrapper";
-import Button1 from "../../../../../../../components/button/Button1";
-import Title from "./Title";
-import Move from "./Move";
-import Color from "./Color";
-import Image from "./TaskImage";
-import Description from "./Description";
-import { getImage, upload } from "../../../../../../../api/firebase/storage/image";
+import ProgressBar from "../../../../../../../../components/ProgressBar";
+import InputWrapper from "../../../../../../../../components/wrapper/InputWrapper";
+import Button1 from "../../../../../../../../components/button/Button1";
+import Title from "./_partials/Title";
+import Move from "./_partials/Move";
+import Color from "./_partials/Color";
+import Image from "./_partials/TaskImage";
+import Description from "./_partials/Description";
+import { getImage, upload } from "../../../../../../../../api/firebase/storage/image";
 
 const TaskSettings = ({ navigation, route }) => {
   // context
@@ -28,9 +28,9 @@ const TaskSettings = ({ navigation, route }) => {
 
   // Initialization
   const move = [
-    { name: STRINGS.TODO, keyName: "todo" },
-    { name: STRINGS.DOING, keyName: "doing" },
-    { name: STRINGS.DONE, keyName: "done" },
+    { name: STRINGS.TODO, value: 1, keyName: "todo" },
+    { name: STRINGS.DOING, value: 2, keyName: "doing" },
+    { name: STRINGS.DONE, value: 3, keyName: "done" },
   ];
   const [boardId, setBoardId] = useState(route.params?.boardId);
   const [column, setColumn] = useState(route.params?.column);

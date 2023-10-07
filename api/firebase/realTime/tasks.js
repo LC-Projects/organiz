@@ -37,15 +37,15 @@ export async function getTask(userId, boardId, column, taskId) {
 
 export async function addTask(userId, boardId, column, task) {
   try {
-    
+    console.log(userId, boardId, column, task);
     let snapshot = await get(
       child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${column}`)
     );
 
     boards = snapshot.val();
 
-    if (!boards[column]) boards[column] = [];
-    boards[column].push(task);
+    if (!boards) boards = [];
+    boards.push(task);
 
     set(ref(FIREBASE_DBRT, `${userId}/boards/${boardId}/${column}`), boards);
     return;
@@ -57,6 +57,7 @@ export async function addTask(userId, boardId, column, task) {
 
 export function modifyTask(userId, boardId, column, taskId, task, columns) {
   try {
+    console.log(userId, boardId, column, taskId, task, columns);
     if (column == columns[task.status - 1].keyName) {
       update(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}/${column}/${taskId}`), task);
     } else {

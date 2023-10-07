@@ -1,7 +1,7 @@
 import { StyleSheet, TextInput } from 'react-native'
 import React from 'react'
-import InputWrapper from '../../../../../../../components/wrapper/InputWrapper'
-import { COLORS, THEME } from '../../../../../../../constants'
+import InputWrapper from '../../../../../../../../../components/wrapper/InputWrapper'
+import { COLORS, THEME } from '../../../../../../../../../constants'
 
 const Description = ({ value, onChangeText }) => {
     return (

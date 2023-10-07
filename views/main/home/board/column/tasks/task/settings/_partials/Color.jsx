@@ -1,8 +1,8 @@
 import { View, StyleSheet } from 'react-native'
 import React from 'react'
-import InputWrapper from '../../../../../../../components/wrapper/InputWrapper'
-import Input1 from '../../../../../../../components/form/Input1'
-import { COLORS, THEME } from '../../../../../../../constants'
+import InputWrapper from '../../../../../../../../../components/wrapper/InputWrapper'
+import Input1 from '../../../../../../../../../components/form/Input1'
+import { COLORS, THEME } from '../../../../../../../../../constants'
 
 const Color = ({ value, onChangeText }) => {
     return (
