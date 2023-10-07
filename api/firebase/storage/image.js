@@ -17,7 +17,7 @@ export async function upload(userId, boardId, taskId, fileName, file) {
 
     // 'file' comes from the Blob or File API
     uploadBytesResumable(storageRef, theBlob).then((snapshot) => {
-      console.log("Uploaded a blob or file!");
+      // console.log("Uploaded a blob or file!");
     });
     return;
   } catch (err) {
