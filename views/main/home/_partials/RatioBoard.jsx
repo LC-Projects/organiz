@@ -7,9 +7,9 @@ const RatioBoard = ({ data }) => {
   // Initialization
   let todo = 0, doing = 0, done = 0;
   data?.forEach(DataBoard => {
-    todo += ((DataBoard?.todo?.length) ? (DataBoard?.todo?.length) : 0);
-    doing += ((DataBoard?.doing?.length) ? (DataBoard?.doing?.length) : 0);
-    done += ((DataBoard?.done?.length) ? (DataBoard?.done?.length) : 0);
+    todo += ((DataBoard?.todo?.filter(e => e !== undefined).length) ? (DataBoard?.todo?.filter(e => e !== undefined).length) : 0);
+    doing += ((DataBoard?.doing?.filter(e => e !== undefined).length) ? (DataBoard?.doing?.filter(e => e !== undefined).length) : 0);
+    done += ((DataBoard?.done?.filter(e => e !== undefined).length) ? (DataBoard?.done?.filter(e => e !== undefined).length) : 0);
   });
   
   const board = ((data?.length) ? (data?.length) : 0);
