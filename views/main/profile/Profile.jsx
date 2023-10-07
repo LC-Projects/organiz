@@ -18,7 +18,7 @@ const Profile = ({ navigation}) => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <ProfilePicture />
           <Title />
-          <Form navigation={navigation}/>
+          <Form />
           <Logout navigation={navigation}/>
         </ScrollView>
       </View>
