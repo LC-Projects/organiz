@@ -1,20 +1,24 @@
 import React, { useContext } from "react";
 import { Text, TouchableOpacity, StyleSheet, View, Alert } from "react-native";
-import { COLORS, ROUTES, THEME } from "../../../constants";
+import { COLORS, THEME } from "../../../constants";
 import { updateEmailUser, updatePasswordUser } from "../../../api/firebase/realTime/auth";
 import { appContext } from "../../../context/appContext";
 
 
-const Save = ({email, password}) => {
+const Save = ({setSave, email, password}) => {
   function updateAuthentication(email, password)
   {
     try {
-      updateEmailUser(email);
-      updatePasswordUser(password);
-      Alert.alert(
-        'Data Save',
-        'Your new email and password has been modified !',
-      );
+      console.log(email.length, password.length);
+      if (email.length >= 10 && password.length >= 6) {
+        updateEmailUser(email);
+        updatePasswordUser(password);
+        setSave(true);
+        Alert.alert(
+          'Data Save',
+          'Your new email and password has been modified !',
+        );
+      }
     }
     catch
     {

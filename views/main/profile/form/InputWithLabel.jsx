@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Text, StyleSheet } from "react-native";
 import { appContext } from "../../../../context/appContext";
 import { COLORS, THEME } from "../../../../constants";
 import Input from "../../../../components/Input.jsx"
 
-const InputWithLabel = ({ label, placeholder, value, secure }) => {
+const InputWithLabel = ({ setNewInput, label, placeholder, value, secure }) => {
   // Context
   const { backgroundColor } = useContext(appContext);
-
+  
   // Render
   return (
     <>
@@ -23,6 +23,7 @@ const InputWithLabel = ({ label, placeholder, value, secure }) => {
         text={placeholder}
         value={value}
         secureTextEntry={secure}
+        onChangeText={setNewInput}
       ></Input>
     </>
   );
