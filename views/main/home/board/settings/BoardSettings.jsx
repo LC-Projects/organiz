@@ -18,7 +18,6 @@ import { COLORS, THEME } from "../../../../../constants";
 import ProgressBar from "../../../../../components/ProgressBar";
 import { getBoard } from "../../../../../api/firebase/realTime/boards";
 import Title from "./_partials/Title";
-import RadioButtons from "../../../../../components/button/RadioButtons";
 import StatusButtons from "./_partials/StatusButtons";
 
 const BoardSettings = ({ navigation, route }) => {
@@ -40,6 +39,7 @@ const BoardSettings = ({ navigation, route }) => {
     setPercentage(route.params?.percentage)
     setBoardId(route.params?.boardId);
     setTitle(route.params?.title);
+    setStatus(route.params?.status);
     (async () => {
       try {
         const a = await getBoard(user.uid, boardId);
@@ -60,7 +60,7 @@ const BoardSettings = ({ navigation, route }) => {
       };
       modifyBoard(user.uid, boardId, board);
       setRefresh(!refresh);
-      navigation.goBack();
+      navigation.pop(2);
     } catch {
       Alert.alert("You have encountered an error !");
     }
