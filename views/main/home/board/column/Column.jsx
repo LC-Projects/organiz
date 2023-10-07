@@ -6,6 +6,10 @@ import InputWrapper from "../../../../../components/wrapper/InputWrapper";
 import ProgressBar from "../../../../../components/ProgressBar";
 
 const Column = ({ percentage, navigation, boardId, title, data, keyName }) => {
+  // useEffect(() => {
+  //   console.log(percentage);
+  // }, [percentage])
+  
  
   return (
     <ScrollView style={styles.container} >

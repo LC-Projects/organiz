@@ -15,7 +15,7 @@ import BoardContainer from "./_partials/BoardContainer";
 const Homepage = ({ navigation }) => {
   // Context
   const { user } = useContext(userContext);
-  const { refresh, backgroundColor } = useContext(appContext);
+  const { refresh, setRefresh, backgroundColor } = useContext(appContext);
 
   // Initalization
   const [data, setData] = useState(null);
@@ -27,11 +27,13 @@ const Homepage = ({ navigation }) => {
         const a = await getBoards(user.uid);
         if (a) {
           setData(a);
+          console.log(a);
         }
       } catch (err) {
         Alert.alert("err");
       }
     })();
+    console.log(refresh);
   }, [refresh]);
 
   // Render

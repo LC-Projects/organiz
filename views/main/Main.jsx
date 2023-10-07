@@ -34,7 +34,7 @@ const Main = ({ navigation }) => {
   function handleAddBoardAdd() {
     addBoard(user.uid, {
       title,
-      important: 1,
+      status: 1,
     });
     setRefresh(!refresh);
     setTitle("");

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import Button from "./task/add/Button";
 import Task from "./task/Task";
@@ -8,28 +8,32 @@ import { userContext } from "../../../../../../context/userContext";
 import { appContext } from "../../../../../../context/appContext";
 
 const Tasks = ({ percentage, navigation, boardId, data, keyName }) => {
-  const { user, setUser } = useContext(userContext);
+  // Context
+  const { user } = useContext(userContext);
   const { refresh, setRefresh } = useContext(appContext);
+
+  // Initialization
   const [add, setAdd] = useState(false);
   const [title, setTitle] = useState("");
 
-  function handleAddCard() {
+  // Handler
+  function handleShowAddCard() {
     setAdd(true);
   }
 
-  function handleCancel() {
+  function handleHideAddCard() {
     setAdd(false);
   }
 
   function handleAdd() {
-    addTask(user.uid, boardId, keyName, 
-        {
-          title,
-          status:1,
-          tag: "#FF7081",
-          image:"",
-          description:""
-        },
+    addTask(user.uid, boardId, keyName,
+      {
+        title,
+        status: 1,
+        tag: "#FF7081",
+        image: "",
+        description: ""
+      },
     );
 
     setAdd(false);
@@ -37,9 +41,13 @@ const Tasks = ({ percentage, navigation, boardId, data, keyName }) => {
     setRefresh(!refresh)
   }
 
+  // Hook
+  useEffect(() => { }, [refresh])
+
+  // Hendler
   return (
     <View style={styles.tasks}>
-      {data && data?.map((task,key) => (
+      {data && data?.map((task, key) => (
         <Task percentage={percentage} navigation={navigation} boardId={boardId} column={keyName} taskId={key} key={key} title={task?.title} tag={task?.tag} />
       ))}
 
@@ -47,11 +55,11 @@ const Tasks = ({ percentage, navigation, boardId, data, keyName }) => {
         <Input
           value={title}
           onChangeText={(e) => setTitle(e)}
-          cancel={handleCancel}
+          cancel={handleHideAddCard}
           add={handleAdd}
         />
       ) : (
-        <Button onPress={handleAddCard} />
+        <Button onPress={handleShowAddCard} />
       )}
     </View>
   );

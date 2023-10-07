@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { ROUTES, THEME } from "../../../../constants";
 import BoardCard from "./boardCard/BoardCard";
 import { calculatePercentage } from "../../../../utils/maths";
+import { appContext } from "../../../../context/appContext";
 
 const BoardContainer = ({ data, navigation }) => {
+  // Context
+  const { refresh } = useContext(appContext)
+
+  // Hook
+  useEffect(() => {}, [data, refresh])
+
+  // Render
   return (
     <View style={styles.boards}>
       {data &&
         data?.map((element, key) => (
-          
+
           <TouchableOpacity
             key={key}
             onPress={() =>
@@ -22,7 +30,7 @@ const BoardContainer = ({ data, navigation }) => {
               })
             }
           >
-            <BoardCard data={element}/>
+            <BoardCard data={element} />
           </TouchableOpacity>
         ))}
     </View>

@@ -26,7 +26,7 @@ const BoardCard = ({data}) => {
     useEffect(() => {
         setTitle(importanceStatus[data?.status - 1]?.name)
         setImportanceColor(importanceStatus[data?.status - 1]?.color)
-    }, [refresh])
+    }, [data, refresh])
     
     // Render
     return (

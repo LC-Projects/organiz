@@ -85,6 +85,8 @@ const Board = ({ navigation, route }) => {
     setBoardId(route.params?.boardId);
     setTitle(route.params?.title);
     setStatus(route.params?.status);
+    setPercentage(route.params?.percentage);
+
     (async () => {
       try {
         const a = await getTasks(user.uid, boardId);
@@ -95,8 +97,7 @@ const Board = ({ navigation, route }) => {
         Alert.alert("err");
       }
     })();
-    setPercentage(calculatePercentage(data));
-  }, [boardId, refresh]);
+  }, [route.params, boardId, refresh]);
 
   // Render
   return (

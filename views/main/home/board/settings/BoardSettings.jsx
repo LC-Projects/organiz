@@ -21,13 +21,15 @@ import Title from "./_partials/Title";
 import StatusButtons from "./_partials/StatusButtons";
 
 const BoardSettings = ({ navigation, route }) => {
-  const [boardId, setBoardId] = useState(route.params?.boardId);
-  const [title, setTitle] = useState(route.params?.title);
-  const [data, setData] = useState(null);
-  const [percentage, setPercentage] = useState(0);
-  const [status, setStatus] = useState(1);
+  // Context
   const { backgroundColor, refresh, setRefresh } = useContext(appContext);
-  const { user, setUser } = useContext(userContext);
+  const { user } = useContext(userContext);
+
+  // Initialization
+  const [percentage, setPercentage] = useState(0);
+  const [boardId, setBoardId] = useState(null);
+  const [title, setTitle] = useState("");
+  const [status, setStatus] = useState(1);
 
   const statusRadioBtn = [
     { name: "Low", value: 1, bg: status == 1 ? COLORS.blue : COLORS.urgent_blue },
@@ -35,34 +37,17 @@ const BoardSettings = ({ navigation, route }) => {
     { name: "High", value: 3, bg: status == 3 ? COLORS.red : COLORS.urgent_red },
   ];
 
-  useEffect(() => {
-    setPercentage(route.params?.percentage)
-    setBoardId(route.params?.boardId);
-    setTitle(route.params?.title);
-    setStatus(route.params?.status);
-    (async () => {
-      try {
-        const a = await getBoard(user.uid, boardId);
-        if (a) {
-          setData(a);
-        }
-      } catch (err) {
-        Alert.alert("You have encountered an error !");
-      }
-    })();
-  }, [route.params]);
-
   function save() {
     try {
       let board = {
-        title: data?.title,
-        status: status,
+        title,
+        status
       };
       modifyBoard(user.uid, boardId, board);
-      setRefresh(!refresh);
+      setRefresh(!refresh)
       navigation.pop(2);
     } catch {
-      Alert.alert("You have encountered an error !");
+      Alert.alert("You have encountered an error!");
     }
   }
 
@@ -72,9 +57,16 @@ const BoardSettings = ({ navigation, route }) => {
       setRefresh(!refresh);
       navigation.pop(2);
     } catch {
-      Alert.alert("You have encountered an error !");
+      Alert.alert("You have encountered an error!");
     }
   }
+
+  useEffect(() => {
+    setPercentage(route.params?.percentage)
+    setBoardId(route.params?.boardId);
+    setTitle(route.params?.title);
+    setStatus(route.params?.status);
+  }, [route.params]);
 
   return (
     <ScrollView
@@ -89,7 +81,7 @@ const BoardSettings = ({ navigation, route }) => {
         <ProgressBar percentage={percentage} />
       </View>
 
-      <Title value={data?.title} onChangeText={setTitle} />
+      <Title value={title} onChangeText={setTitle} />
 
       <StatusButtons data={statusRadioBtn} active={status} onPress={setStatus} />
 
