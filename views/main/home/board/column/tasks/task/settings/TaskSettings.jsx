@@ -69,7 +69,7 @@ const TaskSettings = ({ navigation, route }) => {
 
       await modifyTask(user.uid, boardId, column, taskId, task, move);
 
-      if (image) upload(user.uid, boardId, taskId, image, imgURI);
+      if (image) await upload(user.uid, boardId, taskId, image, imgURI);
 
       setUpdating(true)
       setTimeout(() => {

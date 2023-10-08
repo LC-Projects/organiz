@@ -14,7 +14,8 @@ const firebaseConfig = {
   messagingSenderId: "708456224457",
   appId: "1:708456224457:web:931d60afbd6c886456df18",
   databaseURL: "https://organiz-f07be-default-rtdb.europe-west1.firebasedatabase.app/",
-  storageBucket: "gs://organiz-f07be.appspot.com"
+  // storageBucket: "gs://organiz-f07be.appspot.com", // → Main Storage Bucket
+  storageBucket: "gs://organiz-1.appspot.com", // → New Storage Bucket due to limit
 };
 
 // Initialize Firebase
