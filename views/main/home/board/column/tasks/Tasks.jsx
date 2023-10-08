@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Keyboard } from "react-native";
 import Button from "./task/add/Button";
 import Task from "./task/Task";
 import Input from "./task/add/Input";
@@ -26,7 +26,7 @@ const Tasks = ({ percentage, navigation, boardId, data, keyName }) => {
   }
 
   async function handleAdd() {
-    console.log(user.uid, boardId);
+    Keyboard.dismiss();
     await addTask(user.uid, boardId, keyName,
       {
         title,

@@ -9,13 +9,13 @@ const Ratio = ({ data }) => {
         {data?.todo?.filter(e => e !== undefined) ? data?.todo?.filter(e => e !== undefined).length : 0}
       </Text>
 
-      <Text style={styles.fontSize}> / </Text>
+      <Text style={[styles.fontSize, styles.slash]}> / </Text>
 
       <Text style={[styles.secondvalue, styles.fontSize]}>
         {data?.doing?.filter(e => e !== undefined) ? data?.doing?.filter(e => e !== undefined).length : 0}
       </Text>
 
-      <Text style={styles.fontSize}> / </Text>
+      <Text style={[styles.fontSize, styles.slash]}> / </Text>
 
       <Text style={[styles.thirdvalue, styles.fontSize]}>
         {data?.done?.filter(e => e !== undefined) ? data?.done?.filter(e => e !== undefined).length : 0}
@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
     color: COLORS.orange
   },
   fontSize: {
-    fontSize: THEME.font.size.m
+    fontSize: THEME.font.size.m,
+  },
+  slash: {
+    color: COLORS.gray
   }
 })

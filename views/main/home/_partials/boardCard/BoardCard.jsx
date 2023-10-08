@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         margin:10,
     },
     importanceStatus: {
-        borderRadius:10,
+        borderRadius: THEME.border.s,
         margin:10,
         padding:10,
         fontSize:THEME.font.size.m,

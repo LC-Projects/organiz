@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Keyboard } from "react-native";
 import Homepage from "./home/Homepage";
 import Profile from "./profile/Profile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -32,6 +32,7 @@ const Main = ({ navigation }) => {
   }
 
   async function handleAddBoardAdd() {
+    Keyboard.dismiss();
     await addBoard(user.uid, {
       title,
       status: 1,
