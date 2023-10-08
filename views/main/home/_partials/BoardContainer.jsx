@@ -10,7 +10,7 @@ const BoardContainer = ({ data, navigation }) => {
   const { refresh } = useContext(appContext)
 
   // Hook
-  useEffect(() => {}, [data, refresh])
+  useEffect(() => {}, [refresh])
 
   // Render
   return (

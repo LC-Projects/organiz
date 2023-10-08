@@ -18,17 +18,17 @@ const Form = () => {
     {label: "Change Password", placeholder: "New Password", secure:true, setNewInput: setNewPassword}, 
   ]
   useEffect(() => {
-    if (newEmail.length >= 10) {
+    if (newEmail?.length >= 10) {
       setNewEmail(newEmail);
     }
-    else if(newEmail.length > 1 ) {
+    else if(newEmail?.length > 1 ) {
       Alert.alert('Your email should be validated')
     }
-    if (newPassword.length >= 6) 
+    if (newPassword?.length >= 6) 
     {
       setNewPassword(newPassword);
     }
-    else if(newPassword.length > 1 ) {
+    else if(newPassword?.length > 1 ) {
       Alert.alert('Your password must contained more than 5 words !')
     }
 

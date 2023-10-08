@@ -8,7 +8,7 @@ import Ratio from './Ratio'
 import Title from './Title'
 import { calculatePercentage } from '../../../../../utils/maths'
 
-const BoardCard = ({data}) => {
+const BoardCard = ({ data }) => {
     // Context
     const { refresh } = useContext(appContext);
 
@@ -31,16 +31,19 @@ const BoardCard = ({data}) => {
     // Render
     return (
     <View style={styles.container}>
+
         <View style={styles.topBoard}>
             <Text style={[styles.importanceStatus, {backgroundColor: importanceColor}]}>{title}</Text>
             <Ratio data={data} />
             <ButtonSetting color={COLORS.black} horizontal />
         </View>
+
         <Title value={data?.title} />
 
         <View style={styles.bottomBoard}>
             <ProgressBar percentage={data && calculatePercentage(data)}/>
         </View>
+
     </View>
   )
 }
@@ -57,7 +60,6 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center'
     },
-
     bottomBoard: {
         flexDirection:'row',
         alignItems:'center',
@@ -70,13 +72,6 @@ const styles = StyleSheet.create({
         fontSize:THEME.font.size.m,
         textAlign:'center',
         color:COLORS.white,
-        flex:1
-    },
-    informations: {
-        alignSelf:'flex-start',
-        fontSize:THEME.font.size.l,
-        textAlign:'right',
-        fontWeight:'bold',
         flex:1
     },
   })

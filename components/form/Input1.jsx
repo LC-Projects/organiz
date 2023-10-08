@@ -1,10 +1,12 @@
-import { StyleSheet, TextInput } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native'
 import React from 'react'
 import { THEME } from '../../constants'
 
 const Input1 = ({ onChangeText, value, placeholder}) => {
     return (
-        <TextInput style={styles.input} onChangeText={onChangeText} value={value} placeholder={placeholder} />
+        <KeyboardAvoidingView>
+            <TextInput style={styles.input} onChangeText={onChangeText} value={value} placeholder={placeholder} />
+        </KeyboardAvoidingView>
     )
 }
 

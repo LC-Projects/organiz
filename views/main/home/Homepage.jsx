@@ -15,7 +15,7 @@ import BoardContainer from "./_partials/BoardContainer";
 const Homepage = ({ navigation }) => {
   // Context
   const { user } = useContext(userContext);
-  const { refresh, setRefresh, backgroundColor } = useContext(appContext);
+  const { refresh, backgroundColor } = useContext(appContext);
 
   // Initalization
   const [data, setData] = useState(null);
@@ -26,14 +26,14 @@ const Homepage = ({ navigation }) => {
       try {
         const a = await getBoards(user.uid);
         if (a) {
+          // console.log(a);
           setData(a);
-          console.log(a);
         }
       } catch (err) {
+        console.error(err);
         Alert.alert("err");
       }
     })();
-    console.log(refresh);
   }, [refresh]);
 
   // Render
@@ -48,10 +48,15 @@ const Homepage = ({ navigation }) => {
     >
       <SafeAreaView>
         <ScrollView>
+
           <Hero />
+          
           <RatioBoard data={data} />
+          
           <Title />
+          
           <BoardContainer data={data} navigation={navigation} />
+        
         </ScrollView>
       </SafeAreaView>
     </View>

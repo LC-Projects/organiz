@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View, StyleSheet, Alert } from "react-native";
 import Homepage from "./home/Homepage";
 import Profile from "./profile/Profile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -36,8 +36,11 @@ const Main = ({ navigation }) => {
       title,
       status: 1,
     });
-    setRefresh(!refresh);
     setTitle("");
+    // Alert.alert("Card has been added")
+    // setTimeout(() => {
+      setRefresh(!refresh);
+    // }, 1000);
     setShowAddBoardForm(false);
   }
 
@@ -46,6 +49,9 @@ const Main = ({ navigation }) => {
   function EmptyComponent() {
     return null;
   }
+
+  useEffect(() => {}, [refresh])
+  
 
 
   // Render
@@ -111,8 +117,8 @@ const Main = ({ navigation }) => {
         <AddBoard
           title={title}
           setTitle={setTitle}
-          cancel={handleAddBoardCancel}
-          add={handleAddBoardAdd}
+          cancel={() => handleAddBoardCancel()}
+          add={() => handleAddBoardAdd()}
         />
       )}
     </>

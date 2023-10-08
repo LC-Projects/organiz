@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import Button from "./task/add/Button";
 import Task from "./task/Task";
 import Input from "./task/add/Input";
@@ -36,9 +36,9 @@ const Tasks = ({ percentage, navigation, boardId, data, keyName }) => {
       },
     );
 
-    setAdd(false);
     setTitle("");
-    setRefresh(!refresh)
+    setRefresh(!refresh);
+    setAdd(false);
   }
 
   // Hook
@@ -55,11 +55,11 @@ const Tasks = ({ percentage, navigation, boardId, data, keyName }) => {
         <Input
           value={title}
           onChangeText={(e) => setTitle(e)}
-          cancel={handleHideAddCard}
-          add={handleAdd}
+          cancel={() => handleHideAddCard()}
+          add={() => handleAdd()}
         />
       ) : (
-        <Button onPress={handleShowAddCard} />
+        <Button onPress={() => handleShowAddCard()} />
       )}
     </View>
   );
