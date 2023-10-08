@@ -7,7 +7,7 @@ import { addTask } from "../../../../../../api/firebase/realTime/tasks";
 import { userContext } from "../../../../../../context/userContext";
 import { appContext } from "../../../../../../context/appContext";
 
-const Tasks = ({ percentage, navigation, boardId, data, keyName }) => {
+const Tasks = ({ percentage, navigation, boardId, data, keyName, status }) => {
   // Context
   const { user } = useContext(userContext);
   const { refresh, setRefresh } = useContext(appContext);
@@ -30,7 +30,7 @@ const Tasks = ({ percentage, navigation, boardId, data, keyName }) => {
     await addTask(user.uid, boardId, keyName,
       {
         title,
-        status: 1,
+        status,
         tag: "#FF7081",
         image: "",
         description: ""

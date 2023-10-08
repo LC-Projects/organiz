@@ -16,9 +16,9 @@ const Board = ({ navigation, route }) => {
   // Inititalization
   const layout = useWindowDimensions();
   const titles = [
-    { name: "To Do", key: "todo" },
-    { name: "Doing", key: "doing" },
-    { name: "Done", key: "done" },
+    { name: "To Do", value: 1, key: "todo" },
+    { name: "Doing", value: 2, key: "doing" },
+    { name: "Done", value: 3, key: "done" },
   ];
   const [boardId, setBoardId] = useState(route.params?.boardId);
   const [percentage, setPercentage] = useState(0);
@@ -38,6 +38,7 @@ const Board = ({ navigation, route }) => {
         title={titles[0].name}
         data={data?.todo?.filter(e => e !== undefined)}
         keyName={titles[0].key}
+        status={titles[0].value}
       />
     ),
     doing: () => (
@@ -48,6 +49,7 @@ const Board = ({ navigation, route }) => {
         title={titles[1].name}
         data={data?.doing?.filter(e => e !== undefined)}
         keyName={titles[1].key}
+        status={titles[1].value}
       />
     ),
     done: () => (
@@ -58,6 +60,7 @@ const Board = ({ navigation, route }) => {
         title={titles[2].name}
         data={data?.done?.filter(e => e !== undefined)}
         keyName={titles[2].key}
+        status={titles[2].value}
       />
     ),
   });

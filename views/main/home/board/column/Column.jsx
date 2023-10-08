@@ -4,7 +4,7 @@ import Tasks from "./tasks/Tasks";
 import { COLORS, THEME } from "../../../../../constants";
 import ProgressBar from "../../../../../components/ProgressBar";
 
-const Column = ({ percentage, navigation, boardId, title, data, keyName }) => {
+const Column = ({ percentage, navigation, boardId, title, data, keyName, status }) => {
   return (
     <ScrollView style={styles.container} >
 
@@ -23,6 +23,7 @@ const Column = ({ percentage, navigation, boardId, title, data, keyName }) => {
           boardId={boardId}
           data={data}
           keyName={keyName}
+          status={status}
         />
 
       </View>
