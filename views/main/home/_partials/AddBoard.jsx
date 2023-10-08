@@ -1,17 +1,17 @@
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import { COLORS, THEME } from "../../../../constants";
 import ButtonsActions from "../../../../components/button/ButtonsActions";
 
 const AddBoard = ({ cancel, add, title, setTitle }) => {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior= {(Platform.OS === 'ios')? "padding" : null}>
       <TextInput
         style={styles.title}
         value={title}
         onChangeText={setTitle}
       ></TextInput>
       <ButtonsActions cancel={cancel} add={add} />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

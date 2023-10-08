@@ -21,4 +21,57 @@ export default {
     dark: '#333333',
     light: '#EEEEEE',
     purple: 'purple',
+
+    light: {
+        background: "#EEEEEE",
+        contrastBackground: "#FFFFFF",
+        text: "#171919",
+        contrastText: "#000000",
+
+        homepage: {
+            hero: "#FFFFFF",
+            ratioBoard: "#FFFFFF",
+            ratioBoardSeparator: "#DDDDDD"
+        },
+
+        cardBoard: {
+            background: "",
+            color: ""
+        },
+
+        button: {
+            delete: "#D26887",
+            cancel: "#474677",
+            save: "#29BB97",
+            light: "#FFFFFF",
+            dark: "#171919",
+        }
+    },
+
+    dark: {
+        background: "#474677",
+        contrastBackground: "#FFFFF",
+        text: "#171919",
+        contrastText: "#FFFFFF",
+
+        homepage: {
+            hero: "#FFFFFF",
+            ratioBoard: "#FFFFFF",
+            ratioBoardSeparator: "#DDDDDD"
+        },
+
+        cardBoard: {
+            background: "",
+            color: ""
+        },
+
+        button: {
+            delete: "#D26887",
+            cancel: "#8892AD",
+            cancel: "#8892AD",
+            save: "#29BB97",
+            light: "#FFFFFF",
+            dark: "#171919",
+        }
+    }
 }

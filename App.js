@@ -7,17 +7,23 @@ import Auth from "./routes/AuthRoutes";
 import { userContext } from "./context/userContext";
 import { appContext } from "./context/appContext";
 import { useEffect, useState } from "react";
+import { COLORS } from "./constants";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  // const [user, setUser] = useState(false);
-  const [user, setUser] = useState({uid: "ktHXw6ROETaRHh5lJclP2o1Es5F2"});
+  const [user, setUser] = useState(false);
+  // const [user, setUser] = useState({uid: "ktHXw6ROETaRHh5lJclP2o1Es5F2"}); // → Used to avoid reconnecting while developping
   const [refresh, setRefresh] = useState(false)
-  const [backgroundColor, setBackgroundColor] = useState(false)
+  const [mode, setMode] = useState(true)
 
   const userContextValues = { user, setUser };
-  const appContextValues = { refresh, setRefresh, backgroundColor, setBackgroundColor };
+  const appContextValues = { 
+    refresh, 
+    setRefresh,  
+    mode: mode !== true ? COLORS.light : COLORS.dark, 
+    setMode
+  };
 
   useEffect(() => {}, [user]);
 

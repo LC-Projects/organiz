@@ -6,7 +6,9 @@ export async function getBoards(userId) {
     const userBoards = ref(FIREBASE_DBRT, `${userId}/boards`);
     return new Promise((res, rej) => {
       onValue(userBoards, (data) => {
-        res(data.val());
+        let snapShot = data.val();
+        if (snapShot === null) snapShot = [];
+        res(snapShot);
       });
     });
   } catch (err) {
@@ -44,7 +46,7 @@ export async function getBoard(userId, boardId) {
 
 export function modifyBoard(userId, boardId, board) {
   try {
-    update(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}`), board );
+    update(child(ref(FIREBASE_DBRT), `${userId}/boards/${boardId}`), board);
     return true;
   } catch (err) {
     throw new Error(err);

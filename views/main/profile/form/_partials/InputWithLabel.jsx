@@ -1,21 +1,17 @@
 import React, { useContext, useEffect } from "react";
 import { Text, StyleSheet } from "react-native";
-import { appContext } from "../../../../context/appContext";
-import { COLORS, THEME } from "../../../../constants";
-import Input from "../../../../components/Input.jsx"
+import { appContext } from "../../../../../context/appContext";
+import { COLORS, THEME } from "../../../../../constants";
+import Input from "../../../../../components/Input.jsx"
 
 const InputWithLabel = ({ setNewInput, label, placeholder, value, secure }) => {
   // Context
-  const { backgroundColor } = useContext(appContext);
+  const { mode } = useContext(appContext);
   
   // Render
   return (
     <>
-      <Text
-        style={[
-          styles.subtitle,
-          backgroundColor ? { color: COLORS.light } : { color: COLORS.dark },
-        ]}
+      <Text style={[styles.subtitle, { color: mode.contrastText }]}
       >
         {label}
       </Text>

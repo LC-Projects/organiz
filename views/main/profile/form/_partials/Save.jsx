@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import { Text, TouchableOpacity, StyleSheet, View, Alert } from "react-native";
-import { COLORS, THEME } from "../../../constants";
-import { updateEmailUser, updatePasswordUser } from "../../../api/firebase/realTime/auth";
-import { appContext } from "../../../context/appContext";
+import { COLORS, THEME } from "../../../../../constants";
+import { updateEmailUser, updatePasswordUser } from "../../../../../api/firebase/realTime/auth";
+import { appContext } from "../../../../../context/appContext";
 
 
 const Save = ({setSave, email, password}) => {
+  // Context
+  const { mode } = useContext(appContext)
+
   function updateAuthentication(email, password)
   {
     try {
@@ -31,7 +34,7 @@ const Save = ({setSave, email, password}) => {
   const { backgroundColor } = useContext(appContext);
   return (
     <View style={styles.button}>
-      <TouchableOpacity style={[styles.buttonSave, backgroundColor ? {backgroundColor: COLORS.white} : {backgroundColor: COLORS.green}]} onPress={() => [updateAuthentication(email, password)]}>
+      <TouchableOpacity style={[styles.buttonSave, {backgroundColor: mode.button.save}]} onPress={() => [updateAuthentication(email, password)]}>
         <Text style={[styles.textButton]}>Save</Text>
       </TouchableOpacity>
     </View>
@@ -44,7 +47,7 @@ export default Save;
 const styles = StyleSheet.create({
   button: {
     flexDirection:'row',
-    justifyContent:'center'
+    justifyContent:'center',
   },
   buttonSave: {
     alignItems: "center",
@@ -57,5 +60,6 @@ const styles = StyleSheet.create({
   textButton: {
     fontSize: THEME.font.size.l,
     fontWeight: '800',  
+    color: COLORS.white
   },
 });

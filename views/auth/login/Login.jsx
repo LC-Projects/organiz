@@ -6,15 +6,13 @@ import ButtonSubmit from "../../../components/ButtonSubmit";
 import Input from "../../../components/Input";
 import { userContext } from "../../../context/userContext";
 import { connectUser } from "../../../api/firebase/authUtils";
-import { appContext } from "../../../context/appContext";
 import AuthBottomMessage from "../../../components/AuthBottomMessage";
 import Hero from "./_partials/Hero";
 
 
 const Login = ({ navigation }) => {
   // Context
-  const { user, setUser } = useContext(userContext);
-  const { backgroundColor } = useContext(appContext)
+  const {  setUser } = useContext(userContext);
 
   // Initialization
   const [errMessage, setErrMessage] = useState("");
@@ -35,7 +33,7 @@ const Login = ({ navigation }) => {
 
   // Render
   return (
-    <SafeAreaView style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}>
+    <SafeAreaView style={[styles.container]}>
       {errMessage && <Text>{errMessage}</Text>}
       <View>
         <Hero />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import { COLORS, THEME } from "../constants";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -14,13 +14,13 @@ const Input = ({ placeholder, value, onChangeText, secureTextEntry = false }) =>
 
   // Render
   return (
-    <View style={StyleSheet.container} >
+    <KeyboardAvoidingView style={StyleSheet.container} >
       <TextInput style={styles.input} secureTextEntry={secureTextEntry && !visibility} placeholder={placeholder} value={value} onChangeText={onChangeText} />
 
       {secureTextEntry && <TouchableOpacity style={styles.icon} onPress={() => handleVisibility()} >
         {visibility ? <Icon name="visibility" size={25} color={COLORS.black} /> : <Icon name="visibility-off" size={25} color={COLORS.black} />}
       </TouchableOpacity>}
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 

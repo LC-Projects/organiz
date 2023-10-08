@@ -1,24 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Alert,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  useWindowDimensions,
-} from "react-native";
+import { Alert, StyleSheet, useWindowDimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { appContext } from "../../../../context/appContext";
 import { userContext } from "../../../../context/userContext";
-import { COLORS, ROUTES } from "../../../../constants";
+import { COLORS } from "../../../../constants";
 import { getTasks } from "../../../../api/firebase/realTime/tasks";
 import Column from "./column/Column";
 import { calculatePercentage } from "../../../../utils/maths";
 
 const Board = ({ navigation, route }) => {
   // Context
-  const { user, setUser } = useContext(userContext);
-  const { refresh, setRefresh, backgroundColor } = useContext(appContext);
+  const { user } = useContext(userContext);
+  const { refresh, mode } = useContext(appContext);
 
   // Inititalization
   const layout = useWindowDimensions();
@@ -28,8 +21,6 @@ const Board = ({ navigation, route }) => {
     { name: "Done", key: "done" },
   ];
   const [boardId, setBoardId] = useState(route.params?.boardId);
-  const [title, setTitle] = useState(route.params?.title);
-  const [status, setStatus] = useState(route.params?.status);
   const [percentage, setPercentage] = useState(0);
   const [data, setData] = useState(null);
   const [index, setIndex] = useState(0);
@@ -45,7 +36,7 @@ const Board = ({ navigation, route }) => {
         navigation={navigation}
         boardId={boardId}
         title={titles[0].name}
-        data={data?.todo.filter(e => e !== undefined)}
+        data={data?.todo?.filter(e => e !== undefined)}
         keyName={titles[0].key}
       />
     ),
@@ -55,7 +46,7 @@ const Board = ({ navigation, route }) => {
         navigation={navigation}
         boardId={boardId}
         title={titles[1].name}
-        data={data?.doing.filter(e => e !== undefined)}
+        data={data?.doing?.filter(e => e !== undefined)}
         keyName={titles[1].key}
       />
     ),
@@ -65,7 +56,7 @@ const Board = ({ navigation, route }) => {
         navigation={navigation}
         boardId={boardId}
         title={titles[2].name}
-        data={data?.done.filter(e => e !== undefined)}
+        data={data?.done?.filter(e => e !== undefined)}
         keyName={titles[2].key}
       />
     ),
@@ -83,20 +74,19 @@ const Board = ({ navigation, route }) => {
   // Hook
   useEffect(() => {
     setBoardId(route.params?.boardId);
-    setTitle(route.params?.title);
-    setStatus(route.params?.status);
+    
     (async () => {
       try {
         const a = await getTasks(user.uid, boardId);
         if (a) {
+          setPercentage(calculatePercentage(a));
           setData(a);
         }
       } catch (err) {
         Alert.alert("err");
       }
     })();
-    setPercentage(calculatePercentage(data));
-  }, [boardId, refresh]);
+  }, [route.params, boardId, refresh]);
 
   // Render
   return (
@@ -106,12 +96,7 @@ const Board = ({ navigation, route }) => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
-      style={[
-        styles.container,
-        backgroundColor
-          ? { backgroundColor: COLORS.dark }
-          : { backgroundColor: COLORS.light },
-      ]}
+      style={[styles.container, { backgroundColor: mode.background }]}
     />
   );
 };

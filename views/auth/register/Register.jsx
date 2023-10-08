@@ -1,23 +1,24 @@
 import React, { useContext, useState } from "react";
 import { View, StyleSheet, Alert, Keyboard } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, ROUTES } from "../../../constants";
+import { ROUTES } from "../../../constants";
 import ButtonSubmit from "../../../components/ButtonSubmit";
 import Input from "../../../components/Input";
 import { userContext } from "../../../context/userContext";
 import { createUser } from "../../../api/firebase/authUtils";
-import { appContext } from "../../../context/appContext";
 import AuthBottomMessage from "../../../components/AuthBottomMessage";
 import Hero from "./_partials/Hero";
 
 const Register = ({ navigation }) => {
-  const { user, setUser } = useContext(userContext)
+  // Context
+  const { setUser } = useContext(userContext)
+
+  // Initialization
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const { backgroundColor } = useContext(appContext)
 
-
+  // Handler
   const handleSubmit = async () => {
     Keyboard.dismiss()
     if (password != passwordConfirm) {
@@ -32,8 +33,10 @@ const Register = ({ navigation }) => {
       }
     }
   }
+
+  // Render
   return (
-    <SafeAreaView style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]}>
+    <SafeAreaView style={[styles.container]}>
       <View>
         <Hero />
         <Input placeholder="Email" value={email} onChangeText={setEmail} />
@@ -53,6 +56,7 @@ const Register = ({ navigation }) => {
 
 export default Register
 
+// Style
 const styles = StyleSheet.create({
   container: {
     height: '100%',

@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import Tasks from "./tasks/Tasks";
 import { COLORS, THEME } from "../../../../../constants";
-import InputWrapper from "../../../../../components/wrapper/InputWrapper";
 import ProgressBar from "../../../../../components/ProgressBar";
 
 const Column = ({ percentage, navigation, boardId, title, data, keyName }) => {
- 
   return (
     <ScrollView style={styles.container} >
-      <InputWrapper style={styles.percentage}>
-        <ProgressBar percentage={percentage} />
-      </InputWrapper>
+
+      <ProgressBar percentage={percentage} displayAsInput />
 
       <View style={styles.boardContainer} >
+
         <View style={styles.header}>
           <Text style={styles.headerTitle}>{title}</Text>
           <Text style={styles.headerCounte}>{data?.length}</Text>
@@ -26,6 +24,7 @@ const Column = ({ percentage, navigation, boardId, title, data, keyName }) => {
           data={data}
           keyName={keyName}
         />
+
       </View>
     </ScrollView>
   );
@@ -41,14 +40,6 @@ const styles = StyleSheet.create({
     padding: THEME.spacing.s,
     backgroundColor: COLORS.white,
     borderRadius: THEME.border.m,
-  },
-  percentage: {
-    paddingLeft: 4,
-    paddingRight: 4,
-    paddingTop: 0,
-    paddingBottom: 0,
-    borderRadius: 10,
-    marginBottom: THEME.spacing.xs,
   },
   header: {
     flexDirection: "row",

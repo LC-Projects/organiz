@@ -1,30 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  deleteTask,
-  getTask,
-  modifyTask,
-} from "../../../../../../../../api/firebase/realTime/tasks";
-import { View, StyleSheet, ScrollView, Alert, SafeAreaView } from "react-native";
+import { deleteTask, getTask, modifyTask } from "../../../../../../../../api/firebase/realTime/tasks";
+import { StyleSheet, ScrollView, Alert, SafeAreaView, View, Text } from "react-native";
 import { COLORS, STRINGS, THEME } from "../../../../../../../../constants";
 // Context
 import { appContext } from "../../../../../../../../context/appContext";
 import { userContext } from "../../../../../../../../context/userContext";
 // Component
 import ProgressBar from "../../../../../../../../components/ProgressBar";
-import InputWrapper from "../../../../../../../../components/wrapper/InputWrapper";
-import Button1 from "../../../../../../../../components/button/Button1";
 import Title from "./_partials/Title";
 import Move from "./_partials/Move";
 import Color from "./_partials/Color";
 import Image from "./_partials/TaskImage";
 import Description from "./_partials/Description";
 import { getImage, upload } from "../../../../../../../../api/firebase/storage/image";
+import DeleteCancelSaveButton from "../../../../../../../../components/button/DeleteCancelSaveButton";
 
 const TaskSettings = ({ navigation, route }) => {
   // context
-  const { backgroundColor, refresh, setRefresh } = useContext(appContext);
-  const { user, setUser } = useContext(userContext);
-  const [percentage, setPercentage] = useState(route.params?.percentage)
+  const { mode, refresh, setRefresh } = useContext(appContext);
+  const { user } = useContext(userContext);
 
   // Initialization
   const move = [
@@ -32,13 +26,15 @@ const TaskSettings = ({ navigation, route }) => {
     { name: STRINGS.DOING, value: 2, keyName: "doing" },
     { name: STRINGS.DONE, value: 3, keyName: "done" },
   ];
-  const [boardId, setBoardId] = useState(route.params?.boardId);
-  const [column, setColumn] = useState(route.params?.column);
-  const [taskId, setTaskId] = useState();
+  const [boardId, setBoardId] = useState(null);
+  const [column, setColumn] = useState(null);
+  const [taskId, setTaskId] = useState(null);
+  const [percentage, setPercentage] = useState(0);
+  const [updating, setUpdating] = useState(false)
 
-  const [title, setTitle] = useState(route.params?.title);
+  const [title, setTitle] = useState("");
   const [status, setStatus] = useState(1);
-  const [tag, setTag] = useState(route.params?.tag);
+  const [tag, setTag] = useState("");
   const [image, setImage] = useState("");
   const [imgURI, setImgURI] = useState("")
   const [description, setDescription] = useState("");
@@ -61,7 +57,7 @@ const TaskSettings = ({ navigation, route }) => {
     }
   }
 
-  function save() {
+  async function save() {
     try {
       const task = {
         title,
@@ -70,10 +66,17 @@ const TaskSettings = ({ navigation, route }) => {
         tag,
         description,
       };
-      modifyTask(user.uid, boardId, column, taskId, task, move);
-      if (image) upload(user.uid, boardId, taskId, image , imgURI);
-      setRefresh(!refresh);
-      navigation.goBack();
+
+      await modifyTask(user.uid, boardId, column, taskId, task, move);
+
+      if (image) await upload(user.uid, boardId, taskId, image, imgURI);
+
+      setUpdating(true)
+      setTimeout(() => {
+        setRefresh(!refresh);
+        setUpdating(false)
+        navigation.goBack();
+      }, 2000);
     } catch {
       Alert.alert("You have encountered an error!");
     }
@@ -84,6 +87,8 @@ const TaskSettings = ({ navigation, route }) => {
     setBoardId(route.params?.boardId);
     setColumn(route.params?.column);
     setTaskId(route.params?.taskId);
+    setPercentage(route.params?.percentage);
+
     (async () => {
       try {
         const gettingTask = await getTask(
@@ -93,7 +98,6 @@ const TaskSettings = ({ navigation, route }) => {
           route.params?.taskId
         );
         if (gettingTask) {
-          // setData(a);
           setTitle(gettingTask.title);
           setTag(gettingTask.tag);
           setImage(gettingTask.image);
@@ -119,60 +123,36 @@ const TaskSettings = ({ navigation, route }) => {
           })();
         }
       } catch (err) {
-        Alert.alert("You have encountered an error !");
+        Alert.alert("You have encountered an error!");
       }
     })();
-  }, [route.params]);
+  }, [route.params, refresh]);
 
   return (
     <SafeAreaView>
-        <ScrollView
-          style={[
-            styles.container,
-            backgroundColor
-              ? { backgroundColor: COLORS.dark }
-              : { backgroundColor: COLORS.light },
-          ]}
-        >
-          <InputWrapper
-            style={{
-              paddingLeft: 4,
-              paddingRight: 4,
-              paddingTop: 0,
-              paddingBottom: 0,
-              borderRadius: 10,
-            }}
-          >
-            <ProgressBar percentage={percentage} />
-          </InputWrapper>
-          <Title value={title} onChangeText={setTitle} />
-          <Move data={move} active={status} onPress={setStatus} />
-          <Color value={tag} onChangeText={setTag} />
-          <Image setImage={setImage} imgURI={imgURI} setImgURI={setImgURI} data={data} onPress={() => uploadImage()} />
-          <Description value={description} onChangeText={setDescription} />
-          <View style={styles.actionsButton}>
-            <Button1
-              flex
-              label="Delete"
-              style={{ backgroundColor: COLORS.red }}
-              onPress={() => remove()}
-            />
-            <Button1 flex label="Cancel" onPress={() => navigation.goBack()} />
-            <Button1
-              flex
-              label="Save"
-              style={[
-                backgroundColor
-                  ? { backgroundColor: COLORS.white }
-                  : { backgroundColor: COLORS.green },
-              ]}
-              labelStyle={
-                backgroundColor ? { color: COLORS.black } : { color: COLORS.white }
-              }
-              onPress={() => save()}
-            />
-          </View>
-        </ScrollView>
+      <ScrollView style={[styles.container, { backgroundColor: mode.background }]} >
+
+        <ProgressBar percentage={percentage} displayAsInput />
+
+        <Title value={title} onChangeText={setTitle} />
+
+        <Move data={move} active={status} onPress={setStatus} />
+
+        <Color value={tag} onChangeText={setTag} />
+
+        <Image setImage={setImage} imgURI={imgURI} setImgURI={setImgURI} data={data} onPress={() => uploadImage()} />
+
+        <Description value={description} onChangeText={setDescription} />
+
+        <DeleteCancelSaveButton
+          onPressDelete={() => remove()}
+          onPressCancel={() => navigation.goBack()}
+          onPressSave={() => save()}
+        />
+
+        {updating && <Text style={styles.message}>Updating ...</Text>}
+
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -181,13 +161,22 @@ export default TaskSettings;
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
     padding: THEME.spacing.m,
   },
-  actionsButton: {
-    flexDirection: "row",
-    flex: 1,
-    gap: 20,
-    paddingTop: THEME.spacing.s,
-    paddingBottom: 80
-  },
+  message: {
+    position: "absolute",
+    top: "30%",
+    left: 0,
+    right: 0,
+    color: COLORS.black,
+    backgroundColor: COLORS.ultralight_gray,
+    padding: 25,
+    margin: 25,
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "bold",
+    borderRadius: THEME.border.m,
+    overflow: "hidden"
+  }
 });

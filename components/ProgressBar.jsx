@@ -1,14 +1,17 @@
 import { View, Text, StyleSheet, Animated, Easing } from "react-native";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { COLORS, THEME } from "../constants";
+import InputWrapper from "./wrapper/InputWrapper";
 
-const ProgressBar = ({ percentage }) => {
+const ProgressBar = ({ percentage, displayAsInput = false }) => {
+  // Animation
   const width = new Animated.Value(0);
   const widthAsString = width.interpolate({
     inputRange: [0, percentage],
     outputRange: ['0%', `${percentage}%`],
   })
 
+  // Hook
   useEffect(() => {
     Animated.timing(width, {
       toValue: percentage,
@@ -19,12 +22,29 @@ const ProgressBar = ({ percentage }) => {
   }, [width]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.ProgessBarParent}>
-        <Animated.View style={[styles.ProgessBarChild, {width: widthAsString}]} />
-      </View>
-      <Text style={styles.percentage}>{percentage} %</Text>
-    </View>
+    <>
+      {
+        displayAsInput ?
+
+          <InputWrapper style={styles.inputWrapper} >
+            <View style={styles.container}>
+              <View style={styles.ProgessBarParent}>
+                <Animated.View style={[styles.ProgessBarChild, { width: widthAsString }]} />
+              </View>
+              <Text style={styles.percentage}>{percentage} %</Text>
+            </View>
+          </InputWrapper>
+
+          :
+
+          <View style={styles.container}>
+            <View style={styles.ProgessBarParent}>
+              <Animated.View style={[styles.ProgessBarChild, { width: widthAsString }]} />
+            </View>
+            <Text style={styles.percentage}>{percentage} %</Text>
+          </View>
+      }
+    </>
   );
 };
 
@@ -35,6 +55,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: THEME.spacing.s,
+  },
+  inputWrapper: {
+    paddingLeft: 4,
+    paddingRight: 4,
+    paddingTop: 0,
+    paddingBottom: 0,
+    borderRadius: 10,
   },
   ProgessBarParent: {
     backgroundColor: COLORS.light_gray,

@@ -20,7 +20,7 @@ export default Task;
 
 const styles = StyleSheet.create({
   task: {
-    backgroundColor: COLORS.light_gray,
+    backgroundColor: COLORS.light_purple,
     flexDirection: "row",
     marginTop: THEME.spacing.xs,
     padding: THEME.spacing.xs,

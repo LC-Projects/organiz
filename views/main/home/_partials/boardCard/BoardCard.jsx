@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { COLORS, THEME } from '../../../../../constants'
 import ProgressBar from '../../../../../components/ProgressBar'
@@ -8,7 +8,7 @@ import Ratio from './Ratio'
 import Title from './Title'
 import { calculatePercentage } from '../../../../../utils/maths'
 
-const BoardCard = ({data}) => {
+const BoardCard = ({ data }) => {
     // Context
     const { refresh } = useContext(appContext);
 
@@ -26,21 +26,24 @@ const BoardCard = ({data}) => {
     useEffect(() => {
         setTitle(importanceStatus[data?.status - 1]?.name)
         setImportanceColor(importanceStatus[data?.status - 1]?.color)
-    }, [refresh])
+    }, [data, refresh])
     
     // Render
     return (
     <View style={styles.container}>
+
         <View style={styles.topBoard}>
             <Text style={[styles.importanceStatus, {backgroundColor: importanceColor}]}>{title}</Text>
             <Ratio data={data} />
             <ButtonSetting color={COLORS.black} horizontal />
         </View>
+
         <Title value={data?.title} />
 
         <View style={styles.bottomBoard}>
             <ProgressBar percentage={data && calculatePercentage(data)}/>
         </View>
+
     </View>
   )
 }
@@ -57,26 +60,18 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center'
     },
-
     bottomBoard: {
         flexDirection:'row',
         alignItems:'center',
         margin:10,
     },
     importanceStatus: {
-        borderRadius:10,
+        borderRadius: THEME.border.s,
         margin:10,
         padding:10,
         fontSize:THEME.font.size.m,
         textAlign:'center',
         color:COLORS.white,
-        flex:1
-    },
-    informations: {
-        alignSelf:'flex-start',
-        fontSize:THEME.font.size.l,
-        textAlign:'right',
-        fontWeight:'bold',
         flex:1
     },
   })

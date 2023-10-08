@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View, StyleSheet, Alert, Keyboard } from "react-native";
 import Homepage from "./home/Homepage";
 import Profile from "./profile/Profile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -31,13 +31,14 @@ const Main = ({ navigation }) => {
     setShowAddBoardForm(false);
   }
 
-  function handleAddBoardAdd() {
-    addBoard(user.uid, {
+  async function handleAddBoardAdd() {
+    Keyboard.dismiss();
+    await addBoard(user.uid, {
       title,
-      important: 1,
+      status: 1,
     });
-    setRefresh(!refresh);
     setTitle("");
+    setRefresh(!refresh);
     setShowAddBoardForm(false);
   }
 
@@ -46,6 +47,9 @@ const Main = ({ navigation }) => {
   function EmptyComponent() {
     return null;
   }
+
+  useEffect(() => { }, [refresh])
+
 
 
   // Render
@@ -111,8 +115,8 @@ const Main = ({ navigation }) => {
         <AddBoard
           title={title}
           setTitle={setTitle}
-          cancel={handleAddBoardCancel}
-          add={handleAddBoardAdd}
+          cancel={() => handleAddBoardCancel()}
+          add={() => handleAddBoardAdd()}
         />
       )}
     </>

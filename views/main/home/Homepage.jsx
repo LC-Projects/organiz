@@ -15,7 +15,7 @@ import BoardContainer from "./_partials/BoardContainer";
 const Homepage = ({ navigation }) => {
   // Context
   const { user } = useContext(userContext);
-  const { refresh, backgroundColor } = useContext(appContext);
+  const { refresh, mode } = useContext(appContext);
 
   // Initalization
   const [data, setData] = useState(null);
@@ -29,7 +29,8 @@ const Homepage = ({ navigation }) => {
           setData(a);
         }
       } catch (err) {
-        Alert.alert("err");
+        console.error(err);
+        Alert.alert("Can't get Boards");
       }
     })();
   }, [refresh]);
@@ -37,19 +38,19 @@ const Homepage = ({ navigation }) => {
   // Render
   return (
     <View
-      style={[
-        styles.container,
-        backgroundColor
-          ? { backgroundColor: COLORS.dark }
-          : { backgroundColor: COLORS.light },
-      ]}
+      style={[styles.container, { backgroundColor: mode.background }]}
     >
       <SafeAreaView>
         <ScrollView>
+
           <Hero />
+          
           <RatioBoard data={data} />
+          
           <Title />
+          
           <BoardContainer data={data} navigation={navigation} />
+        
         </ScrollView>
       </SafeAreaView>
     </View>

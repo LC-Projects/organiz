@@ -1,13 +1,13 @@
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, KeyboardAvoidingView } from 'react-native'
 import React from 'react'
 import { COLORS, THEME } from '../../constants'
 
 const InputWrapper = ({ children, style, label = null, column = false }) => {
     return (
-        <View style={[styles.container, style, column && {flexDirection: "column", alignItems: "flex-start"}]} >
+        <KeyboardAvoidingView style={[styles.container, style, column && {flexDirection: "column", alignItems: "flex-start"}]} >
             {label && <Text style={styles.label} >{label}:</Text>}
             {children}
-        </View>
+        </KeyboardAvoidingView>
     )
 }
 
