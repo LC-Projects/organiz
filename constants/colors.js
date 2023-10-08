@@ -18,20 +18,20 @@ export default {
     blue: '#295F93',
     orange: '#FFBE64',
     steel: 'gray',
-    // dark: '#333333',
-    // light: '#EEEEEE',
+    dark: '#333333',
+    light: '#EEEEEE',
     purple: 'purple',
 
     light: {
-        background: "#FFFFFF",
+        background: "#EEEEEE",
         contrastBackground: "#FFFFFF",
         text: "#171919",
         contrastText: "#000000",
 
         homepage: {
-            hero: "",
-            ratioBoard: "",
-            ratioBoardSeparator: ""
+            hero: "#FFFFFF",
+            ratioBoard: "#FFFFFF",
+            ratioBoardSeparator: "#DDDDDD"
         },
 
         cardBoard: {

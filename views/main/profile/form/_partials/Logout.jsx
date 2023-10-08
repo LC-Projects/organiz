@@ -49,9 +49,7 @@ const Logout = ({navigation}) => {
   // Render
   return (
     <>
-      <Text
-          style={[ styles.subtitle, { color: mode.contrastBackground } ]}
-        >
+      <Text style={[ styles.subtitle, { color: mode.contrastText } ]}>
           Left the application
         </Text>
       <View style={styles.button}>
