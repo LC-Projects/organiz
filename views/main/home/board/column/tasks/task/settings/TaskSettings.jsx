@@ -56,7 +56,7 @@ const TaskSettings = ({ navigation, route }) => {
     }
   }
 
-  function save() {
+  async function save() {
     try {
       const task = {
         title,
@@ -66,7 +66,7 @@ const TaskSettings = ({ navigation, route }) => {
         description,
       };
 
-      modifyTask(user.uid, boardId, column, taskId, task, move);
+      await modifyTask(user.uid, boardId, column, taskId, task, move);
 
       if (image) upload(user.uid, boardId, taskId, image, imgURI);
 

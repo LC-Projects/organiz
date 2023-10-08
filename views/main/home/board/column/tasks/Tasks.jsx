@@ -25,8 +25,9 @@ const Tasks = ({ percentage, navigation, boardId, data, keyName }) => {
     setAdd(false);
   }
 
-  function handleAdd() {
-    addTask(user.uid, boardId, keyName,
+  async function handleAdd() {
+    console.log(user.uid, boardId);
+    await addTask(user.uid, boardId, keyName,
       {
         title,
         status: 1,

@@ -31,16 +31,13 @@ const Main = ({ navigation }) => {
     setShowAddBoardForm(false);
   }
 
-  function handleAddBoardAdd() {
-    addBoard(user.uid, {
+  async function handleAddBoardAdd() {
+    await addBoard(user.uid, {
       title,
       status: 1,
     });
     setTitle("");
-    // Alert.alert("Card has been added")
-    // setTimeout(() => {
-      setRefresh(!refresh);
-    // }, 1000);
+    setRefresh(!refresh);
     setShowAddBoardForm(false);
   }
 
@@ -50,8 +47,8 @@ const Main = ({ navigation }) => {
     return null;
   }
 
-  useEffect(() => {}, [refresh])
-  
+  useEffect(() => { }, [refresh])
+
 
 
   // Render
