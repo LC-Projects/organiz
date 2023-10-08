@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import InputWrapper from "../../../../../../../../../components/wrapper/InputWrapper";
 import Button1 from "../../../../../../../../../components/button/Button1";
 import { Image, StyleSheet, Text, View } from "react-native";
@@ -8,8 +8,6 @@ import { userContext } from "../../../../../../../../../context/userContext";
 import { TextInput } from "react-native-gesture-handler";
 
 const TaskImage = ({ setImage, imgURI, setImgURI, data, value, onPress }) => {
-  const { user } = useContext(userContext);
-
   async function handleUpload() {
     try {
       // No permissions request is necessary for launching the image library
@@ -28,7 +26,8 @@ const TaskImage = ({ setImage, imgURI, setImgURI, data, value, onPress }) => {
         setImgURI(result.assets[0].uri);
       }
     } catch (e) {
-      throw e;
+      // throw e;
+      console.error("Upload has been canceled")
     }
   }
 

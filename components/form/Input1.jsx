@@ -4,7 +4,7 @@ import { THEME } from '../../constants'
 
 const Input1 = ({ onChangeText, value, placeholder}) => {
     return (
-        <KeyboardAvoidingView style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior= {(Platform.OS === 'ios')? "padding" : null}>
             <TextInput style={styles.input} onChangeText={onChangeText} value={value} placeholder={placeholder} />
         </KeyboardAvoidingView>
     )

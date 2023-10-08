@@ -26,7 +26,6 @@ const Homepage = ({ navigation }) => {
       try {
         const a = await getBoards(user.uid);
         if (a) {
-          console.log(a);
           setData(a);
         }
       } catch (err) {

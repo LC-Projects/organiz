@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { deleteTask, getTask, modifyTask } from "../../../../../../../../api/firebase/realTime/tasks";
-import { StyleSheet, ScrollView, Alert, SafeAreaView } from "react-native";
+import { StyleSheet, ScrollView, Alert, SafeAreaView, View, Text } from "react-native";
 import { COLORS, STRINGS, THEME } from "../../../../../../../../constants";
 // Context
 import { appContext } from "../../../../../../../../context/appContext";
@@ -18,7 +18,7 @@ import DeleteCancelSaveButton from "../../../../../../../../components/button/De
 const TaskSettings = ({ navigation, route }) => {
   // context
   const { mode, refresh, setRefresh } = useContext(appContext);
-  const { user, setUser } = useContext(userContext);
+  const { user } = useContext(userContext);
 
   // Initialization
   const move = [
@@ -29,7 +29,8 @@ const TaskSettings = ({ navigation, route }) => {
   const [boardId, setBoardId] = useState(null);
   const [column, setColumn] = useState(null);
   const [taskId, setTaskId] = useState(null);
-  const [percentage, setPercentage] = useState(0)
+  const [percentage, setPercentage] = useState(0);
+  const [updating, setUpdating] = useState(false)
 
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState(1);
@@ -70,8 +71,12 @@ const TaskSettings = ({ navigation, route }) => {
 
       if (image) upload(user.uid, boardId, taskId, image, imgURI);
 
-      setRefresh(!refresh);
-      navigation.goBack();
+      setUpdating(true)
+      setTimeout(() => {
+        setRefresh(!refresh);
+        setUpdating(false)
+        navigation.goBack();
+      }, 2000);
     } catch {
       Alert.alert("You have encountered an error!");
     }
@@ -121,7 +126,7 @@ const TaskSettings = ({ navigation, route }) => {
         Alert.alert("You have encountered an error!");
       }
     })();
-  }, [route.params]);
+  }, [route.params, refresh]);
 
   return (
     <SafeAreaView>
@@ -145,6 +150,8 @@ const TaskSettings = ({ navigation, route }) => {
           onPressSave={() => save()}
         />
 
+        {updating && <Text style={styles.message}>Updating ...</Text>}
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -157,4 +164,19 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: THEME.spacing.m,
   },
+  message: {
+    position: "absolute",
+    top: "30%",
+    left: 0,
+    right: 0,
+    color: COLORS.black,
+    backgroundColor: COLORS.ultralight_gray,
+    padding: 25,
+    margin: 25,
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "bold",
+    borderRadius: THEME.border.m,
+    overflow: "hidden"
+  }
 });
