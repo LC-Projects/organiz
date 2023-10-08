@@ -6,15 +6,12 @@ import { appContext } from "../../../../context/appContext";
 
 const Hero = () => {
   // Initialization
-  const { backgroundColor } = useContext(appContext);
+  const { mode } = useContext(appContext);
 
   //   Render
   return (
     <View
-      style={[
-        styles.container,
-        { backgroundColor: backgroundColor ? COLORS.dark : COLORS.light },
-      ]}
+      style={[styles.container, { backgroundColor: mode.homepage.hero }]}
     >
       <AnimatedLottieView
         source={IMGS.json.homepage}

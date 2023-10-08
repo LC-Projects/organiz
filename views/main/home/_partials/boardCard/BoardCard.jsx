@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { COLORS, THEME } from '../../../../../constants'
 import ProgressBar from '../../../../../components/ProgressBar'

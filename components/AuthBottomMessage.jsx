@@ -1,14 +1,14 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useContext } from 'react'
-import { COLORS, ROUTES } from '../constants'
+import { COLORS } from '../constants'
 import { appContext } from '../context/appContext'
 
 const AuthBottomMessage = ({ message, button, link }) => {
-    const { backgroundColor } = useContext(appContext)
+    const { mode } = useContext(appContext)
 
     return (
         <View style={styles.message}>
-            <Text style={[styles.text, backgroundColor ? { color: COLORS.light } : { color: COLORS.dark }]}>{message}</Text>
+            <Text style={[styles.text, { color: mode.text }]}>{message}</Text>
             <Text style={styles.redirect} onPress={link}>{button}</Text>
         </View>
     )

@@ -1,17 +1,12 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React, { useContext } from 'react'
 import { COLORS } from '../constants'
-import { appContext } from '../context/appContext'
 
 const SeparatorWithLabel = ({ label }) => {
-    // Context
-    const { backgroundColor } = useContext(appContext)
-
     // Render
     return (
         <View style={styles.container}>
-            <Text style={[styles.textBetween, backgroundColor ? { backgroundColor: COLORS.dark, color: COLORS.light } : { backgroundColor: COLORS.light, color: COLORS.dark }]}>{label}</Text>
-            <Text style={[styles.horizontalBar, backgroundColor ? { backgroundColor: COLORS.light } : { backgroundColor: COLORS.dark }]}></Text>
+            <Text style={[styles.textBetween, { backgroundColor: COLORS.light, color: COLORS.dark }]}>{label}</Text>
+            <Text style={[styles.horizontalBar, { backgroundColor: COLORS.dark }]}></Text>
         </View>
     )
 }

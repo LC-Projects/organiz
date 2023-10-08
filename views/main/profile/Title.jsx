@@ -1,20 +1,15 @@
 import React, { useContext } from "react";
 import { StyleSheet, Text } from "react-native";
 import { appContext } from "../../../context/appContext";
-import { COLORS, THEME } from "../../../constants";
+import { THEME } from "../../../constants";
 
 const Title = () => {
   // Context
-  const { backgroundColor, setBackgroundColor } = useContext(appContext);
+  const { mode } = useContext(appContext);
 
   // Render
   return (
-    <Text
-      style={[
-        styles.title,
-        backgroundColor ? { color: COLORS.light } : { color: COLORS.dark },
-      ]}
-    >
+    <Text style={[styles.title, { color: mode.contrastText }]}>
       Personnal modification
     </Text>
   );

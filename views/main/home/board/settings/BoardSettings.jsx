@@ -11,7 +11,7 @@ import DeleteCancelSaveButton from "../../../../../components/button/DeleteCance
 
 const BoardSettings = ({ navigation, route }) => {
   // Context
-  const { backgroundColor, refresh, setRefresh } = useContext(appContext);
+  const { mode, refresh, setRefresh } = useContext(appContext);
   const { user } = useContext(userContext);
 
   // Initialization
@@ -59,7 +59,7 @@ const BoardSettings = ({ navigation, route }) => {
 
   return (
     <SafeAreaView>
-      <ScrollView style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]} >
+      <ScrollView style={[styles.container, { backgroundColor: mode.background }]} >
 
         <ProgressBar percentage={percentage} displayAsInput />
 

@@ -11,7 +11,7 @@ import { calculatePercentage } from "../../../../utils/maths";
 const Board = ({ navigation, route }) => {
   // Context
   const { user } = useContext(userContext);
-  const { refresh, backgroundColor } = useContext(appContext);
+  const { refresh, mode } = useContext(appContext);
 
   // Inititalization
   const layout = useWindowDimensions();
@@ -96,12 +96,7 @@ const Board = ({ navigation, route }) => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
-      style={[
-        styles.container,
-        backgroundColor
-          ? { backgroundColor: COLORS.dark }
-          : { backgroundColor: COLORS.light },
-      ]}
+      style={[styles.container, { backgroundColor: mode.background }]}
     />
   );
 };

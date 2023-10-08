@@ -5,14 +5,12 @@ import { appContext } from "../../../../context/appContext";
 
 const Title = () => {
   // Initialization
-  const { backgroundColor } = useContext(appContext);
+  const { mode } = useContext(appContext);
 
   //   Render
   return (
     <Text
-      style={[
-        styles.text,
-        backgroundColor ? { color: COLORS.light } : { color: COLORS.dark },
+      style={[ styles.text, { color: mode.contrastText }
       ]}
     >
       {STRINGS.BOARDS}

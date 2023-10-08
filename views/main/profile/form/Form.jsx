@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Alert, View } from "react-native";
-import InputWithLabel from "./InputWithLabel";
-import ThemeMode from "./ThemeMode";
+import InputWithLabel from "./_partials/InputWithLabel";
+import ThemeMode from "./_partials/ThemeMode";
 import { userContext } from "../../../../context/userContext";
-import Save from "../Save";
+import Save from "./_partials/Save";
 
 const Form = () => {
   // Context

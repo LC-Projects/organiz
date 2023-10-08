@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import DataBoard from "../../../../components/DataBoard";
 import { COLORS, STRINGS, THEME } from "../../../../constants";
+import { appContext } from "../../../../context/appContext";
 
 const RatioBoard = ({ data }) => {
+  // Context
+  const { mode } = useContext(appContext)
+
   // Initialization
   let todo = 0, doing = 0, done = 0;
   data?.forEach(DataBoard => {
@@ -22,7 +26,7 @@ const RatioBoard = ({ data }) => {
 
   //   Render
   return (
-    <ScrollView horizontal={true} style={styles.container}>
+    <ScrollView horizontal={true} style={[ styles.container, {backgroundColor: mode.homepage.ratioBoard} ]}>
       {ratioData && ratioData?.map((e, key) => (
         <DataBoard
           key={key}

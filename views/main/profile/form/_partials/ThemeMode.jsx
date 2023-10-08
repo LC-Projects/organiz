@@ -1,23 +1,23 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useContext } from 'react'
-import { appContext } from '../../../../context/appContext'
-import { COLORS, THEME } from '../../../../constants'
+import { appContext } from '../../../../../context/appContext'
+import { COLORS, THEME } from '../../../../../constants'
 
 const ThemeMode = () => {
     // Context
-    const { backgroundColor, setBackgroundColor } = useContext(appContext)
+    const { mode, setMode } = useContext(appContext)
 
     // Render
     return (
         <>
-            <Text style={[styles.subtitle, backgroundColor ? { color: COLORS.light } : { color: COLORS.dark }]}>Background color</Text>
+            <Text style={[styles.subtitle, { color: mode.contrastText }]}>Background color</Text>
 
             <View style={styles.buttons}>
-                <TouchableOpacity style={styles.button} onPress={() => setBackgroundColor(true)} >
+                <TouchableOpacity style={[styles.button, { backgroundColor: mode.button.dark }]} onPress={() => setMode(true)} >
                     <Text style={[styles.textButton, styles.dark]}>Dark</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => setBackgroundColor(false)} >
-                    <Text style={[styles.textButton, styles.light]}>Light</Text>
+                <TouchableOpacity style={[styles.button, { backgroundColor: mode.button.light }]} onPress={() => setMode(false)} >
+                    <Text style={[styles.textButton, styles.light, { color: mode.text }]}>Light</Text>
                 </TouchableOpacity>
             </View>
         </>
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
         borderRadius: 5,
+        borderWidth: 1,
     },
     textButton: {
         fontSize: THEME.font.size.l,
@@ -55,9 +56,10 @@ const styles = StyleSheet.create({
     },
 
     dark: {
-        color: COLORS.dark
+        color: COLORS.white
     },
     light: {
-        color: COLORS.light
+        color: COLORS.black,
+        borderColor: COLORS.ultralight_gray
     }
 })

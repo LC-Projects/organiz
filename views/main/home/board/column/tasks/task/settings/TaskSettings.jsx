@@ -17,7 +17,7 @@ import DeleteCancelSaveButton from "../../../../../../../../components/button/De
 
 const TaskSettings = ({ navigation, route }) => {
   // context
-  const { backgroundColor, refresh, setRefresh } = useContext(appContext);
+  const { mode, refresh, setRefresh } = useContext(appContext);
   const { user, setUser } = useContext(userContext);
 
   // Initialization
@@ -125,7 +125,7 @@ const TaskSettings = ({ navigation, route }) => {
 
   return (
     <SafeAreaView>
-      <ScrollView style={[styles.container, backgroundColor ? { backgroundColor: COLORS.dark } : { backgroundColor: COLORS.light }]} >
+      <ScrollView style={[styles.container, { backgroundColor: mode.background }]} >
 
         <ProgressBar percentage={percentage} displayAsInput />
 
@@ -154,6 +154,7 @@ export default TaskSettings;
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
     padding: THEME.spacing.m,
   },
 });

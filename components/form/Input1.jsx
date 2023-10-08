@@ -4,7 +4,7 @@ import { THEME } from '../../constants'
 
 const Input1 = ({ onChangeText, value, placeholder}) => {
     return (
-        <KeyboardAvoidingView>
+        <KeyboardAvoidingView style={styles.container}>
             <TextInput style={styles.input} onChangeText={onChangeText} value={value} placeholder={placeholder} />
         </KeyboardAvoidingView>
     )
@@ -13,6 +13,9 @@ const Input1 = ({ onChangeText, value, placeholder}) => {
 export default Input1
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     input: {
         textAlign: 'center',
         borderBottomWidth: 2,

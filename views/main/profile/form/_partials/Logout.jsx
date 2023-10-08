@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { Text, TouchableOpacity, StyleSheet, View, Alert } from "react-native";
-import { COLORS, ROUTES, THEME } from "../../../constants";
-import { userContext } from "../../../context/userContext";
-import { appContext } from "../../../context/appContext";
-import { remove } from "../../../api/firebase/authUtils";
+import { COLORS, ROUTES, THEME } from "../../../../../constants";
+import { userContext } from "../../../../../context/userContext";
+import { appContext } from "../../../../../context/appContext";
+import { remove } from "../../../../../api/firebase/authUtils";
 
 const Logout = ({navigation}) => {
   // Context
   const { setUser } = useContext(userContext);
-  const { backgroundColor } = useContext(appContext);
+  const { mode } = useContext(appContext);
 
   //Handler
   function deleteAccount() {
@@ -50,18 +50,15 @@ const Logout = ({navigation}) => {
   return (
     <>
       <Text
-          style={[
-            styles.subtitle,
-            backgroundColor ? { color: COLORS.light } : { color: COLORS.dark },
-          ]}
+          style={[ styles.subtitle, { color: mode.contrastBackground } ]}
         >
           Left the application
         </Text>
       <View style={styles.button}>
-        <TouchableOpacity style={[styles.buttonDisconnect, {backgroundColor:COLORS.red}]} onPress={() => disconnectAccount()}>
+        <TouchableOpacity style={[styles.buttonDisconnect, {backgroundColor: mode.button.delete}]} onPress={() => disconnectAccount()}>
           <Text style={[styles.textButton]}>Disconnect</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.buttonDisconnect, {backgroundColor:COLORS.urgent_red}]} onPress={() => deleteAccount()}>
+        <TouchableOpacity style={[styles.buttonDisconnect, {backgroundColor: mode.button.delete}]} onPress={() => deleteAccount()}>
           <Text style={[styles.textButton]}>Delete</Text>
         </TouchableOpacity>
       </View>
@@ -94,5 +91,6 @@ const styles = StyleSheet.create({
   textButton: {
     fontSize: THEME.font.size.l,
     fontWeight: '800',  
+    color: COLORS.white
   },
 });
