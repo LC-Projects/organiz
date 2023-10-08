@@ -27,7 +27,7 @@ const TaskImage = ({ setImage, imgURI, setImgURI, data, value, onPress }) => {
       }
     } catch (e) {
       // throw e;
-      console.error("Upload has been canceled")
+      console.log("Upload has been canceled")
     }
   }
 
