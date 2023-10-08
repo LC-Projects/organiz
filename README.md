@@ -36,7 +36,7 @@ By Jonathan M. & Lucky M.
 ## Work Processing
 
 1. We use Trello to organize our projet
-2. Create a mobile design with [FIGMA](https://www.figma.com/file/TcC2sYYFng7L9Y4C9oalgX/Organiz?type=design&node-id=4%3A227&mode=design&t=wK62oOp7RKMY2WSn-1){:target="_blank"}
+2. Create a mobile design with [FIGMA](https://www.figma.com/file/TcC2sYYFng7L9Y4C9oalgX/Organiz?type=design&node-id=4%3A227&mode=design&t=wK62oOp7RKMY2WSn-1)
   - To have a general View of the App
   - Know exactly what are the functions
   - Easy for us to develop
